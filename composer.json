@@ -1,5 +1,5 @@
 {
-    "name": "keestm/kees_cookiebar",
+    "name": "keestm/cookiebar",
     "description": "A Drupal module that adds a accept cookies bar to the site",
     "type": "drupal-module",
     "authors": [
