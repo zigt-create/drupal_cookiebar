@@ -1,0 +1,5 @@
+kees_cookiebar.settings:
+  title: 'Kees-TM Cookiebar settings'
+  description: 'Configure settings for the Cookiebar module.'
+  route_name: kees_cookiebar.cookiebar
+  parent: 'system.admin_config_development'

@@ -1,0 +1,28 @@
+<div class="container cookiebar-page">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <section class="contentBlocks purple">
+                <h1>{{title}}</h1>
+                <div id="cookie-settings" class="row cookiebar-radio">
+                    <label class="btn btn-success">
+                        <input type="radio" name="cookies" id="cookiesRadioTrue" value="true" {% if "true" == cookieValue['#markup'] %}checked{% endif %}> Cookies accepteren
+                    </label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="cookies" id="cookiesRadioFalse" value="false" {% if "false" == cookieValue['#markup'] %}checked{% endif %}> Cookies afwijzen
+                    </label>
+                </div>
+
+                <div class="row">
+                    {{text}}
+                </div>
+            </section>
+
+
+
+
+            
+            
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,8 @@
+cookiebar-css:
+  css:
+    theme:
+        assets/css/kees-cookiebar.css: {}
+
+cookiebar-js:
+  js:
+    assets/js/kees-cookiebar.js: {}

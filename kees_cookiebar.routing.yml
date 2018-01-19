@@ -1,0 +1,30 @@
+# Settings routes
+# Tab 1
+kees_cookiebar.cookiebar:
+    path: '/admin/config/development/cookiebar'
+    defaults:
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarForm'
+        _title: 'Kees-TM Cookiebar settings'
+    requirements:
+        _permission: 'administer cookiebar'
+
+# Tab 2
+kees_cookiebar.page:
+    path: '/admin/config/development/cookiebar/page'
+    defaults:
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarPageForm'
+        _title: 'Kees-TM Cookiebar page settings'
+    requirements:
+        _permission: 'administer cookiebar'
+
+
+# Page route
+cookies.content:
+    path: '/cookies'
+    defaults:
+        _controller: '\Drupal\kees_cookiebar\Controller\CookiesPageController::content'
+        _title: 'Cookies'
+    requirements:
+        _permission: 'access content'
+
+

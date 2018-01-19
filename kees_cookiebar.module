@@ -1,0 +1,55 @@
+<?php
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\block\Entity\Block;
+use Drupal\node\Entity\Node;
+
+
+function kees_cookiebar_theme($existing, $type, $theme, $path) {
+
+    return [
+        'kees_cookiebar' => [
+            'variables' => [
+                'isCookie' => NULL,
+                'label' => NULL,
+                'text' => NULL,
+                'accept_button_text' => NULL,
+                'decline_button_text' => NULL,
+            ],
+        ],
+        'kees_radioblock' => [
+            'variables' => [
+                'cookieValue' => NULL,
+            ],
+        ],
+        'kees_cookiesPage' => [
+            'variables' => [
+                'cookieValue' => NULL,
+                'title' => NULL,
+                'text' => NULL,
+                'accept_button_text' => NULL,
+                'decline_button_text' => NULL,
+            ],
+        ],
+    ];
+}
+
+/**
+ * implements hook_install()
+ *
+ * @return void
+ */
+function kees_cookiebar_install() {
+    // Add block to content on module install
+    $cookiebarBlock = Block::create([
+        'id' => 'kees_cookiebar_block',
+        'plugin' => 'kees_cookiebar_block',
+        'region' => 'content',
+        'weight' => 99,
+        'theme' => \Drupal::config('system.theme')->get('default'),
+        'settings' => [
+            'label' => 'Kees-TM Cookiebar Block',
+            'label_display' => 'visible',
+        ],
+    ]);
+    $cookiebarBlock->save();
+}

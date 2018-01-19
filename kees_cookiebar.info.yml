@@ -1,0 +1,10 @@
+name: Kees-TM Cookiebar
+description: Add "accept cookies bar" to site
+package: Custom
+type: module
+version: 1.0
+core: 8.x
+dependencies:
+- text
+- ckeditor
+- block
