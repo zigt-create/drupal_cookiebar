@@ -17,7 +17,6 @@ class CookiesPageController extends ControllerBase {
 
     return array(
         '#theme' => 'kees_cookiesPage',
-        '#isCookie' => $cookieSet,
         '#title' => array(
             '#markup' =>$config->get('kees_cookiebar.page_title'),
         ),
