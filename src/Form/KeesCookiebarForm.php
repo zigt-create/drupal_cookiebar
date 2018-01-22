@@ -1,5 +1,4 @@
 <?php
-
 namespace Drupal\kees_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -68,7 +67,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
  * @return void
  */
 public function validateForm(array &$form, FormStateInterface $form_state) {
-    // todo
+    // Not (yet) implemented
 }
 
 /**

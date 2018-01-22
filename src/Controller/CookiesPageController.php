@@ -48,13 +48,18 @@ class CookiesPageController extends ControllerBase {
     );
   }
   
-    private function getCookieValue(){
-        $cookie_name = "CookieConsent";
+/**
+ * Read the value of the cookie used to track the users preference
+ *
+ * @return bool
+ */    
+private function getCookieValue(){
+    $cookie_name = "CookieConsent";
 
-        if(isset($_COOKIE[$cookie_name])) {
-            return $_COOKIE[$cookie_name];
-        } 
-        return false;
-    }
+    if(isset($_COOKIE[$cookie_name])) {
+        return $_COOKIE[$cookie_name];
+    } 
+    return false;
+}
 
 }

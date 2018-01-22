@@ -1,3 +1,22 @@
+{#
+/**
+ * @file
+ * Default template implementation to display the cookiebar page.
+ *
+ * Available variables:
+ *   - theme
+ *   - isCookie
+ *   - title
+ *   - text
+ *   - accept_button_text
+ *   - decline_button_text 
+ *   - cookieValue 
+ *
+ * @see template_preprocess_kees_cookiesPage()
+ *
+ * @ingroup themeable
+ */
+#}
 <div class="container cookiebar-page">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -5,24 +24,16 @@
                 <h1>{{title}}</h1>
                 <div id="cookie-settings" class="row cookiebar-radio">
                     <label class="btn btn-success">
-                        <input type="radio" name="cookies" id="cookiesRadioTrue" value="true" {% if "true" == cookieValue['#markup'] %}checked{% endif %}> Cookies accepteren
+                        <input type="radio" name="cookies" id="cookiesRadioTrue" value="true" {% if "true" == cookieValue['#markup'] %}checked{% endif %}> {{ accept_button_text }}
                     </label>
                     <label class="btn btn-danger">
-                        <input type="radio" name="cookies" id="cookiesRadioFalse" value="false" {% if "false" == cookieValue['#markup'] %}checked{% endif %}> Cookies afwijzen
+                        <input type="radio" name="cookies" id="cookiesRadioFalse" value="false" {% if "false" == cookieValue['#markup'] %}checked{% endif %}> {{ decline_button_text }}
                     </label>
                 </div>
-
                 <div class="row">
                     {{text}}
                 </div>
             </section>
-
-
-
-
-            
-            
         </div>
     </div>
-    
 </div>

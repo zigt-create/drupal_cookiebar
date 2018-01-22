@@ -4,7 +4,7 @@ namespace Drupal\kees_cookiebar\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides a cookiebar.
+ * Provides a cookiebar block with radio-buttons to change preference.
  *
  * @Block(
  *   id = "kees_cookieradio_block",
@@ -18,10 +18,19 @@ class CookieRadioBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+      // Read settings 
+    $config = \Drupal::config('kees_cookiebar.settings');
+
     return array(
         '#theme' => 'kees_radioblock',
         '#cookieValue' => array(
             '#markup' => $this->getCookieValue(),
+        ),
+        '#accept_button_text' => array(
+            '#markup' =>$config->get('kees_cookiebar.page_accept_button_text'),
+        ),
+        '#decline_button_text' => array(
+            '#markup' =>$config->get('kees_cookiebar.page_decline_button_text'),
         ),
         '#attached' => array(
             'library' => array(

@@ -1,10 +1,26 @@
+{#
+/**
+ * @file
+ * Default template implementation to display a block to display settings radiobuttons.
+ *
+ * Available variables:
+ *   - Theme
+ *   - cookieValue
+ *   - accept_button_text
+ *   - decline_button_text
+ *
+ * @see template_preprocess_kees_radioblock()
+ *
+ * @ingroup themeable
+ */
+#}
 <div id="cookie-settings" class="row cookiebar-radio">
     <div class="col-md-12">
         <label class="btn btn-success">
-            <input type="radio" name="cookies" id="cookiesRadioTrue" value="true" {% if "true" == cookieValue['#markup'] %}checked{% endif %}> Cookies accepteren
+            <input type="radio" name="cookies" id="cookiesRadioTrue" value="true" {% if "true" == cookieValue['#markup'] %}checked{% endif %}> {{ accept_button_text }}
         </label>
         <label class="btn btn-danger">
-            <input type="radio" name="cookies" id="cookiesRadioFalse" value="false" {% if "false" == cookieValue['#markup'] %}checked{% endif %}> Cookies afwijzen
+            <input type="radio" name="cookies" id="cookiesRadioFalse" value="false" {% if "false" == cookieValue['#markup'] %}checked{% endif %}> {{ decline_button_text }}
         </label>
     </div>
 </div>

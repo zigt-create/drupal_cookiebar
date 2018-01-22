@@ -1,8 +1,8 @@
 name: Kees-TM Cookiebar
-description: Add "accept cookies bar" to site
+description: Add "accept cookies bar" block to your site and create a route (/cookies) to change the users preference
 package: Custom
 type: module
-version: 1.0
+version: 1.01
 core: 8.x
 dependencies:
 - text

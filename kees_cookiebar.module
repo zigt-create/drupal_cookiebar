@@ -3,7 +3,17 @@ use Drupal\block_content\Entity\BlockContent;
 use Drupal\block\Entity\Block;
 use Drupal\node\Entity\Node;
 
-
+/**
+ * Implement hook_theme()
+ * This function tells each theme what variables they can use
+ * Changes Require chache clear
+ *
+ * @param unknown $existing
+ * @param unknown $type
+ * @param unknown $theme
+ * @param unknown $path
+ * @return array
+ */
 function kees_cookiebar_theme($existing, $type, $theme, $path) {
 
     return [
@@ -34,7 +44,8 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * implements hook_install()
+ * Implement hook_install()
+ * Will Add a block to content of current theme when installing the plugin
  *
  * @return void
  */

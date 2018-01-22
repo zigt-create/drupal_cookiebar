@@ -1,3 +1,4 @@
+# Create settings menu link under configurating>development>Kees-TM Cookiebar Settings
 kees_cookiebar.settings:
   title: 'Kees-TM Cookiebar settings'
   description: 'Configure settings for the Cookiebar module.'
