@@ -59,7 +59,7 @@ function kees_cookiebar_install() {
         'theme' => \Drupal::config('system.theme')->get('default'),
         'settings' => [
             'label' => 'Kees-TM Cookiebar Block',
-            'label_display' => 'visible',
+            'label_display' => FALSE,
         ],
     ]);
     $cookiebarBlock->save();
