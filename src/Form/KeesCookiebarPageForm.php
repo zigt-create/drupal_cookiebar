@@ -41,7 +41,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
         '#title' => $this->t('Body'),
         '#default_value' => $config->get('kees_cookiebar.page_text'),
         '#description' => $this->t('Main text on the cookies page'),
-        '#format'=> 'full_html',
+        '#format'=> 'basic_html',
     );
     // Accept button text field
     $form['accept_button_text'] = array(
