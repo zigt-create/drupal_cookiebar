@@ -25,9 +25,6 @@
 /*********************************/
 /*         cookiebar radio       */
 /*********************************/
-.cookiebar-radio {
-    margin: 25px 0;
-}
 .cookiebar-radio input[type="radio"] {
     margin: 4px 0 0;
     line-height: normal;
