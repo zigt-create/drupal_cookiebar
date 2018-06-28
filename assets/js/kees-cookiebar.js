@@ -1,7 +1,7 @@
 (function ($) {
 
   // When clicking on the OK button in the cookiebar
-  $(document).on('click', '.cookiebar a.js-cookiebar-button', function(event) {
+  $(document).on('click', '.kees-js-cookiebar-container a.kees-js-cookiebar-button', function(event) {
     // Variables
     var $object = $(this);
     
@@ -16,7 +16,7 @@
   });
 
   // When clicking on the radio buttons on the cookie page
-  $(document).on('click', '#cookie-settings input[type=radio]', function(event) {
+  $(document).on('click', '#kees-js-cookiebar-settings input[type=radio]', function(event) {
     // Variables
     var $object = $(this);
 
