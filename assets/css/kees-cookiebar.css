@@ -1,12 +1,12 @@
 /*********************************/
 /*         cookiebar bar         */
 /*********************************/
-.cookiebar-container * {
+.kees-css-cookiebar-container * {
     display: inline-block;
     padding: 0;
     margin: 0;
 }
-.cookiebar-container{
+.kees-css-cookiebar-container {
     color: white;
     text-align: center;
     position: fixed;
@@ -17,7 +17,7 @@
     padding: 5px 0;
     z-index: 1000;
 }
-.cookiebar-container span.cookiebar-label{
+.kees-css-cookiebar-container span.cookiebar-label{
     font-weight: bolder;
 }
 
@@ -25,11 +25,11 @@
 /*********************************/
 /*         cookiebar radio       */
 /*********************************/
-.cookiebar-radio input[type="radio"] {
+.kees-css-cookiebar-radio input[type="radio"] {
     margin: 4px 0 0;
     line-height: normal;
 }
-.cookiebar-radio label {
+.kees-css-cookiebar-radio label {
     padding: 15px;
     margin-right: 10px;
     color: #fff;
@@ -39,6 +39,6 @@
 /*********************************/
 /*         cookies page          */
 /*********************************/
-.cookiebar-page{
+.kees-css-cookiebar-page{
     margin-top: 50px;
 }
