@@ -90,7 +90,7 @@ public function validateForm(array &$form, FormStateInterface $form_state) {
 public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('kees_cookiebar.settings');
     $config->set('kees_cookiebar.page_title', $form_state->getValue('title'));
-    $config->set('kees_cookiebar.page_intro', $form_state->getValue('intro')['value']);
+    $config->set('kees_cookiebar.page_intro', $form_state->getValue('intro'));
     $config->set('kees_cookiebar.page_text', $form_state->getValue('text')['value']);
     $config->set('kees_cookiebar.page_accept_button_text', $form_state->getValue('accept_button_text'));
     $config->set('kees_cookiebar.page_decline_button_text', $form_state->getValue('decline_button_text'));
