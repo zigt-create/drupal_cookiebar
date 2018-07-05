@@ -35,6 +35,7 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
             'variables' => [
                 'cookieValue' => NULL,
                 'title' => NULL,
+                'intro' => NULL,
                 'text' => NULL,
                 'accept_button_text' => NULL,
                 'decline_button_text' => NULL,
