@@ -4,7 +4,7 @@ kees_cookiebar.cookiebar:
     path: '/admin/config/development/cookiebar'
     defaults:
         _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarForm'
-        _title: 'Kees-TM Cookiebar settings'
+        _title: 'KeesTM Cookiebar settings'
     requirements:
         _permission: 'administer cookiebar'
 
@@ -13,7 +13,7 @@ kees_cookiebar.page:
     path: '/admin/config/development/cookiebar/page'
     defaults:
         _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarPageForm'
-        _title: 'Kees-TM Cookiebar page settings'
+        _title: 'KeesTM Cookiebar page settings'
     requirements:
         _permission: 'administer cookiebar'
 

@@ -9,7 +9,7 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "kees_cookiebar_block",
- *   admin_label = "Kees-TM Cookiebar",
+ *   admin_label = "KeesTM Cookiebar",
  *   category = "Kees",
  * )
  */

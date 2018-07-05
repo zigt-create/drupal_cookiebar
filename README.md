@@ -1,4 +1,4 @@
-# Kees-TM Cookiebar
+# KeesTM Cookiebar
 
 A drupal module that adds a cookiebar to all pages.
 

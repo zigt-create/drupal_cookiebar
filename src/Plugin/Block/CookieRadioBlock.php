@@ -8,7 +8,7 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "kees_cookieradio_block",
- *   admin_label = "Kees-TM Radio Block",
+ *   admin_label = "KeesTM Radio Block",
  *   category = "Kees",
  * )
  */
