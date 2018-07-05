@@ -35,6 +35,14 @@ public function buildForm(array $form, FormStateInterface $form_state) {
         '#default_value' => $config->get('kees_cookiebar.page_title'),
         '#description' => $this->t('Give your lorem ipsum generator page a title.'),
     );
+    // intro text field.
+    $form['intro'] = array(
+        '#type' => 'textarea',
+        '#title' => $this->t('Body'),
+        '#default_value' => $config->get('kees_cookiebar.page_intro'),
+        '#description' => $this->t('Intro text on the cookies page'),
+        '#format'=> 'basic_html',
+    );
     // Text field.
     $form['text'] = array(
         '#type' => 'text_format',
@@ -82,6 +90,7 @@ public function validateForm(array &$form, FormStateInterface $form_state) {
 public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('kees_cookiebar.settings');
     $config->set('kees_cookiebar.page_title', $form_state->getValue('title'));
+    $config->set('kees_cookiebar.page_intro', $form_state->getValue('intro')['value']);
     $config->set('kees_cookiebar.page_text', $form_state->getValue('text')['value']);
     $config->set('kees_cookiebar.page_accept_button_text', $form_state->getValue('accept_button_text'));
     $config->set('kees_cookiebar.page_decline_button_text', $form_state->getValue('decline_button_text'));
