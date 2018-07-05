@@ -6,6 +6,7 @@ kees_cookiebar:
     decline_button_text: 'Weigeren'
     # CookiebarPage form deafults
     page_title: 'Cookies'
-    page_text: '<h4>cookie uitleg</h4> <br> <p>lorem ipsum</p>'
+    page_intro: 'Introductie tekst...'
+    page_text: '<h4>cookies pagina</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
     page_accept_button_text: 'Cookies accepteren'
     page_decline_button_text: 'Cookies weigeren'

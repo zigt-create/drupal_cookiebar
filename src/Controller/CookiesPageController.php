@@ -20,6 +20,9 @@ class CookiesPageController extends ControllerBase {
         '#title' => array(
             '#markup' =>$config->get('kees_cookiebar.page_title'),
         ),
+        '#intro' => array(
+            '#markup' =>$config->get('kees_cookiebar.page_intro'),
+        ),
         '#text' => array(
             '#markup' =>$config->get('kees_cookiebar.page_text'),
         ),

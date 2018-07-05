@@ -19,7 +19,8 @@
 <div class="container kees-css-cookiebar-page">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>{{title}}</h1>
+            <h1>{{ title }}</h1>
+            <p>{{ intro }}</p>
             <div id="kees-js-cookiebar-settings" class="row kees-css-cookiebar-radio">
                 <label class="btn btn-success">
                     <input type="radio" name="cookies" id="cookiesRadioTrue" value="true" {% if "true" == cookieValue['#markup'] %}checked{% endif %}> {{ accept_button_text }}
@@ -29,7 +30,7 @@
                 </label>
             </div>
             <div class="row">
-                {{text}}
+                {{ text }}
             </div>
         </div>
     </div>
