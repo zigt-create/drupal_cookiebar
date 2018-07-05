@@ -38,7 +38,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
     // intro text field.
     $form['intro'] = array(
         '#type' => 'textarea',
-        '#title' => $this->t('Body'),
+        '#title' => $this->t('Intro'),
         '#default_value' => $config->get('kees_cookiebar.page_intro'),
         '#description' => $this->t('Intro text on the cookies page'),
         '#format'=> 'basic_html',
