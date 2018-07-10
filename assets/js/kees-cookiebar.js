@@ -9,7 +9,7 @@
     event.preventDefault();
 
     // SetCookie function
-    setCookie($object.attr("id"));
+    setCookie( ($object.attr("id") == "true")? "true": "false" );
     
     // Reload page to apply needed and remove unwanted cookies 
     location.reload();
@@ -21,7 +21,7 @@
     var $object = $(this);
 
     // SetCookie function
-    setCookie($object.val());
+    setCookie( ($object.val() == "true")? "true": "false" );
     
     // Reload page to apply needed and remove unwanted cookies 
     location.reload();
