@@ -19,26 +19,26 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
     return [
         'kees_cookiebar' => [
             'variables' => [
-                'isCookie' => NULL,
-                'label' => NULL,
-                'text' => NULL,
-                'accept_button_text' => NULL,
-                'decline_button_text' => NULL,
+                'isCookie' => null,
+                'label' => null,
+                'text' => null,
+                'accept_button_text' => null,
+                'decline_button_text' => null,
             ],
         ],
         'kees_radioblock' => [
             'variables' => [
-                'cookieValue' => NULL,
+                'cookieValue' => null,
             ],
         ],
         'kees_cookiesPage' => [
             'variables' => [
-                'cookieValue' => NULL,
-                'title' => NULL,
-                'intro' => NULL,
-                'text' => NULL,
-                'accept_button_text' => NULL,
-                'decline_button_text' => NULL,
+                'cookieValue' => null,
+                'title' => null,
+                'intro' => null,
+                'text' => null,
+                'accept_button_text' => null,
+                'decline_button_text' => null,
             ],
         ],
     ];
@@ -50,7 +50,8 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
  *
  * @return void
  */
-function kees_cookiebar_install() {
+function kees_cookiebar_install()
+{
     // Add block to content on module install
     $cookiebarBlock = Block::create([
         'id' => 'kees_cookiebar_block',
@@ -60,7 +61,7 @@ function kees_cookiebar_install() {
         'theme' => \Drupal::config('system.theme')->get('default'),
         'settings' => [
             'label' => 'KeesTM Cookiebar Block',
-            'label_display' => FALSE,
+            'label_display' => false,
         ],
     ]);
     $cookiebarBlock->save();
