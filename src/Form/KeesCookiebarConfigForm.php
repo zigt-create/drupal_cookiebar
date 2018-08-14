@@ -25,35 +25,69 @@ class KeesCookiebarConfigForm extends ConfigFormBase
     {
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
+
         // Default settings.
-        // $config = $this->config('kees_cookiebar.settings');
-        // Page title field.
-        $form['label'] = array(
-            '#type' => 'textfield',
-            '#title' => $this->t('Label:'),
-            '#description' => $this->t('Bold text at the beginning of the cookiebar.'),
+        $config = $this->config('kees_cookiebar.settings');
+
+        $rows = array(
+            array(
+                'label' => 'Primaire cookies',
+                'field' => array(
+                    'title' => 'Functionle cookies',
+                    'key' => 'primary_cookies',
+                ),
+            ),
+            array(
+                'label' => 'Cookie set 1',
+                'field' => array(
+                    'title' => 'Analytische cookies',
+                    'key' => 'analytical_cookies',
+                ),
+            ),
+            array(
+                'label' => 'Cookie set 2',
+                'field' => array(
+                    'title' => 'Marketing cookies',
+                    'key' => 'marketing_cookies',
+                ),
+            ),
+            array(
+                'label' => 'Cookie set 3',
+                'field' => array(
+                    'title' => '',
+                    'key' => '',
+                ),
+            ),
+            array(
+                'label' => 'Cookie set 4',
+                'field' => array(
+                    'title' => '',
+                    'key' => '',
+                ),
+            ),
         );
-        // // Text field.
-        // $form['text'] = array(
-        //     '#type' => 'textarea',
-        //     '#title' => $this->t('Description'),
-        //     '#default_value' => $config->get('kees_cookiebar.text'),
-        //     '#description' => $this->t('Main text on the center of the cookiebar.'),
-        // );
-        // // Accept button text field
-        // $form['accept_button_text'] = array(
-        //     '#type' => 'textfield',
-        //     '#title' => $this->t('Accept cookies button text:'),
-        //     '#default_value' => $config->get('kees_cookiebar.accept_button_text'),
-        //     '#description' => $this->t('Text to show on the button to accept the cookies'),
-        // );
-        // // Decline button text field
-        // $form['decline_button_text'] = array(
-        //     '#type' => 'textfield',
-        //     '#title' => $this->t('Decline cookies button text:'),
-        //     '#default_value' => $config->get('kees_cookiebar.decline_button_text'),
-        //     '#description' => $this->t('Text to show on the button to decline the cookies'),
-        // );
+
+        foreach ($rows as $key => $row) {
+            $form[$key] = array(
+                '#type' => 'fieldset',
+                '#title' => t($row['label']),
+                '#collapsible' => false,
+                '#collapsed' => false,
+            );
+
+            $form[$key]['title'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Title'),
+                '#value' => $row['field']['title'],
+            );
+
+            $form[$key]['key'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Key'),
+                '#value' => $row['field']['key'],
+                '#disabled' => ($key < 1 ),
+            );
+        }
 
         return $form;
     }
@@ -85,7 +119,7 @@ class KeesCookiebarConfigForm extends ConfigFormBase
         // $config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
         // $config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
         // $config->save();
-        
+
         return parent::submitForm($form, $form_state);
     }
 
