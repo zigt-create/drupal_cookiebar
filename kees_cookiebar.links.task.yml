@@ -9,3 +9,8 @@ kees_cookiebar.page:
   route_name: kees_cookiebar.page
   base_route: kees_cookiebar.cookiebar
   weight: 2
+kees_cookiebar.admin:
+  title: 'Configuration'
+  route_name: kees_cookiebar.config
+  base_route: kees_cookiebar.cookiebar
+  weight: 3
