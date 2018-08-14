@@ -6,3 +6,5 @@ cookiebar-css:
 cookiebar-js:
   js:
     assets/js/kees-cookiebar.js: {}
+  dependencies:
+    - core/jquery
