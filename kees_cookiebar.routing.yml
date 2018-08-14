@@ -17,6 +17,15 @@ kees_cookiebar.page:
     requirements:
         _permission: 'administer cookiebar'
 
+# Tab 3
+kees_cookiebar.config:
+    path: '/admin/config/development/cookiebar/config'
+    defaults:
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarConfigForm'
+        _title: 'KeesTM Cookiebar configuration'
+    requirements:
+        _permission: 'administer cookiebar settings'
+
 
 # Page route
 cookies.content:
