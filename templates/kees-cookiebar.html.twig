@@ -17,13 +17,54 @@
  */
 #}
 {% if not isCookie %}
-<div class="kees-css-cookiebar-container kees-js-cookiebar-container">
-    <div class="cookiebar">
-        <span class="cookiebar-label">{{ label }}</span>
-        {{ text }}
-        <a href="javascript();" id="true" class="btn btn-primary kees-js-cookiebar-button">{{ accept_button_text }}</a>
-        <a href="javascript();" id="false" class="btn btn-danger kees-js-cookiebar-button">{{ decline_button_text }}</a>
+<div class="kees-css-cookiebar-container kees-js-cookiebar-container ">
+    <div class="cookiebar container">
+        <div class="row">
+            <div class="col-md-6">
+                <form name="cookie-form" action="" onsubmit="return keesCookieForm()" class="">
 
+                    <div class="form-check col-lg-12">
+                        <input type="checkbox" class="form-check-input" disabled checked id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">{{ 'Functionele cookies'|t }}</label>
+                    </div>
+
+                    <div class="form-check col-lg-12">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">{{ 'Check me out'|t }}</label>
+                    </div>
+
+                    <div class="form-check col-lg-12">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">{{ 'Check me out'|t }}</label>
+                    </div>
+
+                    <div class="form-check col-lg-12">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">{{ 'Check me out'|t }}</label>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 {% endif %}
+
+
+
+
+{# <span class="cookiebar-label">{{ label }}</span>
+{{ text }}
+<a href="javascript();" id="true" class="btn btn-primary kees-js-cookiebar-button">{{ accept_button_text }}</a>
+<a href="javascript();" id="false" class="btn btn-danger kees-js-cookiebar-button">{{ decline_button_text }}</a> #}
