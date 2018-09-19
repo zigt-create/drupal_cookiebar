@@ -1,8 +1,9 @@
 <?php
 namespace Drupal\kees_cookiebar\Form;
 
-use Drupal\Core\Form\ConfigFormBase;
-use Drupal\Core\Form\FormStateInterface;
+use \Drupal\Core\Form\ConfigFormBase;
+use \Drupal\Core\Form\FormStateInterface;
+use \Drupal\Core\Url;
 
 class KeesCookiebarConfigForm extends ConfigFormBase
 {
@@ -25,69 +26,50 @@ class KeesCookiebarConfigForm extends ConfigFormBase
     {
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
-
         // Default settings.
         $config = $this->config('kees_cookiebar.settings');
+        $cookies = $config->get('kees_cookiebar.settings_cookies');
 
-        $rows = array(
-            array(
-                'label' => 'Primaire cookies',
-                'field' => array(
-                    'title' => 'Functionle cookies',
-                    'key' => 'primary_cookies',
-                ),
-            ),
-            array(
-                'label' => 'Cookie set 1',
-                'field' => array(
-                    'title' => 'Analytische cookies',
-                    'key' => 'analytical_cookies',
-                ),
-            ),
-            array(
-                'label' => 'Cookie set 2',
-                'field' => array(
-                    'title' => 'Marketing cookies',
-                    'key' => 'marketing_cookies',
-                ),
-            ),
-            array(
-                'label' => 'Cookie set 3',
-                'field' => array(
-                    'title' => '',
-                    'key' => '',
-                ),
-            ),
-            array(
-                'label' => 'Cookie set 4',
-                'field' => array(
-                    'title' => '',
-                    'key' => '',
-                ),
-            ),
+        $form['add_link'] = [
+            '#attributes' => [
+                "class" => ['button', 'form-actions'],
+            ],
+            '#title' => $this->t('+ Add cookie-type'),
+            '#type' => 'link',
+            '#url' => Url::fromRoute('kees_cookiebar.add_config'),
+        ];
+
+        $form['mytable'] = array(
+            '#type' => 'table',
+            '#header' => array(t('Label'), t('Key'), t('Operations')),
+            '#empty' => t('No cookies found'),
         );
 
-        foreach ($rows as $key => $row) {
-            $form[$key] = array(
-                '#type' => 'fieldset',
-                '#title' => t($row['label']),
-                '#collapsible' => false,
-                '#collapsed' => false,
+        $count = 1;
+        foreach ($cookies as $key => $value) {
+            // Some table columns containing raw markup.
+            $form['mytable'][$key]['label'] = array(
+                '#plain_text' => $value,
             );
-
-            $form[$key]['title'] = array(
-                '#type' => 'textfield',
-                '#title' => t('Title'),
-                '#value' => $row['field']['title'],
+            $form['mytable'][$key]['key'] = array(
+                '#plain_text' => $key,
             );
-
-            $form[$key]['key'] = array(
-                '#type' => 'textfield',
-                '#title' => t('Key'),
-                '#value' => $row['field']['key'],
-                '#disabled' => ($key < 1 ),
+            $form['mytable'][$key]['operations'] = array(
+                '#type' => 'operations',
+                '#links' => array(),
             );
+            if (1 != $count) {
+                $form['mytable'][$key]['operations']['#links']['delete'] = array(
+                    'title' => t('Delete'),
+                    'url' => Url::fromRoute('kees_cookiebar.remove_config', array('key' => $key, 'title' => $value)),
+                );
+            }
+            $count++;
         }
+
+        // Hide save button by giving actions->submit a empty array
+        $form['actions'] = array('#type' => 'actions');
+        $form['actions']['submit'] = array();
 
         return $form;
     }
@@ -101,7 +83,7 @@ class KeesCookiebarConfigForm extends ConfigFormBase
      */
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
-        // Not (yet) implemented
+        // not needed / no submit button on this page
     }
 
     /**
@@ -113,13 +95,8 @@ class KeesCookiebarConfigForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        // $config = $this->config('kees_cookiebar.settings');
-        // $config->set('kees_cookiebar.label', $form_state->getValue('label'));
-        // $config->set('kees_cookiebar.text', $form_state->getValue('text'));
-        // $config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
-        // $config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
-        // $config->save();
-
+        // not needed / no submit button on this page
+        // Do nothing
         return parent::submitForm($form, $form_state);
     }
 
