@@ -40,6 +40,7 @@ class CookiebarBlock extends BlockBase
             '#decline_button_text' => array(
                 '#markup' =>$config->get('kees_cookiebar.decline_button_text'),
             ),
+            '#cookies' => $config->get('kees_cookiebar.settings_cookies'),
             '#attached' => array(
                 'library' => array(
                 'kees_cookiebar/cookiebar-css',
