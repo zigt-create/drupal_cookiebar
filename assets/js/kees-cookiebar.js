@@ -63,4 +63,10 @@
     }
   }
 
+  $(document).ready(function(){
+        $('.consent__form__trigger').click(function(){
+            $(this).toggleClass('minus');
+            $(this).next().toggleClass('open');
+        });
+    });
 }(jQuery));
