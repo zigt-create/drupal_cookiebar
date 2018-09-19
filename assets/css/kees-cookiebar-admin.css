@@ -1,3 +1,8 @@
-form#kees-cookiebar-config-form div.form-item {
+form#kees-cookiebar-config-form div.form-item.form-type-textfield {
     display: inline-block;
 }
+
+form#kees-cookiebar-config-form input.form-submit{
+    display: block;
+}
+
