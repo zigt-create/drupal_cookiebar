@@ -4,14 +4,14 @@
   $(document).on('click', '.kees-js-cookiebar-container a.kees-js-cookiebar-button', function(event) {
     // Variables
     var $object = $(this);
-    
+
     // Prevent following the href
     event.preventDefault();
 
     // SetCookie function
     setCookie( ($object.attr("id") == "true")? "true": "false" );
-    
-    // Reload page to apply needed and remove unwanted cookies 
+
+    // Reload page to apply needed and remove unwanted cookies
     location.reload();
   });
 
@@ -22,18 +22,18 @@
 
     // SetCookie function
     setCookie( ($object.val() == "true")? "true": "false" );
-    
-    // Reload page to apply needed and remove unwanted cookies 
+
+    // Reload page to apply needed and remove unwanted cookies
     location.reload();
   });
 
 
   function setCookie(value){
 
-    // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed' 
+    // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed'
     var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
     document.cookie = "CookieConsent="+ value +';expires=' + oneYearFromNow.toGMTString() + '; path=/';
-      
+
     // Additional remove all other cookies if value is 'CookieDisallowed'
     if("false" == value) {
       // Get all cookies in array
@@ -58,8 +58,9 @@
         if('CookieConsent' != cookieName) {
           document.cookie = cookieName + "=; expires=" + cookieRemoveExpireTime.toGMTString() + "; path=/";
         }
-        
-      });   
+
+      });
     }
-  }  
+  }
+
 }(jQuery));
