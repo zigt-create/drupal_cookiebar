@@ -83,3 +83,18 @@ function kees_cookiebar_page_attachments(array &$attachments) {
         return;
     }
 }
+
+/**
+ * Implement hook_preprocess
+ * This preprocess will add a variable to all pages
+ *
+ * @param array $variables
+ * @return void
+ */
+function kees_cookiebar_preprocess(&$variables)
+{
+    $cookies = \Drupal::request()->cookies->get('CookieConsent');
+    if (!empty($cookies)) {
+        $variables['kees_cookies'] = json_decode($cookies, true);
+    }
+}
