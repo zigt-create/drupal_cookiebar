@@ -26,18 +26,18 @@
                     <div class="consent__inner">
                         <h2>{{ label }}</h2>
                         <p>{{ text }}</p>
-                        <form class="consent__form" method="post" onsubmit="return keesCookieForm()" action="">
+                        <form class="consent__form" id="kees_cookie_form" method="post" onsubmit="return keesCookieForm()" action="">
 
                             <div class="scroll_wrapper">
 
-                                {% for key, value in cookies %}
+                                {% for key, cookie in cookies %}
                                     <div class="consent__form__item consent__description--closed {{ (loop.index == 1)? "consent__form__item--first" }} ">
                                         <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "checked disabled" }} >
-                                        <label class="consent__form__label--checkbox" for="{{ key }}"><span>{{ value }}</span></label>
+                                        <label class="consent__form__label--checkbox" for="{{ key }}"><span>{{ cookie.label }}</span></label>
                                         <a href="#info" class="consent__form__trigger trigger--closed"></a>
 
                                         <div class="consent__cookie--description">
-                                            text
+                                            {{ cookie.desc|raw }}
                                         </div>
 
                                     </div>
