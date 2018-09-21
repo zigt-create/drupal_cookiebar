@@ -11,6 +11,12 @@ kees_cookiebar:
   page_accept_button_text: 'Cookies accepteren'
   page_decline_button_text: 'Cookies weigeren'
   settings_cookies:
-      primary_cookies: 'Functionele cookies'
-      analytical_cookies: 'Analitische cookies'
-      marketing_cookies: 'Marketing cookies'
+    primary_cookies:
+      label: 'Primaire cookies'
+      desc: '<h4>Primaire cookies</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
+    analytical_cookies:
+      label: 'Analytische cookies'
+      desc: '<h4>Analytische cookies</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
+    marketing_cookies:
+      label: 'Marketing cookies'
+      desc: '<h4>Marketing cookies</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
