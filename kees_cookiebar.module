@@ -20,6 +20,7 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
         'kees_cookiebar' => [
             'variables' => [
                 'label' => null,
+                'cookies' => null,
                 'text' => null,
                 'accept_button_text' => null,
                 'decline_button_text' => null,
