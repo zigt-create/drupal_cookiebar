@@ -45,11 +45,10 @@ class KeesCookiebarConfigForm extends ConfigFormBase
             '#empty' => t('No cookies found'),
         );
 
-        $count = 1;
         foreach ($cookies as $key => $value) {
             // Some table columns containing raw markup.
             $form['mytable'][$key]['label'] = array(
-                '#plain_text' => $value,
+                '#plain_text' => $value['label'],
             );
             $form['mytable'][$key]['key'] = array(
                 '#plain_text' => $key,
@@ -58,13 +57,16 @@ class KeesCookiebarConfigForm extends ConfigFormBase
                 '#type' => 'operations',
                 '#links' => array(),
             );
-            if (1 != $count) {
+            $form['mytable'][$key]['operations']['#links']['edit'] = array(
+                'title' => t('Edit'),
+                'url' => Url::fromRoute('kees_cookiebar.add_config', array('key' => $key)),
+            );
+            if ("primary_cookies" != $key) {
                 $form['mytable'][$key]['operations']['#links']['delete'] = array(
                     'title' => t('Delete'),
-                    'url' => Url::fromRoute('kees_cookiebar.remove_config', array('key' => $key, 'title' => $value)),
+                    'url' => Url::fromRoute('kees_cookiebar.remove_config', array('key' => $key, 'title' => $value['label'])),
                 );
             }
-            $count++;
         }
 
         // Hide save button by giving actions->submit a empty array
