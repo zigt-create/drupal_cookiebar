@@ -6,6 +6,8 @@ use Drupal\Core\Form\FormStateInterface;
 
 class KeesCookiebarAddConfigForm extends ConfigFormBase
 {
+    private $isEdit = false;
+
     /**
      * {@inheritdoc}
      */
@@ -26,21 +28,45 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
 
-        $form['add_cookie'] = array(
+        $config = $this->config('kees_cookiebar.settings');
+        $cookies = $config->get('kees_cookiebar.settings_cookies');
+        $key = \Drupal::request()->query->get('key');
+
+        if (array_key_exists($key, $cookies)) {
+            // edit existing
+            $this->isEdit = true;
+            $edit_cookie = $cookies[$key];
+        }
+
+        $form['cookie'] = array(
             '#type' => 'fieldset',
-            '#title' => t('Add Cookie type'),
+            '#title' => ($this->isEdit)? $this->t('Edit Cookie type') : $this->t('Add Cookie type') ,
             '#collapsible' => false,
             '#collapsed' => false,
         );
-        $form['add_cookie']['cookie_name'] = array(
+        $form['cookie']['cookie_name'] = array(
             '#placeholder' => 'Cookie name',
             '#type' => 'textfield',
             '#title' => t('Title'),
+            '#default_value' => ($this->isEdit)? $edit_cookie['label'] : null,
         );
-        $form['add_cookie']['cookie_key'] = array(
+        $form['cookie']['cookie_key'] = array(
             '#placeholder' => 'cookie_key',
             '#type' => 'textfield',
             '#title' => t('Key'),
+            '#disabled' => ($this->isEdit)? true : false,
+            '#default_value' => ($this->isEdit)? $key : null,
+        );
+        if ($this->isEdit) {
+            // Set value to be key so it cant be changed
+            $form['cookie']['cookie_key']['#value'] = $key;
+        }
+        $form['cookie']['desc'] = array(
+            '#type' => 'text_format',
+            '#title' => $this->t('Description'),
+            '#description' => $this->t('Description of this cookie-type'),
+            '#format'=> 'basic_html',
+            '#default_value' => ($this->isEdit)? $edit_cookie['desc'] : null,
         );
 
         return $form;
@@ -78,12 +104,16 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         // Get fields
-        $new_name = $form_state->getValue('cookie_name');
-        $new_key = $form_state->getValue('cookie_key');
+        $name = $form_state->getValue('cookie_name');
+        $key = $form_state->getValue('cookie_key');
+        $desc = $form_state->getValue('desc')['value'];
         // Add to existing config
         $config = $this->config('kees_cookiebar.settings');
         $cookies = $config->get('kees_cookiebar.settings_cookies');
-        $cookies[$new_key] = $new_name;
+        $cookies[$key] = array(
+            'label' => $name,
+            'desc' => $desc,
+        );
         // Set new config with new array
         $config->set('kees_cookiebar.settings_cookies', $cookies);
         $config->save();
