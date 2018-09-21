@@ -23,11 +23,8 @@ class CookiebarBlock extends BlockBase
         // read settings
         $config = \Drupal::config('kees_cookiebar.settings');
 
-        $cookieSet = false;
-        $cookieSet = $this->checkCookie();
         return array(
             '#theme' => 'kees_cookiebar',
-            '#isCookie' => $cookieSet,
             '#label' => array(
                 '#markup' =>$config->get('kees_cookiebar.label'),
             ),
@@ -40,7 +37,6 @@ class CookiebarBlock extends BlockBase
             '#decline_button_text' => array(
                 '#markup' =>$config->get('kees_cookiebar.decline_button_text'),
             ),
-            '#cookies' => $config->get('kees_cookiebar.settings_cookies'),
             '#attached' => array(
                 'library' => array(
                 'kees_cookiebar/cookiebar-css',
@@ -54,21 +50,5 @@ class CookiebarBlock extends BlockBase
                 ),
             ),
         );
-    }
-
-    /**
-     * Checks if a coockie exists
-     *
-     * @return bool
-     */
-    private function checkCookie()
-    {
-        $cookie_name = "CookieConsent";
-
-        if (!isset($_COOKIE[$cookie_name])) {
-            return false;
-        } else {
-            return true;
-        }
     }
 }

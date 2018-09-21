@@ -19,8 +19,6 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
     return [
         'kees_cookiebar' => [
             'variables' => [
-                'isCookie' => null,
-                'cookies' => null,
                 'label' => null,
                 'text' => null,
                 'accept_button_text' => null,
