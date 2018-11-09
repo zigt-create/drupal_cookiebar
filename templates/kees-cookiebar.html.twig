@@ -17,7 +17,7 @@
  * @ingroup themeable
  */
 #}
-{% if not kees_cookies.primary_cookies %}
+{% if not kees_cookies.primary_cookies or "/cookies" == path('<current>') %}
     <span id="cookiebar_container">
 
         <div class="consent consent__side--right-bottom ">
