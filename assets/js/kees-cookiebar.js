@@ -1,10 +1,11 @@
-function keesCookieForm() {
+
+function keesCookieForm () {
 
     var cookieConsent = {};
 
-    $("form#kees_cookie_form input:checkbox").each(function (index) {
-        var value = $(this).is(":checked");
-        var id = $(this).prop('name');
+    jQuery("form#kees_cookie_form input:checkbox").each(function (index) {
+        var value = jQuery(this).is(":checked");
+        var id = jQuery(this).prop('name');
 
         cookieConsent[id] = value;
 
@@ -17,11 +18,9 @@ function keesCookieForm() {
     return true;
 }
 
-(function ($) {
-    $(document).ready(function () {
-        $('.consent__form__trigger').click(function () {
-            $(this).toggleClass('minus');
-            $(this).next().toggleClass('open');
-        });
+jQuery(document).ready(function () {
+    jQuery('.consent__form__trigger').click(function () {
+        jQuery(this).toggleClass('minus');
+        jQuery(this).next().toggleClass('open');
     });
-}(jQuery));
+});
