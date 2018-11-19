@@ -4,17 +4,19 @@ var cookieName = 'CookieConsent';
 
 function keesCookieForm() {
 
+    var cookie = {};
+
     jQuery("form#kees_cookie_form input:checkbox").each(function (index) {
         var value = jQuery(this).is(":checked");
         var id = jQuery(this).prop('name');
 
-        cookieConsent[id] = value;
+        cookie[id] = value;
 
     });
-    cookieConsent.primary_cookies = true; // set default for primary cookies
+    cookie.primary_cookies = true; // set default for primary cookies
 
     var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-    document.cookie = "CookieConsent=" + JSON.stringify(cookieConsent) + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
+    document.cookie = "CookieConsent=" + JSON.stringify(cookie) + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
 
     return true;
 }
