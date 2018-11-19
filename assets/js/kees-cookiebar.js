@@ -1,7 +1,8 @@
+// Settings
+var cookieName = 'CookieConsent';
 
-function keesCookieForm () {
 
-    var cookieConsent = {};
+function keesCookieForm() {
 
     jQuery("form#kees_cookie_form input:checkbox").each(function (index) {
         var value = jQuery(this).is(":checked");
