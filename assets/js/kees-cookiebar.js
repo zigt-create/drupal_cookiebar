@@ -22,8 +22,34 @@ function keesCookieForm() {
 }
 
 jQuery(document).ready(function () {
+
+    // Show cookies block
+    var cookiesPage = jQuery('#cookiebar_container').data('cookies-url');
+    if (getCookieValue('primary_cookies') != true || cookiesPage == window.location.pathname ) {
+        jQuery('#cookiebar_container').show();
+    }
+
     jQuery('.consent__form__trigger').click(function () {
         jQuery(this).toggleClass('minus');
         jQuery(this).next().toggleClass('open');
     });
 });
+
+function getCookieValue(name) {
+    var cookie = getCookie();
+
+    try {
+        var object = JSON.parse(cookie);
+    } catch {
+        return false;
+    }
+
+    return object[name];
+}
+
+function getCookie() {
+    var value = "; " + document.cookie;
+    var cookie = value.split("; " + cookieName + "=");
+
+    if (cookie.length == 2) return cookie.pop().split(";").shift();
+}
