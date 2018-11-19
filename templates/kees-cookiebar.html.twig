@@ -17,39 +17,37 @@
  * @ingroup themeable
  */
 #}
-{% if not kees_cookies.primary_cookies or "/cookies" == path('<current>') %}
-    <span id="cookiebar_container">
+<span id="cookiebar_container" style="display: none;" data-cookies-url="/cookies">
 
-        <div class="consent consent__side--right-bottom ">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="consent__inner">
-                        <h2>{{ label }}</h2>
-                        <p>{{ text }}</p>
-                        <form class="consent__form" id="kees_cookie_form" method="post" onsubmit="return keesCookieForm()" action="">
+    <div class="consent consent__side--right-bottom ">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="consent__inner">
+                    <h2>{{ label }}</h2>
+                    <p>{{ text }}</p>
+                    <form class="consent__form" id="kees_cookie_form" method="post" onsubmit="return keesCookieForm()" action="">
 
-                            <div class="scroll_wrapper">
+                        <div class="scroll_wrapper">
 
-                                {% for key, cookie in cookies %}
-                                    <div class="consent__form__item consent__description--closed {{ (loop.index == 1)? "consent__form__item--first" }} ">
-                                        <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "checked disabled" }} >
-                                        <label class="consent__form__label--checkbox" for="{{ key }}"><span>{{ cookie.label }}</span></label>
-                                        <a href="#info" class="consent__form__trigger trigger--closed"></a>
+                            {% for key, cookie in cookies %}
+                                <div class="consent__form__item consent__description--closed {{ (loop.index == 1)? "consent__form__item--first" }} ">
+                                    <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "checked disabled" }} >
+                                    <label class="consent__form__label--checkbox" for="{{ key }}"><span>{{ cookie.label }}</span></label>
+                                    <a href="#info" class="consent__form__trigger trigger--closed"></a>
 
-                                        <div class="consent__cookie--description">
-                                            {{ cookie.desc|raw }}
-                                        </div>
-
+                                    <div class="consent__cookie--description">
+                                        {{ cookie.desc|raw }}
                                     </div>
-                                {% endfor %}
 
-                            </div>
-                            <button class="consent__form__submit btn button btn-primary" type="submit"><span>{{ accept_button_text }}</span></button>
-                        </form>
-                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <button class="consent__form__submit btn button btn-primary" type="submit"><span>{{ accept_button_text }}</span></button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-    </span>
-{% endif %}
+</span>
