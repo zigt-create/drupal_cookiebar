@@ -8,14 +8,14 @@ kees_cookiebar.cookiebar:
     requirements:
         _permission: 'administer cookiebar'
 
-# Tab 2
+# Tab 2 - deprecated
 kees_cookiebar.page:
     path: '/admin/config/development/cookiebar/page'
     defaults:
         _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarPageForm'
         _title: 'KeesTM Cookiebar page settings'
     requirements:
-        _permission: 'administer cookiebar'
+        _permission: 'administer cookiebar settings'
 
 # Tab 3
 kees_cookiebar.config:
