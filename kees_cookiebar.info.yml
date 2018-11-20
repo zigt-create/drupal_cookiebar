@@ -6,5 +6,4 @@ version: 1.01
 core: 8.x
 dependencies:
 - text
-- ckeditor
 - block
