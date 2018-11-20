@@ -48,13 +48,13 @@ class KeesCookiebarForm extends ConfigFormBase
             '#default_value' => $config->get('kees_cookiebar.accept_button_text'),
             '#description' => $this->t('Text to show on the button to accept the cookies'),
         );
-        // Decline button text field
-        $form['decline_button_text'] = array(
-            '#type' => 'textfield',
-            '#title' => $this->t('Decline cookies button text:'),
-            '#default_value' => $config->get('kees_cookiebar.decline_button_text'),
-            '#description' => $this->t('Text to show on the button to decline the cookies'),
-        );
+        // Decline button text field - Deprecated
+        // $form['decline_button_text'] = array(
+        //     '#type' => 'textfield',
+        //     '#title' => $this->t('Decline cookies button text:'),
+        //     '#default_value' => $config->get('kees_cookiebar.decline_button_text'),
+        //     '#description' => $this->t('Text to show on the button to decline the cookies'),
+        // );
 
         return $form;
     }
@@ -86,7 +86,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
         $config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
         $config->save();
-        
+
         return parent::submitForm($form, $form_state);
     }
 
