@@ -25,12 +25,19 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
      */
     public function buildForm(array $form, FormStateInterface $form_state)
     {
+        // Get the current user
+        $user = \Drupal::currentUser();
+
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
 
         $config = $this->config('kees_cookiebar.settings');
         $cookies = $config->get('kees_cookiebar.settings_cookies');
         $key = \Drupal::request()->query->get('key');
+
+        if (empty($key) && !$user->hasPermission('administer cookiebar settings')) {
+            return;
+        }
 
         if (array_key_exists($key, $cookies)) {
             // edit existing
@@ -50,13 +57,15 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
             '#title' => t('Title'),
             '#default_value' => ($this->isEdit)? $edit_cookie['label'] : null,
         );
-        $form['cookie']['cookie_key'] = array(
-            '#placeholder' => 'cookie_key',
-            '#type' => 'textfield',
-            '#title' => t('Key'),
-            '#disabled' => ($this->isEdit)? true : false,
-            '#default_value' => ($this->isEdit)? $key : null,
-        );
+        if ($user->hasPermission('administer cookiebar settings')) {
+            $form['cookie']['cookie_key'] = array(
+                '#placeholder' => 'cookie_key',
+                '#type' => 'textfield',
+                '#title' => t('Key'),
+                '#disabled' => ($this->isEdit)? true : false,
+                '#default_value' => ($this->isEdit)? $key : null,
+            );
+        }
         if ($this->isEdit) {
             // Set value to be key so it cant be changed
             $form['cookie']['cookie_key']['#value'] = $key;

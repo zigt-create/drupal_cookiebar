@@ -24,20 +24,25 @@ class KeesCookiebarConfigForm extends ConfigFormBase
      */
     public function buildForm(array $form, FormStateInterface $form_state)
     {
+        // Get the current user
+        $user = \Drupal::currentUser();
+
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
         // Default settings.
         $config = $this->config('kees_cookiebar.settings');
         $cookies = $config->get('kees_cookiebar.settings_cookies');
 
-        $form['add_link'] = [
-            '#attributes' => [
-                "class" => ['button', 'form-actions'],
-            ],
-            '#title' => $this->t('+ Add cookie-type'),
-            '#type' => 'link',
-            '#url' => Url::fromRoute('kees_cookiebar.add_config'),
-        ];
+        if ($user->hasPermission('administer cookiebar settings')) {
+            $form['add_link'] = [
+                '#attributes' => [
+                    "class" => ['button', 'form-actions'],
+                ],
+                '#title' => $this->t('+ Add cookie-type'),
+                '#type' => 'link',
+                '#url' => Url::fromRoute('kees_cookiebar.add_config'),
+            ];
+        }
 
         $form['mytable'] = array(
             '#type' => 'table',
@@ -61,7 +66,7 @@ class KeesCookiebarConfigForm extends ConfigFormBase
                 'title' => t('Edit'),
                 'url' => Url::fromRoute('kees_cookiebar.add_config', array('key' => $key)),
             );
-            if ("primary_cookies" != $key) {
+            if ("primary_cookies" != $key && $user->hasPermission('administer cookiebar settings')) {
                 $form['mytable'][$key]['operations']['#links']['delete'] = array(
                     'title' => t('Delete'),
                     'url' => Url::fromRoute('kees_cookiebar.remove_config', array('key' => $key, 'title' => $value['label'])),

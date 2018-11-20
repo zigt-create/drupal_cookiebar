@@ -24,7 +24,7 @@ kees_cookiebar.config:
         _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarConfigForm'
         _title: 'KeesTM Cookiebar configuration'
     requirements:
-        _permission: 'administer cookiebar settings'
+        _permission: 'administer cookiebar'
 # Add form
 kees_cookiebar.add_config:
     path: '/admin/config/development/cookiebar/config/add'
@@ -32,7 +32,7 @@ kees_cookiebar.add_config:
         _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarAddConfigForm'
         _title: 'KeesTM Cookiebar add cookie configuration'
     requirements:
-        _permission: 'administer cookiebar settings'
+        _permission: 'administer cookiebar'
 # Remove form
 kees_cookiebar.remove_config:
     path: '/admin/config/development/cookiebar/config/remove'
