@@ -37,14 +37,14 @@ class KeesCookiebarForm extends ConfigFormBase
         // Text field.
         $form['text'] = array(
             '#type' => 'textarea',
-            '#title' => $this->t('Description'),
+            '#title' => $this->t('Description:'),
             '#default_value' => $config->get('kees_cookiebar.text'),
             '#description' => $this->t('Main text on the center of the cookiebar.'),
         );
         // Accept button text field
         $form['accept_button_text'] = array(
             '#type' => 'textfield',
-            '#title' => $this->t('Accept cookies button text:'),
+            '#title' => $this->t('Submit cookies button text:'),
             '#default_value' => $config->get('kees_cookiebar.accept_button_text'),
             '#description' => $this->t('Text to show on the button to accept the cookies'),
         );
