@@ -4,11 +4,12 @@ kees_cookiebar.cookiebar:
   route_name : kees_cookiebar.cookiebar
   base_route: kees_cookiebar.cookiebar
   weight: 1
-kees_cookiebar.page:
-  title: 'Page'
-  route_name: kees_cookiebar.page
-  base_route: kees_cookiebar.cookiebar
-  weight: 2
+# Deprecated
+# kees_cookiebar.page:
+#   title: 'Page'
+#   route_name: kees_cookiebar.page
+#   base_route: kees_cookiebar.cookiebar
+#   weight: 2
 kees_cookiebar.admin:
   title: 'Configuration'
   route_name: kees_cookiebar.config
