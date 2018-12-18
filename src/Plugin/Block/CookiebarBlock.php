@@ -25,7 +25,7 @@ class CookiebarBlock extends BlockBase {
     $cookieSet = false;
     $cookieSet = $this->checkCookie();
     return array(
-        '#theme' => 'kees_cookiebar',
+        '#theme' => ($cookieSet)? 'kees_cookiebar_accepted' : 'kees_cookiebar',
         '#isCookie' => $cookieSet,
         '#label' => array(
             '#markup' =>$config->get('kees_cookiebar.label'),

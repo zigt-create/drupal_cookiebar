@@ -16,32 +16,41 @@ use Drupal\node\Entity\Node;
  */
 function kees_cookiebar_theme($existing, $type, $theme, $path) {
 
-    return [
-        'kees_cookiebar' => [
-            'variables' => [
+    return array(
+        'kees_cookiebar' => array(
+            'variables' => array(
                 'isCookie' => NULL,
                 'label' => NULL,
                 'text' => NULL,
                 'accept_button_text' => NULL,
                 'decline_button_text' => NULL,
-            ],
-        ],
-        'kees_radioblock' => [
-            'variables' => [
+            ),
+        ),
+        'kees_cookiebar_accepted' => array(
+            'variables' => array(
+                'isCookie' => NULL,
+                'label' => NULL,
+                'text' => NULL,
+                'accept_button_text' => NULL,
+                'decline_button_text' => NULL,
+            ),
+        ),
+        'kees_radioblock' => array(
+            'variables' => array(
                 'cookieValue' => NULL,
-            ],
-        ],
-        'kees_cookiesPage' => [
-            'variables' => [
+            ),
+        ),
+        'kees_cookiesPage' => array(
+            'variables' => array(
                 'cookieValue' => NULL,
                 'title' => NULL,
                 'intro' => NULL,
                 'text' => NULL,
                 'accept_button_text' => NULL,
                 'decline_button_text' => NULL,
-            ],
-        ],
-    ];
+            ),
+        ),
+    );
 }
 
 /**
