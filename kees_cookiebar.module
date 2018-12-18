@@ -6,7 +6,6 @@ use Drupal\node\Entity\Node;
 /**
  * Implement hook_theme()
  * This function tells each theme what variables they can use
- * Changes Require chache clear
  *
  * @param unknown $existing
  * @param unknown $type
@@ -15,7 +14,7 @@ use Drupal\node\Entity\Node;
  * @return array
  */
 function kees_cookiebar_theme($existing, $type, $theme, $path) {
-
+    // This defines the variables that will be useable in the templates
     return [
         'kees_cookiebar' => [
             'variables' => [

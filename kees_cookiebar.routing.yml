@@ -41,16 +41,3 @@ kees_cookiebar.remove_config:
         _title: 'KeesTM Cookiebar remove cookie configuration'
     requirements:
         _permission: 'administer cookiebar settings'
-
-
-
-# Page route
-cookies.content:
-    path: '/cookies'
-    defaults:
-        _controller: '\Drupal\kees_cookiebar\Controller\CookiesPageController::content'
-        _title: 'Cookies'
-    requirements:
-        _permission: 'access content'
-
-
