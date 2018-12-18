@@ -1,6 +1,6 @@
 {
     "name": "keestm/cookiebar",
-    "description": "A Drupal module that adds a accept cookies bar to the site",
+    "description": "A Drupal module that adds a cookies bar to your site",
     "type": "drupal-module",
     "license": "MIT",
     "minimum-stability": "dev",
