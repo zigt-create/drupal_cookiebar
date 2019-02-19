@@ -59,7 +59,7 @@ function getCookieValue(name) {
 
     try {
         var object = JSON.parse(cookie);
-    } catch {
+    } catch (error) {
         return false;
     }
 
