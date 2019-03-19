@@ -106,3 +106,22 @@ function kees_cookiebar_preprocess(&$variables)
         $variables['kees_cookies'] = json_decode($cookies, true);
     }
 }
+
+/**
+ * Implement hook_menu_local_tasks_alter
+ *
+ * Will alter the local tasks based on the cookiebar_type
+ *
+ * @param array $data
+ * @param string $route_name
+ * @return void
+ */
+function kees_cookiebar_menu_local_tasks_alter(&$data, $route_name)
+{
+    $config = \Drupal::config('kees_cookiebar.settings');
+    $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
+
+    if ($cookiebar_type === "0") {
+        unset($data['tabs'][0]['kees_cookiebar.config']);
+    }
+}
