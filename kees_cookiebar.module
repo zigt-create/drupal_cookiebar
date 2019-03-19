@@ -18,7 +18,7 @@ function kees_cookiebar_theme($existing, $type, $theme, $path)
 {
     // This defines the variables that will be useable in the templates
     return [
-        'kees_cookiebar' => [
+        'kees_cookiebar_default' => [
             'variables' => [
                 'label' => null,
                 'cookies' => null,
@@ -27,21 +27,30 @@ function kees_cookiebar_theme($existing, $type, $theme, $path)
                 'decline_button_text' => null,
             ],
         ],
-        'kees_radioblock' => [
+        'kees_cookiebar_advanced' => [
             'variables' => [
-                'cookieValue' => null,
-            ],
-        ],
-        'kees_cookiesPage' => [
-            'variables' => [
-                'cookieValue' => null,
-                'title' => null,
-                'intro' => null,
+                'label' => null,
+                'cookies' => null,
                 'text' => null,
                 'accept_button_text' => null,
                 'decline_button_text' => null,
             ],
         ],
+        // 'kees_radioblock' => [
+        //     'variables' => [
+        //         'cookieValue' => null,
+        //     ],
+        // ],
+        // 'kees_cookiesPage' => [
+        //     'variables' => [
+        //         'cookieValue' => null,
+        //         'title' => null,
+        //         'intro' => null,
+        //         'text' => null,
+        //         'accept_button_text' => null,
+        //         'decline_button_text' => null,
+        //     ],
+        // ],
     ];
 }
 
