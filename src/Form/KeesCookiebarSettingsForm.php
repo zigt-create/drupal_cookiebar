@@ -67,14 +67,17 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
      */
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
-        // if key is machine readable
+        // Validation for cookiepage_path
         $field_name = 'cookiepage_path';
+        // If path starts with a '/'
         if (substr($form_state->getValue($field_name), 0, 1) !== "/") {
             $form_state->setErrorByName($field_name, $this->t('Path must start with a \'/\''));
         }
+        // If path ends with a '/'
         if (substr($form_state->getValue($field_name), -1) === "/") {
             $form_state->setErrorByName($field_name, $this->t('Path should not end with a \'/\''));
         }
+        // If path length is shorter than 3 characters
         if (strlen($form_state->getValue($field_name)) < 3) {
             $form_state->setErrorByName($field_name, $this->t('Path should be atleast 3 charaters long'));
         }
