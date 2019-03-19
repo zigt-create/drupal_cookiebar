@@ -4,14 +4,23 @@ kees_cookiebar.cookiebar:
   route_name : kees_cookiebar.cookiebar
   base_route: kees_cookiebar.cookiebar
   weight: 1
-# Deprecated
+
+# Tab 'Page' Will be unset if type is 'advanced', see kees_cookiebar.module::kees_cookiebar_menu_local_tasks_alter
 # kees_cookiebar.page:
 #   title: 'Page'
 #   route_name: kees_cookiebar.page
 #   base_route: kees_cookiebar.cookiebar
 #   weight: 2
-kees_cookiebar.admin:
+
+# Tab 'Configuration' Will be unset if type is 'default', see kees_cookiebar.module::kees_cookiebar_menu_local_tasks_alter
+kees_cookiebar.config:
   title: 'Configuration'
   route_name: kees_cookiebar.config
   base_route: kees_cookiebar.cookiebar
   weight: 3
+
+kees_cookiebar.settings:
+  title: 'Settings'
+  route_name: kees_cookiebar.settings
+  base_route: kees_cookiebar.cookiebar
+  weight: 4
