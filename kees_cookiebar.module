@@ -13,7 +13,8 @@ use Drupal\node\Entity\Node;
  * @param unknown $path
  * @return array
  */
-function kees_cookiebar_theme($existing, $type, $theme, $path) {
+function kees_cookiebar_theme($existing, $type, $theme, $path)
+{
     // This defines the variables that will be useable in the templates
     return [
         'kees_cookiebar' => [
@@ -74,7 +75,8 @@ function kees_cookiebar_install()
  * @param array $attachments
  * @return void
  */
-function kees_cookiebar_page_attachments(array &$attachments) {
+function kees_cookiebar_page_attachments(array &$attachments)
+{
     $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
     if ($is_admin) {
         $attachments['#attached']['library'][] = 'kees_cookiebar/cookiebar-css-admin';

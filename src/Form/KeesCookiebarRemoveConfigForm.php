@@ -3,7 +3,7 @@ namespace Drupal\kees_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use \Drupal\Core\Url;
+use Drupal\Core\Url;
 
 class KeesCookiebarRemoveConfigForm extends ConfigFormBase
 {

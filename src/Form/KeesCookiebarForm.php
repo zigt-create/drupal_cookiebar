@@ -27,6 +27,9 @@ class KeesCookiebarForm extends ConfigFormBase
         $form = parent::buildForm($form, $form_state);
         // Default settings.
         $config = $this->config('kees_cookiebar.settings');
+        $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
+        
+        // Build form
         // Page title field.
         $form['label'] = array(
             '#type' => 'textfield',
@@ -34,6 +37,7 @@ class KeesCookiebarForm extends ConfigFormBase
             '#default_value' => $config->get('kees_cookiebar.label'),
             '#description' => $this->t('Bold text at the beginning of the cookiebar.'),
         );
+
         // Text field.
         $form['text'] = array(
             '#type' => 'textarea',
@@ -41,6 +45,7 @@ class KeesCookiebarForm extends ConfigFormBase
             '#default_value' => $config->get('kees_cookiebar.text'),
             '#description' => $this->t('Main text on the center of the cookiebar.'),
         );
+
         // Accept button text field
         $form['accept_button_text'] = array(
             '#type' => 'textfield',
