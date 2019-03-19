@@ -47,19 +47,24 @@ class KeesCookiebarForm extends ConfigFormBase
         );
 
         // Accept button text field
+        $title = ($cookiebar_type == "1")? "Submit cookies button text:" : "Accept cookies button text:";
+        $description = ($cookiebar_type == "1")? "Text to show on the button to submit cookie preference" : "Text to show on the button to accept the cookies";
         $form['accept_button_text'] = array(
             '#type' => 'textfield',
-            '#title' => $this->t('Submit cookies button text:'),
+            '#title' => $this->t($title),
             '#default_value' => $config->get('kees_cookiebar.accept_button_text'),
-            '#description' => $this->t('Text to show on the button to accept the cookies'),
+            '#description' => $this->t($description),
         );
-        // Decline button text field - Deprecated
-        // $form['decline_button_text'] = array(
-        //     '#type' => 'textfield',
-        //     '#title' => $this->t('Decline cookies button text:'),
-        //     '#default_value' => $config->get('kees_cookiebar.decline_button_text'),
-        //     '#description' => $this->t('Text to show on the button to decline the cookies'),
-        // );
+
+        // Decline button text field
+        if ($cookiebar_type == "0") {
+            $form['decline_button_text'] = array(
+                '#type' => 'textfield',
+                '#title' => $this->t('Decline cookies button text:'),
+                '#default_value' => $config->get('kees_cookiebar.decline_button_text'),
+                '#description' => $this->t('Text to show on the button to decline the cookies'),
+            );
+        }
 
         return $form;
     }
