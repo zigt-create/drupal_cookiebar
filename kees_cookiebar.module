@@ -5,12 +5,13 @@ use Drupal\node\Entity\Node;
 
 /**
  * Implement hook_theme()
- * This function tells each theme what variables they can use
  *
- * @param unknown $existing
- * @param unknown $type
- * @param unknown $theme
- * @param unknown $path
+ * This function tells each theme template what variables they can use
+ *
+ * @param array $existing
+ * @param string $type
+ * @param string $theme
+ * @param string $path
  * @return array
  */
 function kees_cookiebar_theme($existing, $type, $theme, $path)
