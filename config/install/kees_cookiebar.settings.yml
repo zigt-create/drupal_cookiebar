@@ -20,5 +20,5 @@ kees_cookiebar:
     marketing_cookies:
       label: 'Marketing cookies'
       desc: '<h4>Marketing cookies</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
-  cookiebar_type: 0
+  cookiebar_type: '0'
   cookiepage_path: '/cookies'
