@@ -5,7 +5,7 @@
  * @author Tom Grootjans <tom@kees-tm.nl>
  */
 
- /* Set default variables */
+/* Set default variables */
 var cookieName = 'CookieConsent';
 
 /**
@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
 
     // Show cookies block
     var cookiesPage = jQuery('#cookiebar_container').data('cookies-url');
-    if (getCookieValue('primary_cookies') != true || cookiesPage == window.location.pathname ) {
+    if (getCookieValue('primary_cookies') != true || cookiesPage == window.location.pathname) {
         jQuery('#cookiebar_container').show();
     }
 

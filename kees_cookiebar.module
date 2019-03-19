@@ -1,7 +1,11 @@
 <?php
+
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\block\Entity\Block;
 use Drupal\node\Entity\Node;
+
+// Globals
+$GLOBALS["cookie_name"] = 'CookieConsent';
 
 /**
  * Implement hook_theme()
@@ -111,10 +115,7 @@ function kees_cookiebar_page_attachments(array &$attachments)
  */
 function kees_cookiebar_preprocess(&$variables)
 {
-    $cookies = \Drupal::request()->cookies->get('CookieConsent');
-    if (!empty($cookies)) {
-        $variables['kees_cookies'] = json_decode($cookies, true);
-    }
+    $variables['kees_cookie_value'] = GetCookieValue();
 }
 
 /**
@@ -134,4 +135,37 @@ function kees_cookiebar_menu_local_tasks_alter(&$data, $route_name)
     if ($cookiebar_type === "0") {
         unset($data['tabs'][0]['kees_cookiebar.config']);
     }
+}
+
+/**
+ * Implement helper function GetCookieValue()
+ *
+ * to get the value of the cookie set by this module
+ *
+ * @return array|string|bool
+ */
+function GetCookieValue()
+{
+    $cookie_value = \Drupal::request()->cookies->get($GLOBALS["cookie_name"]);
+
+    if (isJSON($cookie_value)) {
+        // For (advanced) cookieblock
+        return json_decode($cookie_value, true);
+    } else {
+        // For (deafult) cookiebar
+        return $cookie_value;
+    }
+    
+    return false;
+}
+
+/**
+ * Implement helper function isJSON()
+ *
+ * @param unknown $string
+ * @return bool
+ */
+function isJSON($string) : bool
+{
+    return is_string($string) && is_array(json_decode($string, true)) ? true : false;
 }

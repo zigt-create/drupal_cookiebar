@@ -1,7 +1,12 @@
-cookiebar-css:
+cookiebar-css-default:
   css:
     theme:
-        assets/css/kees-cookiebar.css: {}
+        assets/css/kees-cookiebar-default.css: {}
+
+cookiebar-css-advanced:
+  css:
+    theme:
+        assets/css/kees-cookiebar-advanced.css: {}
 
 cookiebar-css-admin:
   css:
@@ -10,6 +15,7 @@ cookiebar-css-admin:
 
 cookiebar-js:
   js:
-    assets/js/kees-cookiebar.js: {}
+    assets/js/cookiebar-default.js: {}
+    assets/js/cookiebar-advanced.js: {}
   dependencies:
     - core/jquery

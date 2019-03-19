@@ -38,8 +38,7 @@ class CookiesPageController extends ControllerBase
             ),
             '#attached' => array(
                 'library' => array(
-                'kees_cookiebar/cookiebar-css',
-                'kees_cookiebar/cookiebar-js',
+                    'kees_cookiebar/cookiebar-js',
                 ),
             ),
             '#cache' => array(

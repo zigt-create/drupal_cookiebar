@@ -41,8 +41,7 @@ class CookiebarBlock extends BlockBase
             '#cookies' => $config->get('kees_cookiebar.settings_cookies'),
             '#attached' => array(
                 'library' => array(
-                'kees_cookiebar/cookiebar-css',
-                'kees_cookiebar/cookiebar-js',
+                    'kees_cookiebar/cookiebar-js',
                 ),
             ),
             '#cache' => array(
