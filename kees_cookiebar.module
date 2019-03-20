@@ -108,6 +108,7 @@ function kees_cookiebar_page_attachments(array &$attachments)
 
 /**
  * Implement hook_preprocess
+ *
  * This preprocess will add a variable to all pages
  *
  * @param array $variables
@@ -116,6 +117,26 @@ function kees_cookiebar_page_attachments(array &$attachments)
 function kees_cookiebar_preprocess(&$variables)
 {
     $variables['kees_cookie_value'] = GetCookieValue();
+}
+
+/**
+ * Implement hook_preprocess_html
+ *
+ * Add some configuration to the javascript library
+ *
+ * @param array $variables
+ * @return void
+ */
+function kees_cookiebar_preprocess_html(&$variables)
+{
+    $config = \Drupal::config('kees_cookiebar.settings');
+    $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
+    
+    if (!empty($cookiepage_path)) {
+        $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
+            'cookiepagePath' => $cookiepage_path,
+        );
+    }
 }
 
 /**
