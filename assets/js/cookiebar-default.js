@@ -1,38 +1,51 @@
-(function ($) {
+/**
+ * @file JS file for the cookiebar module
+ *
+ * @author KeesTM <developers@kees-tm.nl>
+ * @author Tom Grootjans <tom@kees-tm.nl>
+ */
 
-    // When clicking on the OK button in the cookiebar
-    $(document).on('click', '.kees-js-cookiebar-container a.kees-js-cookiebar-button', function (event) {
-        // Variables
-        var $object = $(this);
+/* Set default variables */
+var keesCookieName = 'CookieConsent';
 
-        // Prevent following the href
-        event.preventDefault();
+(function ($, Drupal) {
+    Drupal.behaviors.kees_cookiebar_default = {
+        attach: function (context, drupalSettings) {
+            var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
+            var currentPath = window.location.pathname;
 
-        // SetCookie function
-        setCookie(($object.attr("id") == "true") ? "true" : "false");
+            $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (event) {
+                var $object = $(this);
 
-        // Reload page to apply needed and remove unwanted cookies 
-        location.reload();
-    });
+                // Prevent following the href
+                event.preventDefault();
 
-    // When clicking on the radio buttons on the cookie page
-    $(document).on('click', '#kees-js-cookiebar-settings input[type=radio]', function (event) {
-        // Variables
-        var $object = $(this);
+                // SetCookie function
+                setCookie(($object.attr("id") == "true") ? "true" : "false");
 
-        // SetCookie function
-        setCookie(($object.val() == "true") ? "true" : "false");
+                // Reload page to apply needed and remove unwanted cookies 
+                if (currentPath == cookiepagePath) {
+                    window.location.href = "/";
+                } else {
+                    location.reload();
+                }
+            });
 
-        // Reload page to apply needed and remove unwanted cookies 
-        location.reload();
-    });
+            // Show cookiebar if cookies are not set or if user is on the cookies page
+            $('#kees-cookiebar-container', context).once('cookiebar').each(function () {
+                if (getCookie() === undefined || currentPath == cookiepagePath) {
+                    $(this).show();
+                }
+            });
+        }
+    };
 
-
+    // Helper function to set the cookie
     function setCookie(value) {
-
+        
         // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed' 
         var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-        document.cookie = "CookieConsent=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
+        document.cookie = keesCookieName + "=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
 
         // Additional remove all other cookies if value is 'CookieDisallowed'
         if ("false" == value) {
@@ -55,11 +68,22 @@
                 var cookieName = splitValue[0];
 
                 // If cookiename is not our own cookiebar cookie
-                if ('CookieConsent' != cookieName) {
+                if (keesCookieName != cookieName) {
                     document.cookie = cookieName + "=; expires=" + cookieRemoveExpireTime.toGMTString() + "; path=/";
                 }
 
             });
         }
     }
-}(jQuery));
+
+    /**
+     * Get the cookie set by this module
+     */
+    function getCookie() {
+        var value = "; " + document.cookie;
+        var cookie = value.split("; " + keesCookieName + "=");
+
+        if (cookie.length == 2) return cookie.pop().split(";").shift();
+    }
+
+})(jQuery, Drupal);
