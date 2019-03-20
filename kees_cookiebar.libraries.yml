@@ -1,21 +1,25 @@
+# CSS Libraries
 cookiebar-css-default:
   css:
     theme:
         assets/css/kees-cookiebar-default.css: {}
-
 cookiebar-css-advanced:
   css:
     theme:
         assets/css/kees-cookiebar-advanced.css: {}
-
 cookiebar-css-admin:
   css:
     theme:
         assets/css/kees-cookiebar-admin.css: {}
 
-cookiebar-js:
+# JS libraries
+cookiebar-default-js:
   js:
     assets/js/cookiebar-default.js: {}
+  dependencies:
+    - core/jquery
+cookiebar-advanced-js:
+  js:
     assets/js/cookiebar-advanced.js: {}
   dependencies:
     - core/jquery
