@@ -14,16 +14,15 @@ var keesCookieName = 'CookieConsent';
             var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
             var currentPath = window.location.pathname;
 
-            $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (event) {
+            $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
+                e.preventDefault();  //prevent link from redirecting
+                
                 var $object = $(this);
-
-                // Prevent following the href
-                event.preventDefault();
 
                 // SetCookie function
                 setCookie(($object.attr("id") == "true") ? "true" : "false");
 
-                // Reload page to apply needed and remove unwanted cookies 
+                // Redirect or reload the page
                 if (currentPath == cookiepagePath) {
                     window.location.href = "/";
                 } else {
