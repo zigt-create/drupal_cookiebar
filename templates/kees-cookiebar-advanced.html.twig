@@ -18,7 +18,7 @@
  * @ingroup themeable
  */
 #}
-<span id="cookiebar_container" style="display: none;" data-cookies-url="/cookies">
+<span id="kees-cookiebar-container" style="display: none;">
 
     <div class="consent consent__side--right-bottom ">
         <div class="row">
@@ -26,13 +26,13 @@
                 <div class="consent__inner">
                     <h2>{{ label }}</h2>
                     <p>{{ text }}</p>
-                    <form class="consent__form" id="kees_cookie_form" method="post" onsubmit="return keesCookieForm()" action="">
+                    <form class="consent__form" id="kees-cookiebar-form" method="post" action="">
 
                         <div class="scroll_wrapper">
 
                             {% for key, cookie in cookies %}
                                 <div class="consent__form__item consent__description--closed {{ (loop.index == 1)? "consent__form__item--first" }} ">
-                                    <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "checked disabled" }} >
+                                    <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "disabled" }} {{ (loop.index == 1 or kees_cookie_value[key] == true)? "checked" }}>
                                     <label class="consent__form__label--checkbox" for="{{ key }}"><span>{{ cookie.label }}</span></label>
                                     <a href="#info" class="consent__form__trigger trigger--closed"></a>
 
