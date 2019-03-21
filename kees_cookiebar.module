@@ -3,6 +3,7 @@
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\block\Entity\Block;
 use Drupal\node\Entity\Node;
+use Drupal\Core\Url;
 
 // Globals
 $GLOBALS["cookie_name"] = 'CookieConsent';
@@ -131,12 +132,19 @@ function kees_cookiebar_preprocess_html(&$variables)
 {
     $config = \Drupal::config('kees_cookiebar.settings');
     $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
-    
-    if (!empty($cookiepage_path)) {
-        $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
-            'cookiepagePath' => $cookiepage_path,
-        );
+    if (empty($cookiepage_path)) {
+        $cookiepage_path = "/cookies";
+        $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
+        $config->save();
     }
+
+    $language = Drupal::languageManager()->getCurrentLanguage();
+    $url = Url::fromRoute('<front>', [], ['language' => $language]);
+
+    $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
+        'cookiepagePath' => $cookiepage_path,
+        'homeUrl' => $url->toString(),
+    );
 }
 
 /**

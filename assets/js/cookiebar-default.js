@@ -12,6 +12,7 @@ var keesCookieName = 'CookieConsent';
     Drupal.behaviors.kees_cookiebar_default = {
         attach: function (context, drupalSettings) {
             var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
+            var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
             var currentPath = window.location.pathname;
 
             $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
@@ -24,7 +25,7 @@ var keesCookieName = 'CookieConsent';
 
                 // Redirect or reload the page
                 if (currentPath == cookiepagePath) {
-                    window.location.href = "/";
+                    window.location.href = homeUrl;
                 } else {
                     location.reload();
                 }
