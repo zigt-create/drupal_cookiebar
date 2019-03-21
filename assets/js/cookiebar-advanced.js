@@ -77,5 +77,4 @@ var keesCookieName = 'CookieConsent';
 
         if (cookie.length == 2) return cookie.pop().split(";").shift();
     }
-
 })(jQuery, Drupal);

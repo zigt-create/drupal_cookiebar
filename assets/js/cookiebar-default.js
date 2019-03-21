@@ -67,7 +67,6 @@ var keesCookieName = 'CookieConsent';
                 if (keesCookieName != cookieName) {
                     document.cookie = cookieName + "=; expires=" + cookieRemoveExpireTime.toGMTString() + "; path=/";
                 }
-
             });
         }
     }
@@ -81,5 +80,4 @@ var keesCookieName = 'CookieConsent';
 
         if (cookie.length == 2) return cookie.pop().split(";").shift();
     }
-
 })(jQuery, Drupal);
