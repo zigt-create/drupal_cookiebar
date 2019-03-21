@@ -15,8 +15,8 @@ var keesCookieName = 'CookieConsent';
             var currentPath = window.location.pathname;
 
             $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
-                e.preventDefault();  //prevent link from redirecting
-                
+                e.preventDefault(); //prevent link from redirecting
+
                 var $object = $(this);
 
                 // SetCookie function
@@ -41,7 +41,6 @@ var keesCookieName = 'CookieConsent';
 
     // Helper function to set the cookie
     function setCookie(value) {
-        
         // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed' 
         var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
         document.cookie = keesCookieName + "=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
