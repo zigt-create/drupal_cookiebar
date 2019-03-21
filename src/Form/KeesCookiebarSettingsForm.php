@@ -43,6 +43,7 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
             '#title' => 'Cookiebar type:',
             '#options' => $options,
             '#default_value' => $cookiebar_type,
+            '#description' => 'When changing this, all users will have to re-set there cookie preference.',
         );
 
         $form['cookiepage_path'] = array(
@@ -50,7 +51,9 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
             '#title' => 'Path to the cookies settings page',
             '#default_value' => $cookiepage_path,
             '#size' => 60,
-            '#description' => t('On this path the cookiebar or cookieblock will always be visible'),
+            '#description' =>   'E.g: /cookies /cookie-page or /privacy-settings<br>' .
+                                'On this path the cookiebar or cookieblock will always be visible.<br>' .
+                                'When a user sets their cookie preference on this path, they will be redirected to the homepage instead of reloading the page.',
             '#maxlength' => 128,
             '#required' => true,
           );
