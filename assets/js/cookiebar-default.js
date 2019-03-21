@@ -31,11 +31,9 @@ var keesCookieName = 'CookieConsent';
             });
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
-            $('#kees-cookiebar-container', context).once('cookiebar').each(function () {
-                if (getCookie() === undefined || currentPath == cookiepagePath) {
-                    $(this).show();
-                }
-            });
+            if ((getCookie() != true || getCookie() != false) || (currentPath == cookiepagePath)) {
+                $('#kees-cookiebar-container', context).once('cookiebar').show()
+            }
         }
     };
 
