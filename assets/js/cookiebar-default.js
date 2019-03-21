@@ -31,7 +31,7 @@ var keesCookieName = 'CookieConsent';
             });
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
-            if ((getCookie() != true || getCookie() != false) || (currentPath == cookiepagePath)) {
+            if ((getCookie() != "true" && getCookie() != "false") || (currentPath == cookiepagePath)) {
                 $('#kees-cookiebar-container', context).once('cookiebar').show()
             }
         }
