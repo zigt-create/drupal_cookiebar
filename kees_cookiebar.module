@@ -137,13 +137,16 @@ function kees_cookiebar_preprocess_html(&$variables)
         $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
         $config->save();
     }
-
-    $language = Drupal::languageManager()->getCurrentLanguage();
-    $url = Url::fromRoute('<front>', [], ['language' => $language]);
+    
+    $current_language = Drupal::languageManager()->getCurrentLanguage();
+    $default_lang = Drupal::languageManager()->getDefaultLanguage();
+    $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
+    $currentUrl = Url::fromRoute('<current>', [], ['language' => $default_lang]);
 
     $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
         'cookiepagePath' => $cookiepage_path,
-        'homeUrl' => $url->toString(),
+        'homeUrl' => $homeUrl->toString(),
+        'currentUrl' => $currentUrl->toString(),
     );
 }
 

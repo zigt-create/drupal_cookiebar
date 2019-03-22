@@ -12,10 +12,10 @@ var keesCookieName = 'CookieConsent';
     Drupal.behaviors.kees_cookiebar_advanced = {
         attach: function (context, drupalSettings) {
             var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
+            var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
             var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
-            var currentPath = window.location.pathname;
 
-            if (getCookieValue('primary_cookies') != true || currentPath == cookiepagePath) {
+            if (getCookieValue('primary_cookies') != true || currentUrl == cookiepagePath) {
                 $('#kees-cookiebar-container', context).show();
             }
 
@@ -43,7 +43,7 @@ var keesCookieName = 'CookieConsent';
                 document.cookie = "CookieConsent=" + JSON.stringify(cookie) + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
 
                 // Redirect or reload the page
-                if (currentPath == cookiepagePath) {
+                if (currentUrl == cookiepagePath) {
                     window.location.href = homeUrl;
                 } else {
                     location.reload();

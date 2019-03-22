@@ -12,8 +12,8 @@ var keesCookieName = 'CookieConsent';
     Drupal.behaviors.kees_cookiebar_default = {
         attach: function (context, drupalSettings) {
             var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
+            var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
             var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
-            var currentPath = window.location.pathname;
 
             $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
                 e.preventDefault(); //prevent link from redirecting
@@ -24,7 +24,7 @@ var keesCookieName = 'CookieConsent';
                 setCookie(($object.attr("id") == "true") ? "true" : "false");
 
                 // Redirect or reload the page
-                if (currentPath == cookiepagePath) {
+                if (currentUrl == cookiepagePath) {
                     window.location.href = homeUrl;
                 } else {
                     location.reload();
@@ -32,7 +32,7 @@ var keesCookieName = 'CookieConsent';
             });
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
-            if ((getCookie() != "true" && getCookie() != "false") || (currentPath == cookiepagePath)) {
+            if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
                 $('#kees-cookiebar-container', context).once('cookiebar').show()
             }
         }
