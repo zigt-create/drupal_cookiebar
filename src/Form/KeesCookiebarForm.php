@@ -3,9 +3,19 @@ namespace Drupal\kees_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\locale\SourceString;
+
+use Drupal\kees_cookiebar\Helper\ConfigHelper;
 
 class KeesCookiebarForm extends ConfigFormBase
 {
+    protected $ConfigHelper;
+
+    public function __construct()
+    {
+        $this->ConfigHelper = new ConfigHelper();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -25,16 +35,18 @@ class KeesCookiebarForm extends ConfigFormBase
     {
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
-        // Default settings.
-        $config = $this->config('kees_cookiebar.settings');
-        $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
+
+        // get config value
+        $cookiebar_type = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type');
         
-        // Build form
+        // Language links
+        $form = $this->ConfigHelper->addLanguageLinks($form);
+        
         // Page title field.
         $form['label'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Label:'),
-            '#default_value' => $config->get('kees_cookiebar.label'),
+            '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.label'),
             '#description' => $this->t('Bold text at the beginning of the cookiebar.'),
         );
 
@@ -42,7 +54,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $form['text'] = array(
             '#type' => 'textarea',
             '#title' => $this->t('Description:'),
-            '#default_value' => $config->get('kees_cookiebar.text'),
+            '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.text'),
             '#description' => $this->t('Main text on the center of the cookiebar.'),
         );
 
@@ -52,7 +64,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $form['accept_button_text'] = array(
             '#type' => 'textfield',
             '#title' => $this->t($title),
-            '#default_value' => $config->get('kees_cookiebar.accept_button_text'),
+            '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.accept_button_text'),
             '#description' => $this->t($description),
         );
 
@@ -61,7 +73,7 @@ class KeesCookiebarForm extends ConfigFormBase
             $form['decline_button_text'] = array(
                 '#type' => 'textfield',
                 '#title' => $this->t('Decline cookies button text:'),
-                '#default_value' => $config->get('kees_cookiebar.decline_button_text'),
+                '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.decline_button_text'),
                 '#description' => $this->t('Text to show on the button to decline the cookies'),
             );
         }
@@ -90,12 +102,15 @@ class KeesCookiebarForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $config = $this->config('kees_cookiebar.settings');
-        $config->set('kees_cookiebar.label', $form_state->getValue('label'));
-        $config->set('kees_cookiebar.text', $form_state->getValue('text'));
-        $config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
-        $config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
-        $config->save();
+        $this->ConfigHelper->translatable_config->set('kees_cookiebar.label', $form_state->getValue('label'));
+        $this->ConfigHelper->translatable_config->set('kees_cookiebar.text', $form_state->getValue('text'));
+        
+        $this->ConfigHelper->translatable_config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
+        if ($this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type') == "0") {
+            $this->ConfigHelper->translatable_config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
+        }
+
+        $this->ConfigHelper->translatable_config->save();
 
         return parent::submitForm($form, $form_state);
     }

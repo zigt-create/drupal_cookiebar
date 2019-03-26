@@ -6,3 +6,6 @@ form#kees-cookiebar-config-form input.form-submit{
     display: block;
 }
 
+a.lang_link {
+    margin-right: 15px;
+}

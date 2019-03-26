@@ -4,9 +4,22 @@ namespace Drupal\kees_cookiebar\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
+use Drupal\kees_cookiebar\Helper\ConfigHelper;
+
 class KeesCookiebarAddConfigForm extends ConfigFormBase
 {
-    private $isEdit = false;
+    protected $isEdit = false;
+
+    protected $ConfigHelper;
+
+    protected $user_selected_key;
+
+    public function __construct()
+    {
+        $this->ConfigHelper = new ConfigHelper();
+
+        $this->user_selected_key = \Drupal::request()->query->get('key');
+    }
 
     /**
      * {@inheritdoc}
@@ -31,18 +44,19 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
         // Form constructor.
         $form = parent::buildForm($form, $form_state);
 
-        $config = $this->config('kees_cookiebar.settings');
-        $cookies = $config->get('kees_cookiebar.settings_cookies');
-        $key = \Drupal::request()->query->get('key');
+        $cookies = $this->ConfigHelper->getTranslatedCookies();
 
-        if (empty($key) && !$user->hasPermission('administer cookiebar settings')) {
+        if (empty($this->user_selected_key) && !$user->hasPermission('administer cookiebar settings')) {
             return;
         }
 
-        if (array_key_exists($key, $cookies)) {
+        if (array_key_exists($this->user_selected_key, $cookies)) {
             // edit existing
             $this->isEdit = true;
-            $edit_cookie = $cookies[$key];
+            $edit_cookie = $cookies[$this->user_selected_key];
+            
+            // Language links
+            $form = $this->ConfigHelper->addLanguageLinks($form);
         }
 
         $form['cookie'] = array(
@@ -63,12 +77,12 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
                 '#type' => 'textfield',
                 '#title' => t('Key'),
                 '#disabled' => ($this->isEdit)? true : false,
-                '#default_value' => ($this->isEdit)? $key : null,
+                '#default_value' => ($this->isEdit)? $this->user_selected_key : null,
             );
         }
         if ($this->isEdit) {
             // Set value to be key so it cant be changed
-            $form['cookie']['cookie_key']['#value'] = $key;
+            $form['cookie']['cookie_key']['#value'] = $this->user_selected_key;
         }
         $form['cookie']['desc'] = array(
             '#type' => 'text_format',
@@ -112,20 +126,24 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
+        // Get existing cookies
+        $cookies = $this->ConfigHelper->getTranslatedCookies();
+
         // Get fields
         $name = $form_state->getValue('cookie_name');
-        $key = $form_state->getValue('cookie_key');
         $desc = $form_state->getValue('desc')['value'];
-        // Add to existing config
-        $config = $this->config('kees_cookiebar.settings');
-        $cookies = $config->get('kees_cookiebar.settings_cookies');
-        $cookies[$key] = array(
+        
+        // Set changes cookie
+        $cookies[$this->user_selected_key] = array(
             'label' => $name,
             'desc' => $desc,
         );
-        // Set new config with new array
-        $config->set('kees_cookiebar.settings_cookies', $cookies);
-        $config->save();
+       
+        // Save config
+        $this->ConfigHelper->translatable_config->set('kees_cookiebar.settings_cookies', $cookies);
+        $this->ConfigHelper->translatable_config->save();
+        
+        // Redirect
         $form_state->setRedirect('kees_cookiebar.config');
         return parent::submitForm($form, $form_state);
     }
