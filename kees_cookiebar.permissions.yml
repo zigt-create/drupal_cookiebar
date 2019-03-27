@@ -1,4 +1,9 @@
 # Create Permission used to access cookiebar settings
 administer cookiebar:
-  title: 'Administer Cookiebar'
-  description: 'Administer all Cookiebar configurations.'
+  title: 'Change cookiebar text'
+  description: 'Change cookie descriptions'
+
+administer cookiebar settings:
+  title: 'Access cookiebar configuration'
+  description: 'Administer all cookiebar configurations'
+  restrict access: true
