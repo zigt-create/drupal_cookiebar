@@ -130,14 +130,14 @@ function kees_cookiebar_preprocess(&$variables)
  */
 function kees_cookiebar_preprocess_html(&$variables)
 {
-    $config = \Drupal::config('kees_cookiebar.settings');
+    $config = \Drupal::service('config.factory')->getEditable('kees_cookiebar.settings');
     $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
     if (empty($cookiepage_path)) {
         $cookiepage_path = "/cookies";
         $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
         $config->save();
     }
-    
+
     $current_language = Drupal::languageManager()->getCurrentLanguage();
     $default_lang = Drupal::languageManager()->getDefaultLanguage();
     $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
@@ -187,7 +187,7 @@ function GetCookieValue()
         // For (deafult) cookiebar
         return $cookie_value;
     }
-    
+
     return false;
 }
 
