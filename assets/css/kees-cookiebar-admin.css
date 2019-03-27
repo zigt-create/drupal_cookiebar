@@ -9,3 +9,6 @@ form#kees-cookiebar-config-form input.form-submit{
 a.lang_link {
     margin-right: 15px;
 }
+a.lang_link.active {
+    text-decoration: underline;
+}

@@ -48,23 +48,31 @@ class ConfigHelper
                 '#tag' => 'h3',
                 '#value' => 'Translate',
             ];
-            $url = \Drupal\Core\Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all()]);
-                
+            $url = $this::getUrlWithQueryParameters();
+
             $options = $url->getOptions();
             if (isset($options['query']['hl'])) {
+                $active = $options['query']['hl'];
                 unset($options['query']['hl']);
+            } else {
+                $active = 'default';
             }
             $url->setOptions($options);
-            
+
             $form['lang_link_'. $this->default_langcode] = [
                 '#type' => 'link',
                 '#title' => $this->default_language->getName(),
-                '#attributes' => ['class' => ['lang_link', 'active']],
+                '#attributes' => array(
+                    'class' => array(
+                        'lang_link',
+                        ($active == 'default')? 'active' : '',
+                    ),
+                ),
                 '#url' => $url,
             ];
             foreach ($this->languages as $language) {
-                $url = \Drupal\Core\Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all()]);
-                
+                $url = $this::getUrlWithQueryParameters();
+
                 $options = $url->getOptions();
                 $options['query']['hl'] = $language->getId();
                 $url->setOptions($options);
@@ -72,8 +80,13 @@ class ConfigHelper
                 $form['lang_link_'. $language->getId()] = [
                     '#type' => 'link',
                     '#title' => $language->getName(),
-                    '#attributes' => ['class' => 'lang_link'],
-                    '#url' => $url,
+                    '#attributes' => array(
+                        'class' => array(
+                            'lang_link',
+                            ($active == $language->getId())? 'active' : '',
+                        ),
+                    ),
+                        '#url' => $url,
                 ];
             }
             $form['lang_link_spacing'] = [
@@ -89,19 +102,26 @@ class ConfigHelper
     public function getTranslatedCookies() : array
     {
         $cookies = $this->base_config->get('kees_cookiebar.settings_cookies');
-        
+
         foreach ($cookies as $key => $cookie) {
-            $translated_label = $this->translatable_config->get('kees_cookiebar.settings_cookies')[$key]['label'];
-            if (!empty($translated_label)) {
-                $cookies[$key]['label'] = $translated_label;
-            }
-            
-            $translated_desc = $this->translatable_config->get('kees_cookiebar.settings_cookies')[$key]['desc'];
-            if (!empty($translated_desc)) {
-                $cookies[$key]['desc'] = $translated_desc;
+            $translatedconf = $this->translatable_config->get('kees_cookiebar.settings_cookies');
+
+            if (isset($translatedconf[$key])) {
+                if (isset($translatedconf[$key]['label'])) {
+                    $cookies[$key]['label'] = $translatedconf[$key]['label'];
+                }
+
+                if (isset($translatedconf[$key]['desc'])) {
+                    $cookies[$key]['desc'] = $translatedconf[$key]['desc'];
+                }
             }
         }
 
         return $cookies;
+    }
+
+    public static function getUrlWithQueryParameters()
+    {
+        return \Drupal\Core\Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all()]);
     }
 }
