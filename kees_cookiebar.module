@@ -69,8 +69,7 @@ function kees_cookiebar_install()
     // (Re)set saved config. This is sometimes cached in some wierd way...
     $config_file = \file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'kees_cookiebar') . "/config/install/kees_cookiebar.settings.yml");
     $parsed = \Symfony\Component\Yaml\Yaml::parse($config_file);
-    $config_factory = \Drupal::configFactory();
-    $config = $config_factory->getEditable('kees_cookiebar.settings');
+    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
     $config->setData($parsed);
     $config->save(true);
 }
@@ -115,7 +114,7 @@ function kees_cookiebar_preprocess(&$variables)
  */
 function kees_cookiebar_preprocess_html(&$variables)
 {
-    $config = \Drupal::service('config.factory')->getEditable('kees_cookiebar.settings');
+    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
     $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
     if (empty($cookiepage_path)) {
         $cookiepage_path = "/cookies";

@@ -27,7 +27,7 @@ class ConfigHelper
         unset($this->languages[$this->default_langcode]);
 
         // Set config
-        $this->base_config = \Drupal::service('config.factory')->getEditable('kees_cookiebar.settings');
+        $this->base_config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
         $this->translatable_config = $this->base_config;
         if (!empty($this->selected_langcode)) {
             $this->translatable_config = \Drupal::languageManager()->getLanguageConfigOverride($this->selected_langcode, 'kees_cookiebar.settings');
