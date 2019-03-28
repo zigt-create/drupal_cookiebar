@@ -19,8 +19,8 @@ class KeesCookiebarForm extends ConfigFormBase
         $type = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type');
         $path = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiepage_path');
 
-        if (empty($cookies) || empty($type) || empty($path)) {
-            drupal_set_message('You need to run updates on the <a href="/update.php">update.php page</a>', 'warning');
+        if (empty($cookies) || ($type !== "0" && $type !== "1") || empty($path)) {
+            drupal_set_message(t('You need to run updates on the <a href="/update.php">update.php</a> page'), 'warning');
         }
     }
 
