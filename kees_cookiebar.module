@@ -203,16 +203,14 @@ function isJSON($string) : bool
 ###   updates   ###
 ###################
 /**
- * Implement hook_update_N
- *
- * Add new options to config
+ * Add new options to configuration
  */
 function kees_cookiebar_update_8001()
 {
     $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
 
     $cookies['primary_cookies'] = array(
-        'label' => 'Primary_Cookies',
+        'label' => 'Primary Cookies',
         'desc' => "",
     );
     $config->set('kees_cookiebar.settings_cookies', $cookies);
