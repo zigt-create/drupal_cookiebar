@@ -15,7 +15,7 @@ var keesCookieName = 'CookieConsent';
             var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
             var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
 
-            $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
+            $('#kees-cookiebar-container a.kees-js-cookiebar-button', '.kees-js-cookiebar-container a.kees-js-cookiebar-button' , context).click(function (e) {
                 e.preventDefault(); //prevent link from redirecting
 
                 var $object = $(this);
@@ -40,7 +40,7 @@ var keesCookieName = 'CookieConsent';
 
     // Helper function to set the cookie
     function setCookie(value) {
-        // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed' 
+        // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed'
         var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
         document.cookie = keesCookieName + "=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
 
