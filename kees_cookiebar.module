@@ -77,7 +77,7 @@ function kees_cookiebar_install()
 /**
  * Implement hook_page_attachments
  *
- * This function will attach a stylesheet to all admin pages.
+ * Attach a stylesheet to all admin pages.
  *
  * @param array $attachments
  * @return void
@@ -94,7 +94,7 @@ function kees_cookiebar_page_attachments(array &$attachments)
 /**
  * Implement hook_preprocess
  *
- * This preprocess will add a variable to all pages
+ * Add a variable to all pages
  *
  * @param array $variables
  * @return void
@@ -137,7 +137,7 @@ function kees_cookiebar_preprocess_html(&$variables)
 /**
  * Implement hook_menu_local_tasks_alter
  *
- * Will alter the local tasks based on the cookiebar_type
+ * Alter the local tasks based on the cookiebar_type
  *
  * @param array $data
  * @param string $route_name
