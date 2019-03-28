@@ -25,7 +25,7 @@ class CookiebarBlock extends BlockBase
         $config = \Drupal::config('kees_cookiebar.settings');
 
         return array(
-            '#theme' => ($config->get('kees_cookiebar.cookiebar_type') === "1")? "kees_cookiebar_advanced" : "kees_cookiebar_default",
+            '#theme' => ($config->get('kees_cookiebar.cookiebar_type') === "1")? "kees_cookiebar_advanced" : "kees_cookiebar",
             '#label' => array(
                 '#markup' =>$config->get('kees_cookiebar.label'),
             ),

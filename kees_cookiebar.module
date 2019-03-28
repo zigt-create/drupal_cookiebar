@@ -22,41 +22,26 @@ $GLOBALS["cookie_name"] = 'CookieConsent';
 function kees_cookiebar_theme($existing, $type, $theme, $path)
 {
     // This defines the variables that will be useable in the templates
-    return [
-        'kees_cookiebar_default' => [
-            'variables' => [
+    return array(
+        'kees_cookiebar' => array(
+            'variables' => array(
                 'label' => null,
                 'cookies' => null,
                 'text' => null,
                 'accept_button_text' => null,
                 'decline_button_text' => null,
-            ],
-        ],
-        'kees_cookiebar_advanced' => [
-            'variables' => [
+            ),
+        ),
+        'kees_cookiebar_advanced' => array(
+            'variables' => array(
                 'label' => null,
                 'cookies' => null,
                 'text' => null,
                 'accept_button_text' => null,
                 'decline_button_text' => null,
-            ],
-        ],
-        // 'kees_radioblock' => [
-        //     'variables' => [
-        //         'cookieValue' => null,
-        //     ],
-        // ],
-        // 'kees_cookiesPage' => [
-        //     'variables' => [
-        //         'cookieValue' => null,
-        //         'title' => null,
-        //         'intro' => null,
-        //         'text' => null,
-        //         'accept_button_text' => null,
-        //         'decline_button_text' => null,
-        //     ],
-        // ],
-    ];
+            ),
+        ),
+    );
 }
 
 /**
