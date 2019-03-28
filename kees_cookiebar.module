@@ -198,3 +198,26 @@ function isJSON($string) : bool
 {
     return is_string($string) && is_array(json_decode($string, true)) ? true : false;
 }
+
+###################
+###   updates   ###
+###################
+/**
+ * Implement hook_update_N
+ *
+ * Add new options to config
+ */
+function kees_cookiebar_update_8001()
+{
+    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+
+    $cookies['primary_cookies'] = array(
+        'label' => 'Primary_Cookies',
+        'desc' => "",
+    );
+    $config->set('kees_cookiebar.settings_cookies', $cookies);
+    $config->set('kees_cookiebar.cookiebar_type', '0');
+    $config->set('kees_cookiebar.cookiepage_path', '/cookies');
+
+    $config->save(true);
+}
