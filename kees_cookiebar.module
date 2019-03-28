@@ -154,6 +154,19 @@ function kees_cookiebar_menu_local_tasks_alter(&$data, $route_name)
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK()
+ *
+ * Add template suggestion for cookiebar_default
+ *
+ * @param array $variables
+ * @return array
+ */
+function kees_cookiebar_theme_suggestions_kees_cookiebar(array $variables) : array
+{
+    return array('kees_cookiebar_default');
+}
+
+/**
  * Implement helper function GetCookieValue()
  *
  * to get the value of the cookie set by this module
