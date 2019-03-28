@@ -15,7 +15,12 @@ var keesCookieName = 'CookieConsent';
             var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
             var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
 
-            $('#kees-cookiebar-container a.kees-js-cookiebar-button', '.kees-js-cookiebar-container a.kees-js-cookiebar-button' , context).click(function (e) {
+            // Show cookiebar if cookies are not set or if user is on the cookies page
+            if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
+                $('#kees-cookiebar-container', context).once('cookiebar').show()
+            }
+
+            $('#kees-cookiebar-container a.kees-js-cookiebar-button', '.kees-js-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
                 e.preventDefault(); //prevent link from redirecting
 
                 var $object = $(this);
@@ -30,11 +35,6 @@ var keesCookieName = 'CookieConsent';
                     location.reload();
                 }
             });
-
-            // Show cookiebar if cookies are not set or if user is on the cookies page
-            if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
-                $('#kees-cookiebar-container', context).once('cookiebar').show()
-            }
         }
     };
 
