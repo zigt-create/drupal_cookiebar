@@ -3,6 +3,7 @@ namespace Drupal\kees_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Drupal\kees_cookiebar\Helper\ConfigHelper;
 
@@ -18,7 +19,21 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
     {
         $this->ConfigHelper = new ConfigHelper();
 
-        $this->user_selected_key = \Drupal::request()->query->get('key');
+        $requested_key = \Drupal::request()->query->get('key');
+        if (!empty($requested_key)) {
+            if (array_key_exists($requested_key, $this->ConfigHelper->getTranslatedCookies())) {
+                $this->user_selected_key = $requested_key;
+            } else {
+                $url = ConfigHelper::getUrlWithQueryParameters();
+                $options = $url->getOptions();
+                if (isset($options['query']['key'])) {
+                    unset($options['query']['key']);
+                }
+                $url->setOptions($options);
+                $response = new RedirectResponse($url->toString());
+                $response->send();
+            }
+        }
     }
 
     /**
@@ -54,7 +69,7 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
             // edit existing
             $this->isEdit = true;
             $edit_cookie = $cookies[$this->user_selected_key];
-            
+
             // Language links
             $form = $this->ConfigHelper->addLanguageLinks($form);
         }
@@ -130,20 +145,23 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
         $cookies = $this->ConfigHelper->getTranslatedCookies();
 
         // Get fields
-        $name = $form_state->getValue('cookie_name');
-        $desc = $form_state->getValue('desc')['value'];
-        
+        $form_name = $form_state->getValue('cookie_name');
+        $form_desc = $form_state->getValue('desc')['value'];
+        $form_key = $form_state->getValue('cookie_key');
+
+        $cookie_key = (!empty($this->user_selected_key))? $this->user_selected_key : $form_key;
+
         // Set changes cookie
-        $cookies[$this->user_selected_key] = array(
-            'label' => $name,
-            'desc' => $desc,
+        $cookies[$cookie_key] = array(
+            'label' => $form_name,
+            'desc' => $form_desc,
         );
-       
+
         // Save config
         $this->ConfigHelper->translatable_config->set('kees_cookiebar.settings_cookies', $cookies);
         $this->ConfigHelper->translatable_config->save();
-        
-        // Redirect
+
+        // Redirect and return
         $form_state->setRedirect('kees_cookiebar.config');
         return parent::submitForm($form, $form_state);
     }

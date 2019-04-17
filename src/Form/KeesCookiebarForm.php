@@ -14,6 +14,14 @@ class KeesCookiebarForm extends ConfigFormBase
     public function __construct()
     {
         $this->ConfigHelper = new ConfigHelper();
+
+        $cookies = $this->ConfigHelper->base_config->get('kees_cookiebar.settings_cookies');
+        $type = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type');
+        $path = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiepage_path');
+
+        if (empty($cookies) || ($type !== "0" && $type !== "1") || empty($path)) {
+            drupal_set_message(t('You need to run updates on the <a href="/update.php">update.php</a> page'), 'warning');
+        }
     }
 
     /**
@@ -38,10 +46,10 @@ class KeesCookiebarForm extends ConfigFormBase
 
         // get config value
         $cookiebar_type = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type');
-        
+
         // Language links
         $form = $this->ConfigHelper->addLanguageLinks($form);
-        
+
         // Page title field.
         $form['label'] = array(
             '#type' => 'textfield',
@@ -104,7 +112,7 @@ class KeesCookiebarForm extends ConfigFormBase
     {
         $this->ConfigHelper->translatable_config->set('kees_cookiebar.label', $form_state->getValue('label'));
         $this->ConfigHelper->translatable_config->set('kees_cookiebar.text', $form_state->getValue('text'));
-        
+
         $this->ConfigHelper->translatable_config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
         if ($this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type') == "0") {
             $this->ConfigHelper->translatable_config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
