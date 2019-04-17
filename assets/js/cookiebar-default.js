@@ -18,25 +18,36 @@ var keesCookieName = 'CookieConsent';
             // Show cookiebar if cookies are not set or if user is on the cookies page
             if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
                 $('#kees-cookiebar-container', context).once('cookiebar').show()
+                $('.kees-js-cookiebar-container', context).once('cookiebar').show()
+            } else {
+                $('#kees-cookiebar-container', context).once('cookiebar').hide()
+                $('.kees-js-cookiebar-container', context).once('cookiebar').hide()
             }
 
-            $('#kees-cookiebar-container a.kees-js-cookiebar-button', '.kees-js-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
-                e.preventDefault(); //prevent link from redirecting
-
-                var $object = $(this);
-
-                // SetCookie function
-                setCookie(($object.attr("id") == "true") ? "true" : "false");
-
-                // Redirect or reload the page
-                if (currentUrl == cookiepagePath) {
-                    window.location.href = homeUrl;
-                } else {
-                    location.reload();
-                }
+            $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
+                clicked(e, cookiepagePath, currentUrl, homeUrl);
+            });
+            $('.kees-js-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
+                clicked(e, cookiepagePath, currentUrl, homeUrl);
             });
         }
     };
+
+    function clicked (e, cookiepagePath, currentUrl, homeUrl) {
+        e.preventDefault(); //prevent link from redirecting
+
+        var $object = $(this);
+
+        // SetCookie function
+        setCookie(($object.attr("id") == "true") ? "true" : "false");
+
+        // Redirect or reload the page
+        if (currentUrl == cookiepagePath) {
+            window.location.href = homeUrl;
+        } else {
+            location.reload();
+        }
+    }
 
     // Helper function to set the cookie
     function setCookie(value) {
