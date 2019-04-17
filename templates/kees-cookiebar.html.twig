@@ -1,3 +1,4 @@
+{{ attach_library('kees_cookiebar/cookiebar-css-default') }}
 {#
 /**
  * @file
@@ -16,14 +17,11 @@
  * @ingroup themeable
  */
 #}
-{% if not isCookie %}
-<div class="kees-css-cookiebar-container kees-js-cookiebar-container">
+<div id="kees-cookiebar-container" class="kees-css-cookiebar-container" style="display: none;">
     <div class="cookiebar">
         <span class="cookiebar-label">{{ label }}</span>
         {{ text }}
         <a href="javascript();" id="true" class="btn btn-primary kees-js-cookiebar-button">{{ accept_button_text }}</a>
         <a href="javascript();" id="false" class="btn btn-danger kees-js-cookiebar-button">{{ decline_button_text }}</a>
-
     </div>
 </div>
-{% endif %}

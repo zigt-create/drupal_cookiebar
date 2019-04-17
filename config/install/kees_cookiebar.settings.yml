@@ -1,12 +1,25 @@
 kees_cookiebar:
-    # Cookiebar form deafults
-    label: 'Cookies:'
-    text: 'Deze website maakt gebruik van cookies:'
-    accept_button_text: 'Accepteren'
-    decline_button_text: 'Weigeren'
-    # CookiebarPage form deafults
-    page_title: 'Cookies'
-    page_intro: 'Introductie tekst...'
-    page_text: '<h4>cookies pagina</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
-    page_accept_button_text: 'Cookies accepteren'
-    page_decline_button_text: 'Cookies weigeren'
+  langcode: 'en'
+  # Cookiebar form deafults
+  label: 'Cookies:'
+  text: 'This website uses cookies:'
+  accept_button_text: 'Accept'
+  decline_button_text: 'Decline'
+  # CookiebarPage form deafults
+  # page_title: 'Cookies'
+  # page_intro: 'This website uses cookies:'
+  # page_text: '<h4>cookies pagina</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
+  # page_accept_button_text: 'Cookies accepteren'
+  # page_decline_button_text: 'Cookies weigeren'
+  settings_cookies:
+    primary_cookies:
+      label: 'Functional cookies'
+      desc: '<p>Functional cookies do not gather any personal information and are required for the website to work. Therefore it is not possible to disable them.</p>'
+    analytical_cookies:
+      label: 'Analytical cookies'
+      desc: '<p>Analytical cookies allow us to recognise and to count the number of visitors to our website, to see how visitors move around and how they are using it. This helps us to determine how frequently particular pages are visited and to determine the most popular areas of our website. Google analytics has been setup to anonymize IP addresses.</p>'
+    marketing_cookies:
+      label: 'Social media cookies'
+      desc: '<p>Embedded content from social media sites such as YouTube, Facebook, LinkedIn and other platforms often contain cookies. The view this kind of content on the website, these cookies must be allowed.</p>'
+  cookiebar_type: '0'
+  cookiepage_path: '/cookies'

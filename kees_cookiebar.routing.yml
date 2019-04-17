@@ -8,23 +8,46 @@ kees_cookiebar.cookiebar:
     requirements:
         _permission: 'administer cookiebar'
 
-# Tab 2
+# Tab 2 - deprecated
 kees_cookiebar.page:
     path: '/admin/config/development/cookiebar/page'
     defaults:
         _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarPageForm'
         _title: 'KeesTM Cookiebar page settings'
     requirements:
+        _permission: 'administer cookiebar settings'
+
+# Tab 3
+kees_cookiebar.config:
+    path: '/admin/config/development/cookiebar/config'
+    defaults:
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarConfigForm'
+        _title: 'KeesTM Cookiebar configuration'
+    requirements:
         _permission: 'administer cookiebar'
 
-
-# Page route
-cookies.content:
-    path: '/cookies'
+# Tab 4
+kees_cookiebar.settings:
+    path: '/admin/config/development/cookiebar/settings'
     defaults:
-        _controller: '\Drupal\kees_cookiebar\Controller\CookiesPageController::content'
-        _title: 'Cookies'
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarSettingsForm'
+        _title: 'KeesTM Cookiebar settings'
     requirements:
-        _permission: 'access content'
+        _permission: 'administer cookiebar settings'
 
-
+# Add form
+kees_cookiebar.add_config:
+    path: '/admin/config/development/cookiebar/config/add'
+    defaults:
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarAddConfigForm'
+        _title: 'KeesTM Cookiebar add cookie configuration'
+    requirements:
+        _permission: 'administer cookiebar'
+# Remove form
+kees_cookiebar.remove_config:
+    path: '/admin/config/development/cookiebar/config/remove'
+    defaults:
+        _form: '\Drupal\kees_cookiebar\Form\KeesCookiebarRemoveConfigForm'
+        _title: 'KeesTM Cookiebar remove cookie configuration'
+    requirements:
+        _permission: 'administer cookiebar settings'
