@@ -17,6 +17,7 @@ cookiebar-default-js:
   js:
     assets/js/cookiebar-default.js: {}
   dependencies:
+    - core/drupal
     - core/jquery
     - core/jquery.once
     - core/drupalSettings
@@ -24,6 +25,7 @@ cookiebar-advanced-js:
   js:
     assets/js/cookiebar-advanced.js: {}
   dependencies:
+    - core/drupal
     - core/jquery
     - core/jquery.once
     - core/drupalSettings
