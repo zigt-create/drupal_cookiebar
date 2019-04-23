@@ -25,21 +25,19 @@ var keesCookieName = 'CookieConsent';
             }
 
             $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
-                clicked(e, cookiepagePath, currentUrl, homeUrl);
+                clicked(e, cookiepagePath, currentUrl, homeUrl, $object.attr("id"));
             });
             $('.kees-js-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
-                clicked(e, cookiepagePath, currentUrl, homeUrl);
+                clicked(e, cookiepagePath, currentUrl, homeUrl, $object.attr("id"));
             });
         }
     };
 
-    function clicked (e, cookiepagePath, currentUrl, homeUrl) {
+    function clicked (e, cookiepagePath, currentUrl, homeUrl, attrValue) {
         e.preventDefault(); //prevent link from redirecting
 
-        var $object = $(this);
-
         // SetCookie function
-        setCookie(($object.attr("id") == "true") ? "true" : "false");
+        setCookie((attrValue == "true") ? "true" : "false");
 
         // Redirect or reload the page
         if (currentUrl == cookiepagePath) {
