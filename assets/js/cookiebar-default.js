@@ -25,10 +25,10 @@ var keesCookieName = 'CookieConsent';
             }
 
             $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
-                clicked(e, cookiepagePath, currentUrl, homeUrl, $object.attr("id"));
+                clicked(e, cookiepagePath, currentUrl, homeUrl, $(this).attr("id"));
             });
             $('.kees-js-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
-                clicked(e, cookiepagePath, currentUrl, homeUrl, $object.attr("id"));
+                clicked(e, cookiepagePath, currentUrl, homeUrl, $(this).attr("id"));
             });
         }
     };
