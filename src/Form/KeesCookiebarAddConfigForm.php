@@ -86,15 +86,13 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase
             '#title' => t('Title'),
             '#default_value' => ($this->isEdit)? $edit_cookie['label'] : null,
         );
-        if ($user->hasPermission('administer cookiebar settings')) {
-            $form['cookie']['cookie_key'] = array(
-                '#placeholder' => 'cookie_key',
-                '#type' => 'textfield',
-                '#title' => t('Key'),
-                '#disabled' => ($this->isEdit)? true : false,
-                '#default_value' => ($this->isEdit)? $this->user_selected_key : null,
-            );
-        }
+        $form['cookie']['cookie_key'] = array(
+            '#placeholder' => 'cookie_key',
+            '#type' => 'textfield',
+            '#title' => t('Key'),
+            '#disabled' => ($this->isEdit)? true : false,
+            '#default_value' => ($this->isEdit)? $this->user_selected_key : null,
+        );
         if ($this->isEdit) {
             // Set value to be key so it cant be changed
             $form['cookie']['cookie_key']['#value'] = $this->user_selected_key;
