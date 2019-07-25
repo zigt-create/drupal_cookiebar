@@ -1,127 +1,173 @@
 <?php
+
 namespace Drupal\kees_cookiebar\Helper;
 
-class ConfigHelper
-{
-    public $selected_langcode;
+use Drupal\Core\Url;
 
-    public $languages;
+/**
+ * Configer helper class.
+ */
+class ConfigHelper {
+  /**
+   * Selected Langcode.
+   *
+   * @var [type]
+   */
+  public $selectedLangcode;
+  /**
+   * Languages.
+   *
+   * @var [type]
+   */
+  public $languages;
+  /**
+   * Default Language.
+   *
+   * @var [type]
+   */
+  public $defaultLanguage;
+  /**
+   * Default Langcode.
+   *
+   * @var [type]
+   */
+  public $defaultLangcode;
+  /**
+   * Base Config.
+   *
+   * @var [type]
+   */
+  public $baseConfig;
+  /**
+   * Selected Langcode.
+   *
+   * @var [type]
+   */
+  public $translatableConfig;
 
-    public $default_language;
+  /**
+   * Construct function.
+   */
+  public function __construct() {
+    // Set languages variables.
+    $this->languages = \Drupal::languageManager()->getLanguages();
+    if (array_key_exists(\Drupal::request()->query->get('hl'), $this->languages)) {
+      $this->selectedLangcode = \Drupal::request()->query->get('hl');
+    }
+    $this->defaultLanguage = \Drupal::languageManager()->getDefaultLanguage();
+    $this->defaultLangcode = $this->defaultLanguage->getId();
+    unset($this->languages[$this->defaultLangcode]);
 
-    public $default_langcode;
+    // Set config.
+    $this->baseConfig = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+    $this->translatableConfig = $this->baseConfig;
+    if (!empty($this->selectedLangcode)) {
+      $this->translatableConfig = \Drupal::languageManager()->getLanguageConfigOverride($this->selectedLangcode, 'kees_cookiebar.settings');
+    }
+  }
 
-    public $base_config;
+  /**
+   * Implement addLanguageLinks method.
+   *
+   * @param array $form
+   *   Contains translatable strings.
+   *
+   * @return array
+   *   Retuns array with newly added translations
+   */
+  public function addLanguageLinks(array $form) : array {
+    if (!empty($this->languages)) {
+      $form['lang_link_heading'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'h3',
+        '#value' => 'Translate',
+      ];
+      $url = $this::getUrlWithQueryParameters();
 
-    public $translatable_config;
+      $options = $url->getOptions();
+      if (isset($options['query']['hl'])) {
+        $active = $options['query']['hl'];
+        unset($options['query']['hl']);
+      }
+      else {
+        $active = 'default';
+      }
+      $url->setOptions($options);
 
-    public function __construct()
-    {
-        // Set languages variables
-        $this->languages = \Drupal::languageManager()->getLanguages();
-        if (array_key_exists(\Drupal::request()->query->get('hl'), $this->languages)) {
-            $this->selected_langcode = \Drupal::request()->query->get('hl');
-        }
-        $this->default_language = \Drupal::languageManager()->getDefaultLanguage();
-        $this->default_langcode = $this->default_language->getId();
-        unset($this->languages[$this->default_langcode]);
+      $form['lang_link_' . $this->defaultLangcode] = [
+        '#type' => 'link',
+        '#title' => $this->defaultLanguage->getName(),
+        '#attributes' => [
+          'class' => [
+            'lang_link',
+            ($active == 'default') ? 'active' : '',
+          ],
+        ],
+        '#url' => $url,
+      ];
+      foreach ($this->languages as $language) {
+        $url = $this::getUrlWithQueryParameters();
 
-        // Set config
-        $this->base_config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
-        $this->translatable_config = $this->base_config;
-        if (!empty($this->selected_langcode)) {
-            $this->translatable_config = \Drupal::languageManager()->getLanguageConfigOverride($this->selected_langcode, 'kees_cookiebar.settings');
-        }
+        $options = $url->getOptions();
+        $options['query']['hl'] = $language->getId();
+        $url->setOptions($options);
+
+        $form['lang_link_' . $language->getId()] = [
+          '#type' => 'link',
+          '#title' => $language->getName(),
+          '#attributes' => [
+            'class' => [
+              'lang_link',
+              ($active == $language->getId()) ? 'active' : '',
+            ],
+          ],
+          '#url' => $url,
+        ];
+      }
+      $form['lang_link_spacing'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'p',
+        '#value' => '&nbsp;',
+      ];
     }
 
-    /**
-     * Implement addLanguageLinks method
-     *
-     * @param array $form
-     * @return array
-     */
-    public function addLanguageLinks(array $form) : array
-    {
-        if (!empty($this->languages)) {
-            $form['lang_link_heading'] = [
-                '#type' => 'html_tag',
-                '#tag' => 'h3',
-                '#value' => 'Translate',
-            ];
-            $url = $this::getUrlWithQueryParameters();
+    return $form;
+  }
 
-            $options = $url->getOptions();
-            if (isset($options['query']['hl'])) {
-                $active = $options['query']['hl'];
-                unset($options['query']['hl']);
-            } else {
-                $active = 'default';
-            }
-            $url->setOptions($options);
+  /**
+   * Get Translated Cookies.
+   *
+   * @return array
+   *   Returns all translated cookie options
+   */
+  public function getTranslatedCookies() : array {
+    $cookies = $this->baseConfig->get('kees_cookiebar.settings_cookies');
 
-            $form['lang_link_'. $this->default_langcode] = [
-                '#type' => 'link',
-                '#title' => $this->default_language->getName(),
-                '#attributes' => array(
-                    'class' => array(
-                        'lang_link',
-                        ($active == 'default')? 'active' : '',
-                    ),
-                ),
-                '#url' => $url,
-            ];
-            foreach ($this->languages as $language) {
-                $url = $this::getUrlWithQueryParameters();
+    foreach ($cookies as $key => $cookie) {
+      $translatedconf = $this->translatableConfig->get('kees_cookiebar.settings_cookies');
 
-                $options = $url->getOptions();
-                $options['query']['hl'] = $language->getId();
-                $url->setOptions($options);
-
-                $form['lang_link_'. $language->getId()] = [
-                    '#type' => 'link',
-                    '#title' => $language->getName(),
-                    '#attributes' => array(
-                        'class' => array(
-                            'lang_link',
-                            ($active == $language->getId())? 'active' : '',
-                        ),
-                    ),
-                        '#url' => $url,
-                ];
-            }
-            $form['lang_link_spacing'] = [
-                '#type' => 'html_tag',
-                '#tag' => 'p',
-                '#value' => '&nbsp;',
-            ];
+      if (isset($translatedconf[$key])) {
+        if (isset($translatedconf[$key]['label'])) {
+          $cookies[$key]['label'] = $translatedconf[$key]['label'];
         }
 
-        return $form;
-    }
-
-    public function getTranslatedCookies() : array
-    {
-        $cookies = $this->base_config->get('kees_cookiebar.settings_cookies');
-
-        foreach ($cookies as $key => $cookie) {
-            $translatedconf = $this->translatable_config->get('kees_cookiebar.settings_cookies');
-
-            if (isset($translatedconf[$key])) {
-                if (isset($translatedconf[$key]['label'])) {
-                    $cookies[$key]['label'] = $translatedconf[$key]['label'];
-                }
-
-                if (isset($translatedconf[$key]['desc'])) {
-                    $cookies[$key]['desc'] = $translatedconf[$key]['desc'];
-                }
-            }
+        if (isset($translatedconf[$key]['desc'])) {
+          $cookies[$key]['desc'] = $translatedconf[$key]['desc'];
         }
-
-        return $cookies;
+      }
     }
 
-    public static function getUrlWithQueryParameters()
-    {
-        return \Drupal\Core\Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all()]);
-    }
+    return $cookies;
+  }
+
+  /**
+   * Get URL With Query Parameters.
+   *
+   * @return Drupal\Url
+   *   Returns URL with query
+   */
+  public static function getUrlWithsQueryParameters() {
+    return Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all()]);
+  }
+
 }

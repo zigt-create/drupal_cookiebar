@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Kees Cookiebar install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function kees_cookiebar_install() {
+  // Add block to content on module install.
+  $cookiebarBlock = Block::create([
+    'id' => 'kees_cookiebar_block',
+    'plugin' => 'kees_cookiebar_block',
+    'region' => 'content',
+    'weight' => 99,
+    'theme' => \Drupal::config('system.theme')->get('default'),
+    'settings' => [
+      'label' => 'KeesTM Cookiebar Block',
+      'label_display' => FALSE,
+    ],
+  ]);
+  $cookiebarBlock->save();
+
+  // (Re)set saved config. This is sometimes cached in some wierd way...
+  $config_file = \file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'kees_cookiebar') . "/config/install/kees_cookiebar.settings.yml");
+  $parsed = Yaml::parse($config_file);
+  $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+  $config->setData($parsed);
+  $config->save(TRUE);
+}

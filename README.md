@@ -7,4 +7,3 @@ also create /cookies page where the user can change their preference
 ## Installation
 
     composer require keestm/cookiebar
-

@@ -1,14 +1,14 @@
 form#kees-cookiebar-config-form div.form-item.form-type-textfield {
-    display: inline-block;
+  display: inline-block;
 }
 
-form#kees-cookiebar-config-form input.form-submit{
-    display: block;
+form#kees-cookiebar-config-form input.form-submit {
+  display: block;
 }
 
 a.lang_link {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 a.lang_link.active {
-    text-decoration: underline;
+  text-decoration: underline;
 }

@@ -1,142 +1,142 @@
 #kees-cookiebar-container .consent {
-    position: fixed;
-    z-index: 99999;
-    background: #fff;
-    padding: 0;
-    font-size: 16px;
-    -webkit-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 99999;
+  background: #fff;
+  padding: 0;
+  font-size: 16px;
+  -webkit-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
 }
 
 #kees-cookiebar-container .consent__side--right-bottom {
-    left: auto;
-    right: 0;
-    bottom: 0;
-    top: auto;
-    min-width: 320px;
-    max-width: 380px;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  min-width: 320px;
+  max-width: 380px;
 }
 
 #kees-cookiebar-container .consent__inner {
-    position: relative;
-    max-width: 840px;
-    margin: 0 auto;
-    padding: 25px;
+  position: relative;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 25px;
 }
 
 @media (max-width: 767px) {
-    #kees-cookiebar-container .consent__inner {
-        max-height: 500px;
-        overflow-y: scroll;
-    }
+  #kees-cookiebar-container .consent__inner {
+    max-height: 500px;
+    overflow-y: scroll;
+  }
 }
 
 #kees-cookiebar-container .consent__inner button {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #kees-cookiebar-container .consent__close {
-    position: absolute;
-    right: 25px;
-    top: 25px;
-    width: 25px;
-    height: 25px;
-    opacity: 0.75;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  width: 25px;
+  height: 25px;
+  opacity: 0.75;
 }
 
 #kees-cookiebar-container .consent__form {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 #kees-cookiebar-container .consent__form__item {
-    position: relative;
-    margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 #kees-cookiebar-container .consent__form__item input {
-    display: none;
+  display: none;
 }
 
 #kees-cookiebar-container .consent__form__item input+label {
-    position: relative;
-    padding: 20px 10px 20px 50px;
-    width: 100%;
-    cursor: pointer;
-    background-color: #f3f3f3;
+  position: relative;
+  padding: 20px 10px 20px 50px;
+  width: 100%;
+  cursor: pointer;
+  background-color: #f3f3f3;
 }
 
 #kees-cookiebar-container .consent__form__item input+label:before {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid white;
-    background-color: white;
-    position: absolute;
-    left: 17px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 3px;
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  background-color: white;
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 3px;
 }
 
 #kees-cookiebar-container .consent__form__item input[type="checkbox"]:checked+label:after {
-    color: green;
-    display: inline-block;
-    position: absolute;
-    left: 19px;
-    top: 43%;
-    transform: translateY(-50%);
-    font-family: 'FontAwesome';
-    content: '\f00c';
-    width: 15px;
-    height: 15px;
-    border-radius: 2px;
+  color: green;
+  display: inline-block;
+  position: absolute;
+  left: 19px;
+  top: 43%;
+  transform: translateY(-50%);
+  font-family: 'FontAwesome';
+  content: '\f00c';
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
 }
 
 #kees-cookiebar-container .consent__form__item:last-child {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 #kees-cookiebar-container .consent__form__trigger {
-    display: block;
-    position: absolute;
-    color: #333;
-    right: 15px;
-    top: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 16px;
-    text-align: center;
-    padding-top: 10px;
-    background-color: #F8AE00;
+  display: block;
+  position: absolute;
+  color: #333;
+  right: 15px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 10px;
+  background-color: #f8ae00;
 }
 
 #kees-cookiebar-container .consent__form__trigger:before {
-    font-family: 'FontAwesome';
-    content: '\f067';
-    color: white;
-    position: absolute;
-    z-index: 9;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  font-family: 'FontAwesome';
+  content: '\f067';
+  color: white;
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #kees-cookiebar-container .consent__form__trigger.minus:before {
-    content: '\f068';
+  content: '\f068';
 }
 
 #kees-cookiebar-container .consent__cookie--description {
-    max-height: 0px;
-    overflow: hidden;
-    transition: 0.3s all ease-in;
+  max-height: 0px;
+  overflow: hidden;
+  transition: 0.3s all ease-in;
 }
 
 #kees-cookiebar-container .consent__cookie--description.open {
-    padding-top: 15px;
-    max-height: 200px;
-    overflow-y: auto;
+  padding-top: 15px;
+  max-height: 200px;
+  overflow-y: auto;
 }
