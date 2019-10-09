@@ -1,0 +1,27 @@
+{{ attach_library('advanced_cookiebar/cookiebar-css-default') }}
+{#
+/**
+ * @file
+ * Default template implementation to display the cookiebar block.
+ *
+ * Available variables:
+ *   - Theme
+ *   - isCookie
+ *   - label
+ *   - text
+ *   - accept_button_text
+ *   - decline_button_text
+ *
+ * @see template_preprocess_advanced_cookiebar()
+ *
+ * @ingroup themeable
+ */
+#}
+<div id="advanced-cookiebar-container" class="advanced-css-cookiebar-container" style="display: none;">
+    <div class="cookiebar">
+        <span class="cookiebar-label">{{ label }}</span>
+        {{ text }}
+        <a href="javascript();" id="true" class="btn btn-primary advanced-js-cookiebar-button">{{ accept_button_text }}</a>
+        <a href="javascript();" id="false" class="btn btn-danger advanced-js-cookiebar-button">{{ decline_button_text }}</a>
+    </div>
+</div>

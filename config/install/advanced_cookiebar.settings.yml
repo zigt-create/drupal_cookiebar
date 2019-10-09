@@ -1,16 +1,11 @@
-kees_cookiebar:
+advanced_cookiebar:
   langcode: 'en'
   # Cookiebar form deafults
   label: 'Cookies:'
   text: 'This website uses cookies:'
   accept_button_text: 'Accept'
   decline_button_text: 'Decline'
-  # CookiebarPage form deafults
-  # page_title: 'Cookies'
-  # page_intro: 'This website uses cookies:'
-  # page_text: '<h4>cookies pagina</h4> <br> <p>Dit kun je aanpassen door via de shortcuts naar de instellingen te gaan van de cookiebar.</p>'
-  # page_accept_button_text: 'Cookies accepteren'
-  # page_decline_button_text: 'Cookies weigeren'
+  
   settings_cookies:
     primary_cookies:
       label: 'Functional cookies'

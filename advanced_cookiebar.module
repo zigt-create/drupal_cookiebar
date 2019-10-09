@@ -13,10 +13,10 @@ $GLOBALS["cookie_name"] = 'CookieConsent';
 /**
  * Implements hook_theme().
  */
-function kees_cookiebar_theme($existing, $type, $theme, $path) {
+function advanced_cookiebar_theme($existing, $type, $theme, $path) {
   // This defines the variables that will be useable in the templates.
   return [
-    'kees_cookiebar' => [
+    'advanced_cookiebar' => [
       'variables' => [
         'label' => NULL,
         'cookies' => NULL,
@@ -25,7 +25,7 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
         'decline_button_text' => NULL,
       ],
     ],
-    'kees_cookiebar_advanced' => [
+    'advanced_cookiebar_advanced' => [
       'variables' => [
         'label' => NULL,
         'cookies' => NULL,
@@ -40,10 +40,10 @@ function kees_cookiebar_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_page_attachments().
  */
-function kees_cookiebar_page_attachments(array &$attachments) {
+function advanced_cookiebar_page_attachments(array &$attachments) {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
   if ($is_admin) {
-    $attachments['#attached']['library'][] = 'kees_cookiebar/cookiebar-css-admin';
+    $attachments['#attached']['library'][] = 'advanced_cookiebar/cookiebar-css-admin';
     return;
   }
 }
@@ -51,19 +51,19 @@ function kees_cookiebar_page_attachments(array &$attachments) {
 /**
  * Implements hook_preprocess().
  */
-function kees_cookiebar_preprocess(&$variables) {
-  $variables['kees_cookie_value'] = GetCookieValue();
+function advanced_cookiebar_preprocess(&$variables) {
+  $variables['advanced_cookie_value'] = GetCookieValue();
 }
 
 /**
  * Implements hook_preprocess_html().
  */
-function kees_cookiebar_preprocess_html(&$variables) {
-  $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
-  $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
+function advanced_cookiebar_preprocess_html(&$variables) {
+  $config = \Drupal::configFactory()->getEditable('advanced_cookiebar.settings');
+  $cookiepage_path = $config->get('advanced_cookiebar.cookiepage_path');
   if (empty($cookiepage_path)) {
     $cookiepage_path = "/cookies";
-    $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
+    $config->set('advanced_cookiebar.cookiepage_path', $cookiepage_path);
     $config->save();
   }
 
@@ -72,7 +72,7 @@ function kees_cookiebar_preprocess_html(&$variables) {
   $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
   $currentUrl = Url::fromRoute('<current>', [], ['language' => $default_lang]);
 
-  $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = [
+  $variables['#attached']['drupalSettings']['cookiebarConfig'] = [
     'cookiepagePath' => $cookiepage_path,
     'homeUrl' => $homeUrl->toString(),
     'currentUrl' => $currentUrl->toString(),
@@ -82,20 +82,20 @@ function kees_cookiebar_preprocess_html(&$variables) {
 /**
  * Implements hook_menu_local_tasks_alter().
  */
-function kees_cookiebar_menu_local_tasks_alter(&$data, $route_name) {
-  $config = \Drupal::config('kees_cookiebar.settings');
-  $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
+function advanced_cookiebar_menu_local_tasks_alter(&$data, $route_name) {
+  $config = \Drupal::config('advanced_cookiebar.settings');
+  $cookiebar_type = $config->get('advanced_cookiebar.cookiebar_type');
 
   if ($cookiebar_type === "0") {
-    unset($data['tabs'][0]['kees_cookiebar.config']);
+    unset($data['tabs'][0]['advanced_cookiebar.config']);
   }
 }
 
 /**
  * Implements hook_theme_suggestions_HOOK().
  */
-function kees_cookiebar_theme_suggestions_kees_cookiebar(array $variables) : array {
-  return ['kees_cookiebar_default'];
+function advanced_cookiebar_theme_suggestions_advanced_cookiebar(array $variables) : array {
+  return ['advanced_cookiebar_default'];
 }
 
 /**
@@ -137,16 +137,16 @@ function is_json($string) : bool {
 /**
  * Add new options to configuration.
  */
-function kees_cookiebar_update_8001() {
-  $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+function advanced_cookiebar_update_8001() {
+  $config = \Drupal::configFactory()->getEditable('advanced_cookiebar.settings');
 
   $cookies['primary_cookies'] = [
     'label' => 'Primary Cookies',
     'desc' => "",
   ];
-  $config->set('kees_cookiebar.settings_cookies', $cookies);
-  $config->set('kees_cookiebar.cookiebar_type', '0');
-  $config->set('kees_cookiebar.cookiepage_path', '/cookies');
+  $config->set('advanced_cookiebar.settings_cookies', $cookies);
+  $config->set('advanced_cookiebar.cookiebar_type', '0');
+  $config->set('advanced_cookiebar.cookiepage_path', '/cookies');
 
   $config->save(TRUE);
 }

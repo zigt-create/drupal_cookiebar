@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Form;
+namespace Drupal\advanced_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -9,7 +9,7 @@ use Drupal\Core\Url;
 /**
  * {@inheritdoc}
  */
-class KeesCookiebarConfigForm extends ConfigFormBase {
+class AdvancedCookiebarConfigForm extends ConfigFormBase {
 
   /**
    * The current user.
@@ -23,7 +23,7 @@ class KeesCookiebarConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'kees_cookiebar_config_form';
+    return 'advanced_cookiebar_config_form';
   }
 
   /**
@@ -36,8 +36,8 @@ class KeesCookiebarConfigForm extends ConfigFormBase {
     // Form constructor.
     $form = parent::buildForm($form, $form_state);
     // Default settings.
-    $config = $this->config('kees_cookiebar.settings');
-    $cookies = $config->get('kees_cookiebar.settings_cookies');
+    $config = $this->config('advanced_cookiebar.settings');
+    $cookies = $config->get('advanced_cookiebar.settings_cookies');
 
     if ($user->hasPermission('administer cookiebar settings')) {
       $form['add_link'] = [
@@ -46,7 +46,7 @@ class KeesCookiebarConfigForm extends ConfigFormBase {
         ],
         '#title' => $this->t('+ Add cookie-type'),
         '#type' => 'link',
-        '#url' => Url::fromRoute('kees_cookiebar.add_config'),
+        '#url' => Url::fromRoute('advanced_cookiebar.add_config'),
       ];
     }
 
@@ -70,12 +70,12 @@ class KeesCookiebarConfigForm extends ConfigFormBase {
       ];
       $form['mytable'][$key]['operations']['#links']['edit'] = [
         'title' => $this->t('Edit'),
-        'url' => Url::fromRoute('kees_cookiebar.add_config', ['key' => $key]),
+        'url' => Url::fromRoute('advanced_cookiebar.add_config', ['key' => $key]),
       ];
       if ("primary_cookies" != $key && $user->hasPermission('administer cookiebar settings')) {
         $form['mytable'][$key]['operations']['#links']['delete'] = [
           'title' => $this->t('Delete'),
-          'url' => Url::fromRoute('kees_cookiebar.remove_config', ['key' => $key, 'title' => $value['label']]),
+          'url' => Url::fromRoute('advanced_cookiebar.remove_config', ['key' => $key, 'title' => $value['label']]),
         ];
       }
     }
@@ -108,7 +108,7 @@ class KeesCookiebarConfigForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'kees_cookiebar.settings',
+      'advanced_cookiebar.settings',
     ];
   }
 

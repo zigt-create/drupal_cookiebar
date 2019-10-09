@@ -1,0 +1,53 @@
+# Settings routes
+# Tab 1
+advanced_cookiebar.cookiebar:
+    path: '/admin/config/development/cookiebar'
+    defaults:
+        _form: '\Drupal\advanced_cookiebar\Form\AdvancedCookiebarForm'
+        _title: 'Advanced Cookiebar settings'
+    requirements:
+        _permission: 'administer cookiebar'
+
+# Tab 2 - deprecated
+advanced_cookiebar.page:
+    path: '/admin/config/development/cookiebar/page'
+    defaults:
+        _form: '\Drupal\advanced_cookiebar\Form\AdvancedCookiebarPageForm'
+        _title: 'Advanced Cookiebar page settings'
+    requirements:
+        _permission: 'administer cookiebar settings'
+
+# Tab 3
+advanced_cookiebar.config:
+    path: '/admin/config/development/cookiebar/config'
+    defaults:
+        _form: '\Drupal\advanced_cookiebar\Form\AdvancedCookiebarConfigForm'
+        _title: 'Advanced Cookiebar configuration'
+    requirements:
+        _permission: 'administer cookiebar'
+
+# Tab 4
+advanced_cookiebar.settings:
+    path: '/admin/config/development/cookiebar/settings'
+    defaults:
+        _form: '\Drupal\advanced_cookiebar\Form\AdvancedCookiebarSettingsForm'
+        _title: 'Advanced Cookiebar settings'
+    requirements:
+        _permission: 'administer cookiebar settings'
+
+# Add form
+advanced_cookiebar.add_config:
+    path: '/admin/config/development/cookiebar/config/add'
+    defaults:
+        _form: '\Drupal\advanced_cookiebar\Form\AdvancedCookiebarAddConfigForm'
+        _title: 'AdvancedTM Cookiebar add cookie configuration'
+    requirements:
+        _permission: 'administer cookiebar'
+# Remove form
+advanced_cookiebar.remove_config:
+    path: '/admin/config/development/cookiebar/config/remove'
+    defaults:
+        _form: '\Drupal\advanced_cookiebar\Form\AdvancedCookiebarRemoveConfigForm'
+        _title: 'Advanced Cookiebar remove cookie configuration'
+    requirements:
+        _permission: 'administer cookiebar settings'

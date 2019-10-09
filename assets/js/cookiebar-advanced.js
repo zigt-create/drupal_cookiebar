@@ -1,22 +1,15 @@
-/**
- * @file JS file for the cookiebar module
- *
- * @author KeesTM <developers@kees-tm.nl>
- * @author Tom Grootjans <tom@kees-tm.nl>
- */
-
 /* Set default variables */
-var keesCookieName = 'CookieConsent';
+var advancedCookieName = 'CookieConsent';
 
 (function ($, Drupal) {
-    Drupal.behaviors.kees_cookiebar_advanced = {
+    Drupal.behaviors.advanced_cookiebar_advanced = {
         attach: function (context, drupalSettings) {
-            var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
-            var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
-            var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
+            var cookiepagePath = drupalSettings.cookiebarConfig.cookiepagePath;
+            var currentUrl = drupalSettings.cookiebarConfig.currentUrl;
+            var homeUrl = drupalSettings.cookiebarConfig.homeUrl;
 
             if (getCookieValue('primary_cookies') != true || currentUrl == cookiepagePath) {
-                $('#kees-cookiebar-container', context).show();
+                $('#advanced-cookiebar-container', context).show();
             }
 
             $('.consent__form__trigger', context).click(function () {
@@ -25,12 +18,12 @@ var keesCookieName = 'CookieConsent';
             });
 
             // On form submit, save selected value as cookie
-            $('form#kees-cookiebar-form', context).on('submit', function (e) {
+            $('form#advanced-cookiebar-form', context).on('submit', function (e) {
                 e.preventDefault();  //prevent form from submitting
 
                 var cookie = {};
 
-                $("form#kees-cookiebar-form input:checkbox").each(function () {
+                $("form#advanced-cookiebar-form input:checkbox").each(function () {
                     var value = $(this).is(":checked");
                     var id = $(this).prop('name');
 
@@ -74,7 +67,7 @@ var keesCookieName = 'CookieConsent';
      */
     function getCookie() {
         var value = "; " + document.cookie;
-        var cookie = value.split("; " + keesCookieName + "=");
+        var cookie = value.split("; " + advancedCookieName + "=");
 
         if (cookie.length == 2) return cookie.pop().split(";").shift();
     }

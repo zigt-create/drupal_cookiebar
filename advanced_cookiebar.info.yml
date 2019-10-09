@@ -1,6 +1,6 @@
-name: KeesTM Cookiebar
+name: Advanced Cookiebar
 description: Add a cookies bar block to your site
-package: KeesTM
+package: Advanced cookiebar
 type: module
 core: 8.x
 dependencies:

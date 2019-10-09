@@ -1,20 +1,20 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Form;
+namespace Drupal\advanced_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Kees Cookiebar Page Form.
+ * {@inheritdoc}
  */
-class KeesCookiebarPageForm extends ConfigFormBase {
+class AdvancedCookiebarPageForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'kees_cookiebar_page_form';
+    return 'advanced_cookiebar_page_form';
   }
 
   /**
@@ -32,19 +32,19 @@ class KeesCookiebarPageForm extends ConfigFormBase {
     // Form constructor.
     $form = parent::buildForm($form, $form_state);
     // Default settings.
-    $config = $this->config('kees_cookiebar.settings');
+    $config = $this->config('advanced_cookiebar.settings');
     // Page title field.
     $form['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title:'),
-      '#default_value' => $config->get('kees_cookiebar.page_title'),
+      '#default_value' => $config->get('advanced_cookiebar.page_title'),
       '#description' => $this->t('Give your lorem ipsum generator page a title.'),
     ];
     // Intro text field.
     $form['intro'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Intro'),
-      '#default_value' => $config->get('kees_cookiebar.page_intro'),
+      '#default_value' => $config->get('advanced_cookiebar.page_intro'),
       '#description' => $this->t('Intro text on the cookies page'),
       '#format' => 'basic_html',
     ];
@@ -52,7 +52,7 @@ class KeesCookiebarPageForm extends ConfigFormBase {
     $form['text'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Body'),
-      '#default_value' => $config->get('kees_cookiebar.page_text'),
+      '#default_value' => $config->get('advanced_cookiebar.page_text'),
       '#description' => $this->t('Main text on the cookies page'),
       '#format' => 'basic_html',
     ];
@@ -60,14 +60,14 @@ class KeesCookiebarPageForm extends ConfigFormBase {
     $form['accept_button_text'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Accept cookies button text:'),
-      '#default_value' => $config->get('kees_cookiebar.page_accept_button_text'),
+      '#default_value' => $config->get('advanced_cookiebar.page_accept_button_text'),
       '#description' => $this->t('Text to show on the button to accept the cookies'),
     ];
     // Decline button text field.
     $form['decline_button_text'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Decline cookies button text:'),
-      '#default_value' => $config->get('kees_cookiebar.page_decline_button_text'),
+      '#default_value' => $config->get('advanced_cookiebar.page_decline_button_text'),
       '#description' => $this->t('Text to show on the button to decline the cookies'),
     ];
 
@@ -98,12 +98,12 @@ class KeesCookiebarPageForm extends ConfigFormBase {
    *   Returns parent::submitForm().
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->config('kees_cookiebar.settings');
-    $config->set('kees_cookiebar.page_title', $form_state->getValue('title'));
-    $config->set('kees_cookiebar.page_intro', $form_state->getValue('intro'));
-    $config->set('kees_cookiebar.page_text', $form_state->getValue('text')['value']);
-    $config->set('kees_cookiebar.page_accept_button_text', $form_state->getValue('accept_button_text'));
-    $config->set('kees_cookiebar.page_decline_button_text', $form_state->getValue('decline_button_text'));
+    $config = $this->config('advanced_cookiebar.settings');
+    $config->set('advanced_cookiebar.page_title', $form_state->getValue('title'));
+    $config->set('advanced_cookiebar.page_intro', $form_state->getValue('intro'));
+    $config->set('advanced_cookiebar.page_text', $form_state->getValue('text')['value']);
+    $config->set('advanced_cookiebar.page_accept_button_text', $form_state->getValue('accept_button_text'));
+    $config->set('advanced_cookiebar.page_decline_button_text', $form_state->getValue('decline_button_text'));
     $config->save();
 
     return parent::submitForm($form, $form_state);
@@ -114,7 +114,7 @@ class KeesCookiebarPageForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'kees_cookiebar.settings',
+      'advanced_cookiebar.settings',
     ];
   }
 

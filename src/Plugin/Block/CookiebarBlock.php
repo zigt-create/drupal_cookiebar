@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Plugin\Block;
+namespace Drupal\advanced_cookiebar\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 
@@ -8,9 +8,9 @@ use Drupal\Core\Block\BlockBase;
  * Provides a cookiebar.
  *
  * @Block(
- *   id = "kees_cookiebar_block",
- *   admin_label = "KeesTM Cookiebar",
- *   category = "Kees",
+ *   id = "advanced_cookiebar_block",
+ *   admin_label = "Advanced Cookiebar",
+ *   category = "Cookiebar",
  * )
  */
 class CookiebarBlock extends BlockBase {
@@ -20,26 +20,26 @@ class CookiebarBlock extends BlockBase {
    */
   public function build() {
     // Read settings.
-    $config = \Drupal::config('kees_cookiebar.settings');
+    $config = \Drupal::config('advanced_cookiebar.settings');
 
     return [
-      '#theme' => ($config->get('kees_cookiebar.cookiebar_type') === "1") ? "kees_cookiebar_advanced" : "kees_cookiebar",
+      '#theme' => ($config->get('advanced_cookiebar.cookiebar_type') === "1") ? "advanced_cookiebar_advanced" : "advanced_cookiebar",
       '#label' => [
-        '#markup' => $config->get('kees_cookiebar.label'),
+        '#markup' => $config->get('advanced_cookiebar.label'),
       ],
       '#text' => [
-        '#markup' => $config->get('kees_cookiebar.text'),
+        '#markup' => $config->get('advanced_cookiebar.text'),
       ],
       '#accept_button_text' => [
-        '#markup' => $config->get('kees_cookiebar.accept_button_text'),
+        '#markup' => $config->get('advanced_cookiebar.accept_button_text'),
       ],
       '#decline_button_text' => [
-        '#markup' => $config->get('kees_cookiebar.decline_button_text'),
+        '#markup' => $config->get('advanced_cookiebar.decline_button_text'),
       ],
-      '#cookies' => $config->get('kees_cookiebar.settings_cookies'),
+      '#cookies' => $config->get('advanced_cookiebar.settings_cookies'),
       '#attached' => [
         'library' => [
-          ($config->get('kees_cookiebar.cookiebar_type') === "1") ? "kees_cookiebar/cookiebar-advanced-js" : "kees_cookiebar/cookiebar-default-js",
+          ($config->get('advanced_cookiebar.cookiebar_type') === "1") ? "advanced_cookiebar/cookiebar-advanced-js" : "advanced_cookiebar/cookiebar-default-js",
         ],
       ],
       '#cache' => [

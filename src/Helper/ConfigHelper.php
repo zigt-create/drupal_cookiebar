@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Helper;
+namespace Drupal\advanced_cookiebar\Helper;
 
 use Drupal\Core\Url;
 
@@ -59,10 +59,10 @@ class ConfigHelper {
     unset($this->languages[$this->defaultLangcode]);
 
     // Set config.
-    $this->baseConfig = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+    $this->baseConfig = \Drupal::configFactory()->getEditable('advanced_cookiebar.settings');
     $this->translatableConfig = $this->baseConfig;
     if (!empty($this->selectedLangcode)) {
-      $this->translatableConfig = \Drupal::languageManager()->getLanguageConfigOverride($this->selectedLangcode, 'kees_cookiebar.settings');
+      $this->translatableConfig = \Drupal::languageManager()->getLanguageConfigOverride($this->selectedLangcode, 'advanced_cookiebar.settings');
     }
   }
 
@@ -141,10 +141,10 @@ class ConfigHelper {
    *   Returns all translated cookie options
    */
   public function getTranslatedCookies() : array {
-    $cookies = $this->baseConfig->get('kees_cookiebar.settings_cookies');
+    $cookies = $this->baseConfig->get('advanced_cookiebar.settings_cookies');
 
     foreach ($cookies as $key => $cookie) {
-      $translatedconf = $this->translatableConfig->get('kees_cookiebar.settings_cookies');
+      $translatedconf = $this->translatableConfig->get('advanced_cookiebar.settings_cookies');
 
       if (isset($translatedconf[$key])) {
         if (isset($translatedconf[$key]['label'])) {

@@ -1,21 +1,21 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Form;
+namespace Drupal\advanced_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Kees Cookiebar Remove Config form.
+ * {@inheritdoc}
  */
-class KeesCookiebarRemoveConfigForm extends ConfigFormBase {
+class AdvancedCookiebarRemoveConfigForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'kees_cookiebar_remove_config_form';
+    return 'advanced_cookiebar_remove_config_form';
   }
 
   /**
@@ -43,7 +43,7 @@ class KeesCookiebarRemoveConfigForm extends ConfigFormBase {
         "class" => ['button--primary'],
       ],
       '#value' => t('Yes, delete'),
-      '#suffix' => '<a href="' . Url::fromRoute('kees_cookiebar.config')->toString() . '">No, cancel</a>',
+      '#suffix' => '<a href="' . Url::fromRoute('advanced_cookiebar.config')->toString() . '">No, cancel</a>',
     ];
 
     return $form;
@@ -53,22 +53,22 @@ class KeesCookiebarRemoveConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->config('kees_cookiebar.settings');
-    $cookies = $config->get('kees_cookiebar.settings_cookies');
+    $config = $this->config('advanced_cookiebar.settings');
+    $cookies = $config->get('advanced_cookiebar.settings_cookies');
     $key = $form_state->getValue('key_text');
     // If field is not empty.
     if (empty($key)) {
-      $form_state->setErrorByName('key_text', $this->t('No key found! <a href="@url">Go back</a>', Url::fromRoute('kees_cookiebar.config')->toString()));
+      $form_state->setErrorByName('key_text', $this->t('No key found! <a href="@url">Go back</a>', Url::fromRoute('advanced_cookiebar.config')->toString()));
     }
 
     // If key exists.
     if (!array_key_exists($key, $cookies)) {
-      $form_state->setErrorByName('key_text', $this->t('Key doesn\'t match with current configuration! <a href="@url">Go back</a>', Url::fromRoute('kees_cookiebar.config')->toString()));
+      $form_state->setErrorByName('key_text', $this->t('Key doesn\'t match with current configuration! <a href="@url">Go back</a>', Url::fromRoute('advanced_cookiebar.config')->toString()));
     }
 
     // Primary cookies cannot be deleted.
     if ("primary_cookies" == $key) {
-      $form_state->setErrorByName('key_text', $this->t('Primary cookies cannot be deleted! <a href="@url">Go back</a>', Url::fromRoute('kees_cookiebar.config')->toString()));
+      $form_state->setErrorByName('key_text', $this->t('Primary cookies cannot be deleted! <a href="@url">Go back</a>', Url::fromRoute('advanced_cookiebar.config')->toString()));
     }
   }
 
@@ -78,16 +78,16 @@ class KeesCookiebarRemoveConfigForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Get variables.
     $key = $form_state->getValue('key_text');
-    $config = $this->config('kees_cookiebar.settings');
-    $cookies = $config->get('kees_cookiebar.settings_cookies');
+    $config = $this->config('advanced_cookiebar.settings');
+    $cookies = $config->get('advanced_cookiebar.settings_cookies');
 
     // Remove cookie from array.
     unset($cookies[$key]);
     // Save new array.
-    $config->set('kees_cookiebar.settings_cookies', $cookies);
+    $config->set('advanced_cookiebar.settings_cookies', $cookies);
     $config->save();
 
-    $form_state->setRedirect('kees_cookiebar.config');
+    $form_state->setRedirect('advanced_cookiebar.config');
     return parent::submitForm($form, $form_state);
   }
 
@@ -96,7 +96,7 @@ class KeesCookiebarRemoveConfigForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'kees_cookiebar.settings',
+      'advanced_cookiebar.settings',
     ];
   }
 

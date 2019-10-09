@@ -1,12 +1,12 @@
 {
-    "name": "keestm/cookiebar",
+    "name": "drupal/advanced_cookiebar",
     "description": "A Drupal module that adds a cookies bar to your site",
     "type": "drupal-module",
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
         {
-            "name": "KeesTM"
+            "name": "Kees™"
         }
     ],
     "require": {}

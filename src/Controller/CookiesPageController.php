@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Controller;
+namespace Drupal\advanced_cookiebar\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 
@@ -17,31 +17,31 @@ class CookiesPageController extends ControllerBase {
    */
   public function content() {
     // Read settings.
-    $config = \Drupal::config('kees_cookiebar.settings');
+    $config = \Drupal::config('advanced_cookiebar.settings');
 
     return [
-      '#theme' => 'kees_cookiesPage',
+      '#theme' => 'advanced_cookiesPage',
       '#title' => [
-        '#markup' => $config->get('kees_cookiebar.page_title'),
+        '#markup' => $config->get('advanced_cookiebar.page_title'),
       ],
       '#intro' => [
-        '#markup' => $config->get('kees_cookiebar.page_intro'),
+        '#markup' => $config->get('advanced_cookiebar.page_intro'),
       ],
       '#text' => [
-        '#markup' => $config->get('kees_cookiebar.page_text'),
+        '#markup' => $config->get('advanced_cookiebar.page_text'),
       ],
       '#accept_button_text' => [
-        '#markup' => $config->get('kees_cookiebar.page_accept_button_text'),
+        '#markup' => $config->get('advanced_cookiebar.page_accept_button_text'),
       ],
       '#decline_button_text' => [
-        '#markup' => $config->get('kees_cookiebar.page_decline_button_text'),
+        '#markup' => $config->get('advanced_cookiebar.page_decline_button_text'),
       ],
       '#cookieValue' => [
         '#markup' => $this->getCookieValue(),
       ],
       '#attached' => [
         'library' => [
-          'kees_cookiebar/cookiebar-js',
+          'advanced_cookiebar/cookiebar-js',
         ],
       ],
       '#cache' => [

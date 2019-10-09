@@ -1,17 +1,17 @@
 <?php
 
-namespace Drupal\kees_cookiebar\Form;
+namespace Drupal\advanced_cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-use Drupal\kees_cookiebar\Helper\ConfigHelper;
+use Drupal\advanced_cookiebar\Helper\ConfigHelper;
 
 /**
- * Kees Cookiebar Add Config Form.
+ * {@inheritdoc}
  */
-class KeesCookiebarAddConfigForm extends ConfigFormBase {
+class AdvancedCookiebarAddConfigForm extends ConfigFormBase {
   /**
    * Is edit.
    *
@@ -60,7 +60,7 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'kees_cookiebar_add_config_form';
+    return 'advanced_cookiebar_add_config_form';
   }
 
   /**
@@ -181,11 +181,11 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase {
     ];
 
     // Save config.
-    $this->ConfigHelper->translatable_config->set('kees_cookiebar.settings_cookies', $cookies);
+    $this->ConfigHelper->translatable_config->set('advanced_cookiebar.settings_cookies', $cookies);
     $this->ConfigHelper->translatable_config->save();
 
     // Redirect and return.
-    $form_state->setRedirect('kees_cookiebar.config');
+    $form_state->setRedirect('advanced_cookiebar.config');
     return parent::submitForm($form, $form_state);
   }
 
@@ -194,7 +194,7 @@ class KeesCookiebarAddConfigForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'kees_cookiebar.settings',
+      'advanced_cookiebar.settings',
     ];
   }
 

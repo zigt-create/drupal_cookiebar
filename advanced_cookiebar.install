@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Advanced Cookiebar install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function advanced_cookiebar_install() {
+  // Add block to content on module install.
+  $cookiebar_block = Block::create([
+    'id' => 'advanced_cookiebar_block',
+    'plugin' => 'advanced_cookiebar_block',
+    'region' => 'content',
+    'weight' => 99,
+    'theme' => \Drupal::config('system.theme')->get('default'),
+    'settings' => [
+      'label' => 'Advanced Cookiebar Block',
+      'label_display' => FALSE,
+    ],
+  ]);
+  $cookiebar_block->save();
+
+  // (Re)set saved config. This is sometimes cached in some wierd way...
+  $config_file = \file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'advanced_cookiebar') . "/config/install/advanced_cookiebar.settings.yml");
+  $parsed = Yaml::parse($config_file);
+  $config = \Drupal::configFactory()->getEditable('advanced_cookiebar.settings');
+  $config->setData($parsed);
+  $config->save(TRUE);
+}

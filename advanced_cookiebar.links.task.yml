@@ -1,0 +1,26 @@
+# Create tabs on cookiebar settings page
+advanced_cookiebar.cookiebar:
+  title: 'Cookiebar'
+  route_name : advanced_cookiebar.cookiebar
+  base_route: advanced_cookiebar.cookiebar
+  weight: 1
+
+# Tab 'Page' Will be unset if type is 'advanced', see advanced_cookiebar.module::advanced_cookiebar_menu_local_tasks_alter
+# advanced_cookiebar.page:
+#   title: 'Page'
+#   route_name: advanced_cookiebar.page
+#   base_route: advanced_cookiebar.cookiebar
+#   weight: 2
+
+# Tab 'Configuration' Will be unset if type is 'default', see advanced_cookiebar.module::advanced_cookiebar_menu_local_tasks_alter
+advanced_cookiebar.config:
+  title: 'Configuration'
+  route_name: advanced_cookiebar.config
+  base_route: advanced_cookiebar.cookiebar
+  weight: 3
+
+advanced_cookiebar.settings:
+  title: 'Settings'
+  route_name: advanced_cookiebar.settings
+  base_route: advanced_cookiebar.cookiebar
+  weight: 4
