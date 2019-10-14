@@ -117,24 +117,27 @@ function kees_cookiebar_preprocess(&$variables)
  */
 function kees_cookiebar_preprocess_html(&$variables)
 {
-    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
-    $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
-    if (empty($cookiepage_path)) {
-        $cookiepage_path = "/cookies";
-        $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
-        $config->save();
-    }
+  $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+  $cookie_nid = $config->get('kees_cookiebar.cookiepage_path');
+  $cookie_node = Node::load($cookie_nid);
+  $cookie_page_url = null;
+  $compliancy_version = "";
+  if ($cookie_node) {
+    $cookie_page_url = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $cookie_nid);
+    $compliancy_version = $cookie_node->getLoadedRevisionId();
+  }
 
-    $current_language = Drupal::languageManager()->getCurrentLanguage();
-    $default_lang = Drupal::languageManager()->getDefaultLanguage();
-    $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
-    $currentUrl = Url::fromRoute('<current>', [], ['language' => $default_lang]);
+  $current_language = Drupal::languageManager()->getCurrentLanguage();
+  $default_lang = Drupal::languageManager()->getDefaultLanguage();
+  $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
+  $currentUrl = Url::fromRoute('<current>', [], ['language' => $default_lang]);
 
-    $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
-        'cookiepagePath' => $cookiepage_path,
-        'homeUrl' => $homeUrl->toString(),
-        'currentUrl' => $currentUrl->toString(),
-    );
+  $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
+    'cookiepagePath' => $cookie_page_url,
+    'compliancyVersion' => $compliancy_version,
+    'homeUrl' => $homeUrl->toString(),
+    'currentUrl' => $currentUrl->toString(),
+  );
 }
 
 /**

@@ -12,10 +12,11 @@ var keesCookieName = 'CookieConsent';
     Drupal.behaviors.kees_cookiebar_advanced = {
         attach: function (context, drupalSettings) {
             var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
+            var compliancyVersion = drupalSettings.keesCookiebarConfig.compliancyVersion;
             var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
             var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
 
-            if (getCookieValue('primary_cookies') != true || currentUrl == cookiepagePath) {
+            if ((getCookieValue('version') == undefined || getCookieValue('version') != compliancyVersion) || getCookieValue('primary_cookies') != true || currentUrl == cookiepagePath) {
                 $('#kees-cookiebar-container', context).show();
             }
 
@@ -30,6 +31,7 @@ var keesCookieName = 'CookieConsent';
 
                 var cookie = {};
 
+                cookie["version"] = compliancyVersion;
                 $("form#kees-cookiebar-form input:checkbox").each(function () {
                     var value = $(this).is(":checked");
                     var id = $(this).prop('name');
