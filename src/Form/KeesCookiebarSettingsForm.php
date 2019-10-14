@@ -4,6 +4,7 @@ namespace Drupal\kees_cookiebar\Form;
 use \Drupal\Core\Form\ConfigFormBase;
 use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\Core\Cache\Cache;
+use Drupal\node\Entity\Node;
 use \Drupal\Core\Url;
 
 class KeesCookiebarSettingsForm extends ConfigFormBase
@@ -27,11 +28,12 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
     {
         // Form constructor
         $form = parent::buildForm($form, $form_state);
-        
+
         // Get config
         $config = $this->config('kees_cookiebar.settings');
         $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
         $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
+        $node = Node::load($cookiepage_path);
 
         // Build form
         $options = array(
@@ -47,43 +49,15 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
         );
 
         $form['cookiepage_path'] = array(
-            '#type' => 'textfield',
-            '#title' => 'Path to the cookies settings page',
-            '#default_value' => $cookiepage_path,
-            '#size' => 60,
-            '#description' =>   'E.g: /cookies /cookie-page or /privacy-settings<br>' .
-                                'On this path the cookiebar or cookieblock will always be visible.<br>' .
-                                'When a user sets their cookie preference on this path, they will be redirected to the homepage instead of reloading the page.',
-            '#maxlength' => 128,
+            '#type' => 'entity_autocomplete',
+            '#target_type' => 'node',
+            '#title' => 'Cookies settings page',
+            '#default_value' => $node,
+            '#description' => '',
             '#required' => true,
           );
 
         return $form;
-    }
-
-    /**
-     * Form validation for settings form
-     *
-     * @param array $form
-     * @param FormStateInterface $form_state
-     * @return void
-     */
-    public function validateForm(array &$form, FormStateInterface $form_state)
-    {
-        // Validation for cookiepage_path
-        $field_name = 'cookiepage_path';
-        // If path starts with a '/'
-        if (substr($form_state->getValue($field_name), 0, 1) !== "/") {
-            $form_state->setErrorByName($field_name, $this->t('Path must start with a \'/\''));
-        }
-        // If path ends with a '/'
-        if (substr($form_state->getValue($field_name), -1) === "/") {
-            $form_state->setErrorByName($field_name, $this->t('Path should not end with a \'/\''));
-        }
-        // If path length is shorter than 3 characters
-        if (strlen($form_state->getValue($field_name)) < 3) {
-            $form_state->setErrorByName($field_name, $this->t('Path should be atleast 3 charaters long'));
-        }
     }
 
     /**
