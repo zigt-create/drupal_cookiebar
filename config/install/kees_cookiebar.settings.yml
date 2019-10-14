@@ -22,4 +22,4 @@ kees_cookiebar:
       label: 'Social media cookies'
       desc: '<p>Embedded content from social media sites such as YouTube, Facebook, LinkedIn and other platforms often contain cookies. The view this kind of content on the website, these cookies must be allowed.</p>'
   cookiebar_type: '0'
-  cookiepage_path: '/cookies'
+  cookiepage_node: null
