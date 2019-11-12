@@ -17,7 +17,7 @@ var keesCookieName = 'CookieConsent';
             var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
 
             if ((getCookieValue('version') == undefined || getCookieValue('version') != compliancyVersion) || getCookieValue('primary_cookies') != true || currentUrl == cookiepagePath) {
-                $('#kees-cookiebar-container', context).show();
+                $('#kees-cookiebar-container').show();
             }
 
             $('.consent__form__trigger', context).click(function () {
