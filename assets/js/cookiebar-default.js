@@ -34,6 +34,9 @@ var keesCookieName = 'CookieConsent';
     };
 
     function clicked (e, cookiepagePath, currentUrl, homeUrl, attrValue) {
+        // Prevent link from redirecting
+        e.preventDefault(); 
+        
         // SetCookie function
         setCookie((attrValue == "true") ? "true" : "false");
 
