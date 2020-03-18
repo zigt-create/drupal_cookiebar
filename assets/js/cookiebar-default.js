@@ -24,18 +24,16 @@ var keesCookieName = 'CookieConsent';
                 $('.kees-js-cookiebar-container', context).once('cookiebar').hide()
             }
 
-            $('#kees-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
+            $('#kees-cookiebar-container button,a.kees-js-cookiebar-button', context).click(function (e) {
                 clicked(e, cookiepagePath, currentUrl, homeUrl, $(this).attr("id"));
             });
-            $('.kees-js-cookiebar-container a.kees-js-cookiebar-button', context).click(function (e) {
+            $('.kees-js-cookiebar-container button,a.kees-js-cookiebar-button', context).click(function (e) {
                 clicked(e, cookiepagePath, currentUrl, homeUrl, $(this).attr("id"));
             });
         }
     };
 
     function clicked (e, cookiepagePath, currentUrl, homeUrl, attrValue) {
-        e.preventDefault(); //prevent link from redirecting
-
         // SetCookie function
         setCookie((attrValue == "true") ? "true" : "false");
 
