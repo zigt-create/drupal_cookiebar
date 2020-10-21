@@ -1,6 +1,0 @@
-# Create settings menu link under configurating>development>KeesTM Cookiebar Settings
-kees_cookiebar.settings:
-  title: 'KeesTM Cookiebar settings'
-  description: 'Configure settings for the Cookiebar module.'
-  route_name: kees_cookiebar.cookiebar
-  parent: 'system.admin_config_development'

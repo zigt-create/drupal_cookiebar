@@ -1,4 +1,4 @@
-#kees-cookiebar-container .consent {
+#cookiebar-container .consent {
     position: fixed;
     z-index: 99999;
     background: #fff;
@@ -9,7 +9,7 @@
     box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.5);
 }
 
-#kees-cookiebar-container .consent__side--right-bottom {
+#cookiebar-container .consent__side--right-bottom {
     left: auto;
     right: 0;
     bottom: 0;
@@ -18,7 +18,7 @@
     max-width: 380px;
 }
 
-#kees-cookiebar-container .consent__inner {
+#cookiebar-container .consent__inner {
     position: relative;
     max-width: 840px;
     margin: 0 auto;
@@ -26,17 +26,17 @@
 }
 
 @media (max-width: 767px) {
-    #kees-cookiebar-container .consent__inner {
+    #cookiebar-container .consent__inner {
         max-height: 500px;
         overflow-y: scroll;
     }
 }
 
-#kees-cookiebar-container .consent__inner button {
+#cookiebar-container .consent__inner button {
     margin-top: 20px;
 }
 
-#kees-cookiebar-container .consent__close {
+#cookiebar-container .consent__close {
     position: absolute;
     right: 25px;
     top: 25px;
@@ -45,20 +45,20 @@
     opacity: 0.75;
 }
 
-#kees-cookiebar-container .consent__form {
+#cookiebar-container .consent__form {
     padding-top: 10px;
 }
 
-#kees-cookiebar-container .consent__form__item {
+#cookiebar-container .consent__form__item {
     position: relative;
     margin-bottom: 20px;
 }
 
-#kees-cookiebar-container .consent__form__item input {
+#cookiebar-container .consent__form__item input {
     display: none;
 }
 
-#kees-cookiebar-container .consent__form__item input+label {
+#cookiebar-container .consent__form__item input+label {
     position: relative;
     padding: 20px 10px 20px 50px;
     width: 100%;
@@ -66,7 +66,7 @@
     background-color: #f3f3f3;
 }
 
-#kees-cookiebar-container .consent__form__item input+label:before {
+#cookiebar-container .consent__form__item input+label:before {
     content: '';
     display: block;
     width: 20px;
@@ -80,7 +80,7 @@
     border-radius: 3px;
 }
 
-#kees-cookiebar-container .consent__form__item input[type="checkbox"]:checked+label:after {
+#cookiebar-container .consent__form__item input[type="checkbox"]:checked+label:after {
     color: green;
     display: inline-block;
     position: absolute;
@@ -94,11 +94,11 @@
     border-radius: 2px;
 }
 
-#kees-cookiebar-container .consent__form__item:last-child {
+#cookiebar-container .consent__form__item:last-child {
     margin-bottom: 0px;
 }
 
-#kees-cookiebar-container .consent__form__trigger {
+#cookiebar-container .consent__form__trigger {
     display: block;
     position: absolute;
     color: #333;
@@ -114,7 +114,7 @@
     background-color: #F8AE00;
 }
 
-#kees-cookiebar-container .consent__form__trigger:before {
+#cookiebar-container .consent__form__trigger:before {
     font-family: 'FontAwesome';
     content: '\f067';
     color: white;
@@ -125,17 +125,17 @@
     transform: translate(-50%, -50%);
 }
 
-#kees-cookiebar-container .consent__form__trigger.minus:before {
+#cookiebar-container .consent__form__trigger.minus:before {
     content: '\f068';
 }
 
-#kees-cookiebar-container .consent__cookie--description {
+#cookiebar-container .consent__cookie--description {
     max-height: 0px;
     overflow: hidden;
     transition: 0.3s all ease-in;
 }
 
-#kees-cookiebar-container .consent__cookie--description.open {
+#cookiebar-container .consent__cookie--description.open {
     padding-top: 15px;
     max-height: 200px;
     overflow-y: auto;

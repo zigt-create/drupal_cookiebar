@@ -1,0 +1,6 @@
+# Create settings menu link under configurating>development>Cookiebar Settings
+cookiebar.settings:
+  title: 'Cookiebar settings'
+  description: 'Configure settings for the Cookiebar module.'
+  route_name: cookiebar.cookiebar
+  parent: 'system.admin_config_development'

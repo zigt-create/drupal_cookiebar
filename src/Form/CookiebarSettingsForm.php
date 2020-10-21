@@ -1,19 +1,19 @@
 <?php
-namespace Drupal\kees_cookiebar\Form;
+namespace Drupal\cookiebar\Form;
 
 use \Drupal\Core\Form\ConfigFormBase;
 use \Drupal\Core\Form\FormStateInterface;
 use \Drupal\Core\Cache\Cache;
 use \Drupal\Core\Url;
 
-class KeesCookiebarSettingsForm extends ConfigFormBase
+class CookiebarSettingsForm extends ConfigFormBase
 {
     /**
      * {@inheritdoc}
      */
     public function getFormId()
     {
-        return 'kees_cookiebar_settings_form';
+        return 'cookiebar_settings_form';
     }
 
     /**
@@ -29,9 +29,9 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
         $form = parent::buildForm($form, $form_state);
         
         // Get config
-        $config = $this->config('kees_cookiebar.settings');
-        $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
-        $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
+        $config = $this->config('cookiebar.settings');
+        $cookiebar_type = $config->get('cookiebar.cookiebar_type');
+        $cookiepage_path = $config->get('cookiebar.cookiepage_path');
 
         // Build form
         $options = array(
@@ -98,9 +98,9 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
         $cookiebar_type = $form_state->getValue('cookiebar_type');
         $cookiepage_path = $form_state->getValue('cookiepage_path');
 
-        $config = $this->config('kees_cookiebar.settings');
-        $config->set('kees_cookiebar.cookiebar_type', $cookiebar_type);
-        $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
+        $config = $this->config('cookiebar.settings');
+        $config->set('cookiebar.cookiebar_type', $cookiebar_type);
+        $config->set('cookiebar.cookiepage_path', $cookiepage_path);
         $config->save();
 
         return parent::submitForm($form, $form_state);
@@ -112,7 +112,7 @@ class KeesCookiebarSettingsForm extends ConfigFormBase
     protected function getEditableConfigNames()
     {
         return [
-            'kees_cookiebar.settings',
+            'cookiebar.settings',
         ];
     }
 }

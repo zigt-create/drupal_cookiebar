@@ -1,39 +1,44 @@
 /**
  * @file JS file for the cookiebar module
  *
- * @author KeesTM <developers@kees-tm.nl>
- * @author Tom Grootjans <tom@kees-tm.nl>
+ * @author EstDigital <developers@estdigital.nl>
+ * @author Tom Grootjans <tom@estdigital.nl>
  */
 
 /* Set default variables */
-var keesCookieName = 'CookieConsent';
+var CookieName = 'CookieConsent';
 
 (function ($, Drupal) {
-    Drupal.behaviors.kees_cookiebar_default = {
+    Drupal.behaviors.cookiebar_default = {
         attach: function (context, drupalSettings) {
-            var cookiepagePath = drupalSettings.keesCookiebarConfig.cookiepagePath;
-            var currentUrl = drupalSettings.keesCookiebarConfig.currentUrl;
-            var homeUrl = drupalSettings.keesCookiebarConfig.homeUrl;
+            console.log("joe");
+
+            var cookiepagePath = drupalSettings.CookiebarConfig.cookiepagePath;
+            var currentUrl = drupalSettings.CookiebarConfig.currentUrl;
+            var homeUrl = drupalSettings.CookiebarConfig.homeUrl;
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
             if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
-                $('#kees-cookiebar-container', context).once('cookiebar').show()
-                $('.kees-js-cookiebar-container', context).once('cookiebar').show()
+                console.log("Show cookiebar");
+                $('#cookiebar-container', context).once('cookiebar').show()
+                $('.js-cookiebar-container', context).once('cookiebar').show()
             } else {
-                $('#kees-cookiebar-container', context).once('cookiebar').hide()
-                $('.kees-js-cookiebar-container', context).once('cookiebar').hide()
+                console.log("Do not show cookiebar");
+                $('#cookiebar-container', context).once('cookiebar').hide()
+                $('.js-cookiebar-container', context).once('cookiebar').hide()
             }
 
-            $('#kees-cookiebar-container button,a.kees-js-cookiebar-button', context).click(function (e) {
+            $('#cookiebar-container button,a.js-cookiebar-button', context).click(function (e) {
                 clicked(e, cookiepagePath, currentUrl, homeUrl, $(this).attr("id"));
             });
-            $('.kees-js-cookiebar-container button,a.kees-js-cookiebar-button', context).click(function (e) {
+            $('.js-cookiebar-container button,a.js-cookiebar-button', context).click(function (e) {
                 clicked(e, cookiepagePath, currentUrl, homeUrl, $(this).attr("id"));
             });
         }
     };
 
     function clicked (e, cookiepagePath, currentUrl, homeUrl, attrValue) {
+        console.log("Cookiebar is clicked");
         // Prevent link from redirecting
         e.preventDefault(); 
         
@@ -50,12 +55,14 @@ var keesCookieName = 'CookieConsent';
 
     // Helper function to set the cookie
     function setCookie(value) {
+        console.log("Set cookie");
         // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed'
         var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-        document.cookie = keesCookieName + "=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
+        document.cookie = CookieName + "=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
 
         // Additional remove all other cookies if value is 'CookieDisallowed'
         if ("false" == value) {
+            console.log("Value is false");
             // Get all cookies in array
             var getCookies = document.cookie.split(';');
 
@@ -75,7 +82,7 @@ var keesCookieName = 'CookieConsent';
                 var cookieName = splitValue[0];
 
                 // If cookiename is not our own cookiebar cookie
-                if (keesCookieName != cookieName) {
+                if (CookieName != cookieName) {
                     document.cookie = cookieName + "=; expires=" + cookieRemoveExpireTime.toGMTString() + "; path=/";
                 }
             });
@@ -86,8 +93,9 @@ var keesCookieName = 'CookieConsent';
      * Get the cookie set by this module
      */
     function getCookie() {
+        console.log("get cookie")
         var value = "; " + document.cookie;
-        var cookie = value.split("; " + keesCookieName + "=");
+        var cookie = value.split("; " + CookieName + "=");
 
         if (cookie.length == 2) return cookie.pop().split(";").shift();
     }

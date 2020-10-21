@@ -1,0 +1,19 @@
+# Create tabs on cookiebar settings page
+cookiebar.cookiebar:
+  title: 'Cookiebar'
+  route_name : cookiebar.cookiebar
+  base_route: cookiebar.cookiebar
+  weight: 1
+
+# Tab 'Configuration' Will be unset if type is 'default', see cookiebar.module::cookiebar_menu_local_tasks_alter
+cookiebar.config:
+  title: 'Configuration'
+  route_name: cookiebar.config
+  base_route: cookiebar.cookiebar
+  weight: 3
+
+cookiebar.settings:
+  title: 'Settings'
+  route_name: cookiebar.settings
+  base_route: cookiebar.cookiebar
+  weight: 4

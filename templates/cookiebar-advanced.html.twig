@@ -1,4 +1,4 @@
-{{ attach_library('kees_cookiebar/cookiebar-css-advanced') }}
+{{ attach_library('cookiebar/cookiebar-css-advanced') }}
 {#
 /**
  * @file
@@ -13,12 +13,12 @@
  *   - accept_button_text
  *   - decline_button_text
  *
- * @see template_preprocess_kees_cookiebar()
+ * @see template_preprocess_cookiebar()
  *
  * @ingroup themeable
  */
 #}
-<span id="kees-cookiebar-container" style="display: none;">
+<span id="cookiebar-container" style="display: none;">
 
     <div class="consent consent__side--right-bottom ">
         <div class="row">
@@ -26,13 +26,13 @@
                 <div class="consent__inner">
                     <h2>{{ label }}</h2>
                     <p>{{ text }}</p>
-                    <form class="consent__form" id="kees-cookiebar-form" method="post" action="">
+                    <form class="consent__form" id="cookiebar-form" method="post" action="">
 
                         <div class="scroll_wrapper">
 
                             {% for key, cookie in cookies %}
                                 <div class="consent__form__item consent__description--closed {{ (loop.index == 1)? "consent__form__item--first" }} ">
-                                    <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "disabled" }} {{ (loop.index == 1 or kees_cookie_value[key] == true)? "checked" }}>
+                                    <input type="checkbox" name="{{ key }}" id="{{ key }}" value="y" class="consent__form__checkbox" {{ (loop.index == 1)? "disabled" }} {{ (loop.index == 1 or cookie_value[key] == true)? "checked" }}>
                                     <label class="consent__form__label--checkbox" for="{{ key }}"><span>{{ cookie.label }}</span></label>
                                     <a href="#info" class="consent__form__trigger trigger--closed"></a>
 
