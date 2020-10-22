@@ -1,0 +1,27 @@
+{{ attach_library('cookiebar/cookiebar-css-default') }}
+{#
+/**
+ * @file
+ * Default template implementation to display the cookiebar block.
+ *
+ * Available variables:
+ *   - Theme
+ *   - isCookie
+ *   - label
+ *   - text
+ *   - accept_button_text
+ *   - decline_button_text
+ *
+ * @see template_preprocess_cookiebar()
+ *
+ * @ingroup themeable
+ */
+#}
+<div id="cookiebar-container" class="css-cookiebar-container" style="display: none;">
+    <div class="cookiebar">
+        <span class="cookiebar-label">{{ label }}</span>
+        {{ text }}
+        <a id="true" class="btn btn-primary js-cookiebar-button">{{ accept_button_text }}</a>
+        <a id="false" class="btn btn-danger js-cookiebar-button">{{ decline_button_text }}</a>
+    </div>
+</div>

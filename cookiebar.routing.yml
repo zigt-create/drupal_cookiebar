@@ -1,0 +1,44 @@
+# Settings routes
+# Tab 1
+cookiebar.cookiebar:
+    path: '/admin/config/development/cookiebar'
+    defaults:
+        _form: '\Drupal\cookiebar\Form\CookiebarForm'
+        _title: 'Cookiebar settings'
+    requirements:
+        _permission: 'administer cookiebar'
+
+# Tab 3
+cookiebar.config:
+    path: '/admin/config/development/cookiebar/config'
+    defaults:
+        _form: '\Drupal\cookiebar\Form\CookiebarConfigForm'
+        _title: 'Cookiebar configuration'
+    requirements:
+        _permission: 'administer cookiebar'
+
+# Tab 4
+cookiebar.settings:
+    path: '/admin/config/development/cookiebar/settings'
+    defaults:
+        _form: '\Drupal\cookiebar\Form\CookiebarSettingsForm'
+        _title: 'Cookiebar settings'
+    requirements:
+        _permission: 'administer cookiebar settings'
+
+# Add form
+cookiebar.add_config:
+    path: '/admin/config/development/cookiebar/config/add'
+    defaults:
+        _form: '\Drupal\cookiebar\Form\CookiebarAddConfigForm'
+        _title: 'Cookiebar add cookie configuration'
+    requirements:
+        _permission: 'administer cookiebar'
+# Remove form
+cookiebar.remove_config:
+    path: '/admin/config/development/cookiebar/config/remove'
+    defaults:
+        _form: '\Drupal\cookiebar\Form\CookiebarRemoveConfigForm'
+        _title: 'Cookiebar remove cookie configuration'
+    requirements:
+        _permission: 'administer cookiebar settings'

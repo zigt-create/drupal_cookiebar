@@ -1,13 +1,13 @@
 <?php
-namespace Drupal\kees_cookiebar\Form;
+namespace Drupal\cookiebar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\locale\SourceString;
 
-use Drupal\kees_cookiebar\Helper\ConfigHelper;
+use Drupal\cookiebar\Helper\ConfigHelper;
 
-class KeesCookiebarForm extends ConfigFormBase
+class CookiebarForm extends ConfigFormBase
 {
     protected $ConfigHelper;
 
@@ -15,9 +15,9 @@ class KeesCookiebarForm extends ConfigFormBase
     {
         $this->ConfigHelper = new ConfigHelper();
 
-        $cookies = $this->ConfigHelper->base_config->get('kees_cookiebar.settings_cookies');
-        $type = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type');
-        $path = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiepage_path');
+        $cookies = $this->ConfigHelper->base_config->get('cookiebar.settings_cookies');
+        $type = $this->ConfigHelper->base_config->get('cookiebar.cookiebar_type');
+        $path = $this->ConfigHelper->base_config->get('cookiebar.cookiepage_path');
 
         if (empty($cookies) || ($type !== "0" && $type !== "1") || empty($path)) {
             drupal_set_message(t('You need to run updates on the <a href="/update.php">update.php</a> page'), 'warning');
@@ -29,7 +29,7 @@ class KeesCookiebarForm extends ConfigFormBase
      */
     public function getFormId()
     {
-        return 'kees_cookiebar_form';
+        return 'cookiebar_form';
     }
 
     /**
@@ -45,7 +45,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $form = parent::buildForm($form, $form_state);
 
         // get config value
-        $cookiebar_type = $this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type');
+        $cookiebar_type = $this->ConfigHelper->base_config->get('cookiebar.cookiebar_type');
 
         // Language links
         $form = $this->ConfigHelper->addLanguageLinks($form);
@@ -54,7 +54,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $form['label'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Label:'),
-            '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.label'),
+            '#default_value' => $this->ConfigHelper->translatable_config->get('cookiebar.label'),
             '#description' => $this->t('Bold text at the beginning of the cookiebar.'),
         );
 
@@ -62,7 +62,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $form['text'] = array(
             '#type' => 'textarea',
             '#title' => $this->t('Description:'),
-            '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.text'),
+            '#default_value' => $this->ConfigHelper->translatable_config->get('cookiebar.text'),
             '#description' => $this->t('Main text on the center of the cookiebar.'),
         );
 
@@ -72,7 +72,7 @@ class KeesCookiebarForm extends ConfigFormBase
         $form['accept_button_text'] = array(
             '#type' => 'textfield',
             '#title' => $this->t($title),
-            '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.accept_button_text'),
+            '#default_value' => $this->ConfigHelper->translatable_config->get('cookiebar.accept_button_text'),
             '#description' => $this->t($description),
         );
 
@@ -81,7 +81,7 @@ class KeesCookiebarForm extends ConfigFormBase
             $form['decline_button_text'] = array(
                 '#type' => 'textfield',
                 '#title' => $this->t('Decline cookies button text:'),
-                '#default_value' => $this->ConfigHelper->translatable_config->get('kees_cookiebar.decline_button_text'),
+                '#default_value' => $this->ConfigHelper->translatable_config->get('cookiebar.decline_button_text'),
                 '#description' => $this->t('Text to show on the button to decline the cookies'),
             );
         }
@@ -110,12 +110,12 @@ class KeesCookiebarForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $this->ConfigHelper->translatable_config->set('kees_cookiebar.label', $form_state->getValue('label'));
-        $this->ConfigHelper->translatable_config->set('kees_cookiebar.text', $form_state->getValue('text'));
+        $this->ConfigHelper->translatable_config->set('cookiebar.label', $form_state->getValue('label'));
+        $this->ConfigHelper->translatable_config->set('cookiebar.text', $form_state->getValue('text'));
 
-        $this->ConfigHelper->translatable_config->set('kees_cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
-        if ($this->ConfigHelper->base_config->get('kees_cookiebar.cookiebar_type') == "0") {
-            $this->ConfigHelper->translatable_config->set('kees_cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
+        $this->ConfigHelper->translatable_config->set('cookiebar.accept_button_text', $form_state->getValue('accept_button_text'));
+        if ($this->ConfigHelper->base_config->get('cookiebar.cookiebar_type') == "0") {
+            $this->ConfigHelper->translatable_config->set('cookiebar.decline_button_text', $form_state->getValue('decline_button_text'));
         }
 
         $this->ConfigHelper->translatable_config->save();
@@ -129,7 +129,7 @@ class KeesCookiebarForm extends ConfigFormBase
     protected function getEditableConfigNames()
     {
         return [
-            'kees_cookiebar.settings',
+            'cookiebar.settings',
         ];
     }
 }

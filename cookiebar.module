@@ -19,11 +19,11 @@ $GLOBALS["cookie_name"] = 'CookieConsent';
  * @param string $path
  * @return array
  */
-function kees_cookiebar_theme($existing, $type, $theme, $path)
+function cookiebar_theme($existing, $type, $theme, $path)
 {
     // This defines the variables that will be useable in the templates
     return array(
-        'kees_cookiebar' => array(
+        'cookiebar' => array(
             'variables' => array(
                 'label' => null,
                 'cookies' => null,
@@ -32,7 +32,7 @@ function kees_cookiebar_theme($existing, $type, $theme, $path)
                 'decline_button_text' => null,
             ),
         ),
-        'kees_cookiebar_advanced' => array(
+        'cookiebar_advanced' => array(
             'variables' => array(
                 'label' => null,
                 'cookies' => null,
@@ -50,19 +50,19 @@ function kees_cookiebar_theme($existing, $type, $theme, $path)
  *
  * @return void
  */
-function kees_cookiebar_install()
+function cookiebar_install()
 {
     // Add block to content on module install
     $cur_theme = \Drupal::config('system.theme')->get('default');
     if (!empty($cur_theme)) {
         $cookiebarBlock = Block::create([
-            'id' => 'kees_cookiebar_block',
-            'plugin' => 'kees_cookiebar_block',
+            'id' => 'cookiebar_block',
+            'plugin' => 'cookiebar_block',
             'region' => 'content',
             'weight' => 99,
             'theme' => $cur_theme,
             'settings' => [
-                'label' => 'KeesTM Cookiebar Block',
+                'label' => 'Cookiebar Block',
                 'label_display' => false,
             ],
         ]);
@@ -70,9 +70,9 @@ function kees_cookiebar_install()
     }
 
     // (Re)set saved config. This is sometimes cached in some wierd way...
-    $config_file = \file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'kees_cookiebar') . "/config/install/kees_cookiebar.settings.yml");
+    $config_file = \file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'cookiebar') . "/config/install/cookiebar.settings.yml");
     $parsed = \Symfony\Component\Yaml\Yaml::parse($config_file);
-    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
+    $config = \Drupal::configFactory()->getEditable('cookiebar.settings');
     $config->setData($parsed);
     $config->save(true);
 }
@@ -85,11 +85,11 @@ function kees_cookiebar_install()
  * @param array $attachments
  * @return void
  */
-function kees_cookiebar_page_attachments(array &$attachments)
+function cookiebar_page_attachments(array &$attachments)
 {
     $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
     if ($is_admin) {
-        $attachments['#attached']['library'][] = 'kees_cookiebar/cookiebar-css-admin';
+        $attachments['#attached']['library'][] = 'cookiebar/cookiebar-css-admin';
         return;
     }
 }
@@ -102,9 +102,9 @@ function kees_cookiebar_page_attachments(array &$attachments)
  * @param array $variables
  * @return void
  */
-function kees_cookiebar_preprocess(&$variables)
+function cookiebar_preprocess(&$variables)
 {
-    $variables['kees_cookie_value'] = GetCookieValue();
+    $variables['cookie_value'] = GetCookieValue();
 }
 
 /**
@@ -115,13 +115,13 @@ function kees_cookiebar_preprocess(&$variables)
  * @param array $variables
  * @return void
  */
-function kees_cookiebar_preprocess_html(&$variables)
+function cookiebar_preprocess_html(&$variables)
 {
-    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
-    $cookiepage_path = $config->get('kees_cookiebar.cookiepage_path');
+    $config = \Drupal::configFactory()->getEditable('cookiebar.settings');
+    $cookiepage_path = $config->get('cookiebar.cookiepage_path');
     if (empty($cookiepage_path)) {
         $cookiepage_path = "/cookies";
-        $config->set('kees_cookiebar.cookiepage_path', $cookiepage_path);
+        $config->set('cookiebar.cookiepage_path', $cookiepage_path);
         $config->save();
     }
 
@@ -130,7 +130,7 @@ function kees_cookiebar_preprocess_html(&$variables)
     $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
     $currentUrl = Url::fromRoute('<current>', [], ['language' => $default_lang]);
 
-    $variables['#attached']['drupalSettings']['keesCookiebarConfig'] = array(
+    $variables['#attached']['drupalSettings']['cookiebarConfig'] = array(
         'cookiepagePath' => $cookiepage_path,
         'homeUrl' => $homeUrl->toString(),
         'currentUrl' => $currentUrl->toString(),
@@ -146,13 +146,13 @@ function kees_cookiebar_preprocess_html(&$variables)
  * @param string $route_name
  * @return void
  */
-function kees_cookiebar_menu_local_tasks_alter(&$data, $route_name)
+function cookiebar_menu_local_tasks_alter(&$data, $route_name)
 {
-    $config = \Drupal::config('kees_cookiebar.settings');
-    $cookiebar_type = $config->get('kees_cookiebar.cookiebar_type');
+    $config = \Drupal::config('cookiebar.settings');
+    $cookiebar_type = $config->get('cookiebar.cookiebar_type');
 
     if ($cookiebar_type === "0") {
-        unset($data['tabs'][0]['kees_cookiebar.config']);
+        unset($data['tabs'][0]['cookiebar.config']);
     }
 }
 
@@ -164,9 +164,9 @@ function kees_cookiebar_menu_local_tasks_alter(&$data, $route_name)
  * @param array $variables
  * @return array
  */
-function kees_cookiebar_theme_suggestions_kees_cookiebar(array $variables) : array
+function cookiebar_theme_suggestions_cookiebar(array $variables) : array
 {
-    return array('kees_cookiebar_default');
+    return array('cookiebar_default');
 }
 
 /**
@@ -200,25 +200,4 @@ function GetCookieValue()
 function isJSON($string) : bool
 {
     return is_string($string) && is_array(json_decode($string, true)) ? true : false;
-}
-
-###################
-###   updates   ###
-###################
-/**
- * Add new options to configuration
- */
-function kees_cookiebar_update_8001()
-{
-    $config = \Drupal::configFactory()->getEditable('kees_cookiebar.settings');
-
-    $cookies['primary_cookies'] = array(
-        'label' => 'Primary Cookies',
-        'desc' => "",
-    );
-    $config->set('kees_cookiebar.settings_cookies', $cookies);
-    $config->set('kees_cookiebar.cookiebar_type', '0');
-    $config->set('kees_cookiebar.cookiepage_path', '/cookies');
-
-    $config->save(true);
 }
