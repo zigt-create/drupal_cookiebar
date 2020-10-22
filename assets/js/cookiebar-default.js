@@ -13,9 +13,9 @@ var CookieName = 'CookieConsent';
         attach: function (context, drupalSettings) {
             console.log("joe");
 
-            var cookiepagePath = drupalSettings.CookiebarConfig.cookiepagePath;
-            var currentUrl = drupalSettings.CookiebarConfig.currentUrl;
-            var homeUrl = drupalSettings.CookiebarConfig.homeUrl;
+            var cookiepagePath = drupalSettings.cookiebarConfig.cookiepagePath;
+            var currentUrl = drupalSettings.cookiebarConfig.currentUrl;
+            var homeUrl = drupalSettings.cookiebarConfig.homeUrl;
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
             if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {

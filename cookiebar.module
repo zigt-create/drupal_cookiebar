@@ -130,7 +130,7 @@ function cookiebar_preprocess_html(&$variables)
     $homeUrl = Url::fromRoute('<front>', [], ['language' => $current_language]);
     $currentUrl = Url::fromRoute('<current>', [], ['language' => $default_lang]);
 
-    $variables['#attached']['drupalSettings']['CookiebarConfig'] = array(
+    $variables['#attached']['drupalSettings']['cookiebarConfig'] = array(
         'cookiepagePath' => $cookiepage_path,
         'homeUrl' => $homeUrl->toString(),
         'currentUrl' => $currentUrl->toString(),

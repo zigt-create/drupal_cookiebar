@@ -6,14 +6,14 @@
  */
 
 /* Set default variables */
-var CookieName = 'CookieConsent';
+var cookieName = 'CookieConsent';
 
 (function ($, Drupal) {
     Drupal.behaviors.cookiebar_advanced = {
         attach: function (context, drupalSettings) {
-            var cookiepagePath = drupalSettings.CookiebarConfig.cookiepagePath;
-            var currentUrl = drupalSettings.CookiebarConfig.currentUrl;
-            var homeUrl = drupalSettings.CookiebarConfig.homeUrl;
+            var cookiepagePath = drupalSettings.cookiebarConfig.cookiepagePath;
+            var currentUrl = drupalSettings.cookiebarConfig.currentUrl;
+            var homeUrl = drupalSettings.cookiebarConfig.homeUrl;
 
             if (getCookieValue('primary_cookies') != true || currentUrl == cookiepagePath) {
                 $('#cookiebar-container', context).show();
@@ -74,7 +74,7 @@ var CookieName = 'CookieConsent';
      */
     function getCookie() {
         var value = "; " + document.cookie;
-        var cookie = value.split("; " + CookieName + "=");
+        var cookie = value.split("; " + cookieName + "=");
 
         if (cookie.length == 2) return cookie.pop().split(";").shift();
     }
