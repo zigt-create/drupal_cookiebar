@@ -1,8 +1,9 @@
 name: Cookiebar
 description: Add a cookies bar block to your site
-package: estdigital
+package: Custom
 type: module
 version: 3.0.0
+core: 8.x
 core_version_requirement: ^8.0 || ^9.0
 dependencies:
 - text
