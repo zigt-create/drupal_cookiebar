@@ -11,19 +11,15 @@ var CookieName = 'CookieConsent';
 (function ($, Drupal) {
     Drupal.behaviors.cookiebar_default = {
         attach: function (context, drupalSettings) {
-            console.log("joe");
-
             var cookiepagePath = drupalSettings.cookiebarConfig.cookiepagePath;
             var currentUrl = drupalSettings.cookiebarConfig.currentUrl;
             var homeUrl = drupalSettings.cookiebarConfig.homeUrl;
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
             if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
-                console.log("Show cookiebar");
                 $('#cookiebar-container', context).once('cookiebar').show()
                 $('.js-cookiebar-container', context).once('cookiebar').show()
             } else {
-                console.log("Do not show cookiebar");
                 $('#cookiebar-container', context).once('cookiebar').hide()
                 $('.js-cookiebar-container', context).once('cookiebar').hide()
             }
@@ -38,7 +34,6 @@ var CookieName = 'CookieConsent';
     };
 
     function clicked (e, cookiepagePath, currentUrl, homeUrl, attrValue) {
-        console.log("Cookiebar is clicked");
         // Prevent link from redirecting
         e.preventDefault(); 
         
@@ -55,14 +50,12 @@ var CookieName = 'CookieConsent';
 
     // Helper function to set the cookie
     function setCookie(value) {
-        console.log("Set cookie");
         // Set cookiebar cookie for one year to the value which can be 'CookieAllowed' or 'CookieDisallowed'
         var oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
         document.cookie = CookieName + "=" + value + ';expires=' + oneYearFromNow.toGMTString() + '; path=/';
 
         // Additional remove all other cookies if value is 'CookieDisallowed'
         if ("false" == value) {
-            console.log("Value is false");
             // Get all cookies in array
             var getCookies = document.cookie.split(';');
 
@@ -93,7 +86,6 @@ var CookieName = 'CookieConsent';
      * Get the cookie set by this module
      */
     function getCookie() {
-        console.log("get cookie")
         var value = "; " + document.cookie;
         var cookie = value.split("; " + CookieName + "=");
 
