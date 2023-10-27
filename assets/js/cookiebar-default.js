@@ -17,11 +17,11 @@ var CookieName = 'CookieConsent';
 
             // Show cookiebar if cookies are not set or if user is on the cookies page
             if ((getCookie() != "true" && getCookie() != "false") || (currentUrl == cookiepagePath)) {
-                $('#cookiebar-container', context).once('cookiebar').show()
-                $('.js-cookiebar-container', context).once('cookiebar').show()
+                $('#cookiebar-container', context).show()
+                $('.js-cookiebar-container', context).show()
             } else {
-                $('#cookiebar-container', context).once('cookiebar').hide()
-                $('.js-cookiebar-container', context).once('cookiebar').hide()
+                $('#cookiebar-container', context).hide()
+                $('.js-cookiebar-container', context).hide()
             }
 
             $('#cookiebar-container button,a.js-cookiebar-button', context).click(function (e) {
