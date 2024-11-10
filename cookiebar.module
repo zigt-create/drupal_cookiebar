@@ -70,7 +70,7 @@ function cookiebar_install()
     }
 
     // (Re)set saved config. This is sometimes cached in some wierd way...
-    $config_file = \file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'cookiebar') . "/config/install/cookiebar.settings.yml");
+    $config_file = \file_get_contents(DRUPAL_ROOT . '/' . \Drupal::service('extension.list.module')->getPath('cookiebar') . "/config/install/cookiebar.settings.yml");
     $parsed = \Symfony\Component\Yaml\Yaml::parse($config_file);
     $config = \Drupal::configFactory()->getEditable('cookiebar.settings');
     $config->setData($parsed);
